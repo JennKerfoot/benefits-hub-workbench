@@ -14,9 +14,15 @@
       "label": "Preventive Dental",
       "facts": [
         {
+          "label": "Medicare-covered dental services",
+          "slot": "dental_medicare.copay",
+          "altSlot": "dental_medicare.coinsurance"
+        },
+        {
           "forEach": "dental_preventive.sub_types",
           "label": "{item.label}",
-          "slot": "item.copay"
+          "slot": "item.copay",
+          "altSlot": "item.coinsurance"
         },
         {
           "label": "Preventive dental maximum",

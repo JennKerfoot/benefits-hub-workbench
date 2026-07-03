@@ -605,7 +605,9 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "meals.copay",
-       "highlight": true
+       "highlight": true,
+       "altSlot": "meals.coinsurance",
+       "default": "Covered \u2014 see plan documents"
       },
       {
        "label": "Plan pays up to",
@@ -849,16 +851,18 @@ window.WB_CONTENT = {
       {
        "label": "Emergency room",
        "slot": "emergency_care.copay",
-       "highlight": true
+       "highlight": true,
+       "altSlot": "emergency_care.coinsurance"
       },
       {
        "label": "Urgent care",
-       "slot": "urgent_care.copay"
+       "slot": "urgent_care.copay",
+       "altSlot": "urgent_care.coinsurance"
       },
       {
        "label": "Emergency care while traveling abroad",
        "slot": "worldwide_emergency.copay_emergency",
-       "altSlot": "worldwide_emergency.max_plan_benefit"
+       "altSlot": "worldwide_emergency.coinsurance_emergency"
       }
      ]
     }
@@ -1087,9 +1091,15 @@ window.WB_CONTENT = {
      "label": "Preventive Dental",
      "facts": [
       {
+       "label": "Medicare-covered dental services",
+       "slot": "dental_medicare.copay",
+       "altSlot": "dental_medicare.coinsurance"
+      },
+      {
        "forEach": "dental_preventive.sub_types",
        "label": "{item.label}",
-       "slot": "item.copay"
+       "slot": "item.copay",
+       "altSlot": "item.coinsurance"
       },
       {
        "label": "Preventive dental maximum",

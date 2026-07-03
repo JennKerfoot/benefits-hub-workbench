@@ -16,7 +16,9 @@
         {
           "label": "Your cost",
           "slot": "meals.copay",
-          "highlight": true
+          "highlight": true,
+          "altSlot": "meals.coinsurance",
+          "default": "Covered \u2014 see plan documents"
         },
         {
           "label": "Plan pays up to",
