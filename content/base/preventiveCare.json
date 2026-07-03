@@ -34,7 +34,7 @@
           "forEach": "additional_preventive.sub_types",
           "label": "{item.label}",
           "slot": "item.copay",
-          "altSlot": "item.benefit_type"
+          "default": "Covered"
         }
       ]
     }

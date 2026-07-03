@@ -20,7 +20,8 @@
           "label": "{item.label}",
           "slot": "item.max_plan_benefit",
           "suffix": " {item.max_plan_benefit_period}",
-          "pooledNote": "Included in your combined allowance"
+          "pooledNote": "Included in your combined allowance",
+          "default": "Included"
         }
       ]
     }

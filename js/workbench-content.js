@@ -408,7 +408,8 @@ window.WB_CONTENT = {
        "label": "{item.label}",
        "slot": "item.max_plan_benefit",
        "suffix": " {item.max_plan_benefit_period}",
-       "pooledNote": "Included in your combined allowance"
+       "pooledNote": "Included in your combined allowance",
+       "default": "Included"
       }
      ]
     }
@@ -821,7 +822,7 @@ window.WB_CONTENT = {
        "forEach": "additional_preventive.sub_types",
        "label": "{item.label}",
        "slot": "item.copay",
-       "altSlot": "item.benefit_type"
+       "default": "Covered"
       }
      ]
     }
