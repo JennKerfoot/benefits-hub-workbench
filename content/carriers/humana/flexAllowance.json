@@ -4,22 +4,12 @@
     "carrier": "humana"
   },
   "key": "flexAllowance",
-  "title": "Healthy Options card",
-  "note": "Loaded to your Humana Spending Account Card. One shared allowance across all categories — check your balance at MyHumana.com.",
+  "note": "Allowances are loaded to your Humana Spending Account Card \u2014 check your balance at MyHumana.com.",
   "cta": {
     "label": "Check my balance at MyHumana",
     "icon": "open_in_new",
     "action": "web",
     "href": "https://www.myhumana.com"
   },
-  "eoc_facts": [
-    {
-      "label": "Monthly deposit",
-      "value": "$225 a month",
-      "source": "eoc",
-      "approved": true,
-      "citation": "EOC p. Chapter 4, Healthy Options Allowance (Humana-H7617076000EOC26); SB wallet section (Humana-H7617076000SB26)",
-      "requires": "vbid_packages"
-    }
-  ]
+  "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
 }

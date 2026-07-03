@@ -5,5 +5,6 @@
   },
   "key": "prescriptions",
   "vendor": "CenterWell Pharmacy (preferred mail order)",
-  "note": "CenterWell Pharmacy is the preferred mail-order option. Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+  "note": "CenterWell Pharmacy is the preferred mail-order option.",
+  "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
 }

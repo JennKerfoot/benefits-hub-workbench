@@ -20,16 +20,19 @@ content = {
     "adminMapping": json.load(open(f"{ROOT}/admin-benefit-mapping.json")),
     "base": {},
     "carriers": {},
+    "contracts": {},
+    "plans": {},
 }
 for f in glob.glob(f"{ROOT}/base/*.json"):
     t = json.load(open(f))
     content["base"][t["key"]] = t
-for carrier_dir in glob.glob(f"{ROOT}/carriers/*/"):
-    cname = os.path.basename(carrier_dir.rstrip("/"))
-    content["carriers"][cname] = {}
-    for f in glob.glob(carrier_dir + "*.json"):
-        t = json.load(open(f))
-        content["carriers"][cname][t["key"]] = t
+for layer in ("carriers", "contracts", "plans"):
+    for d in glob.glob(f"{ROOT}/{layer}/*/"):
+        name = os.path.basename(d.rstrip("/"))
+        content[layer][name] = {}
+        for f in glob.glob(d + "*.json"):
+            t = json.load(open(f))
+            content[layer][name][t["key"]] = t
 
 with open(OUT, "w") as out:
     out.write("// GENERATED from content/ by tools/generate-content-bundle.py — do not edit by hand.\n")

@@ -1,4 +1,4 @@
-// GENERATED from benefits-hub-handoff/03-content — regenerate when content changes.
+// GENERATED from content/ by tools/generate-content-bundle.py — do not edit by hand.
 window.WB_CONTENT = {
  "taxonomy": {
   "$schema": "duos-benefit-content/v1",
@@ -1336,7 +1336,7 @@ window.WB_CONTENT = {
      "action": "web",
      "href": "https://www.silversneakers.com"
     },
-    "note": "Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
    "vision": {
     "$schema": "duos-benefit-content/v1",
@@ -1344,7 +1344,8 @@ window.WB_CONTENT = {
      "carrier": "humana"
     },
     "key": "vision",
-    "note": "Network: Humana Medicare Insight Network; higher eyewear allowance applies at PLUS providers. Verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+    "note": "Network: Humana Medicare Insight Network; a higher eyewear allowance applies at PLUS providers.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
    "otc": {
     "$schema": "duos-benefit-content/v1",
@@ -1352,8 +1353,9 @@ window.WB_CONTENT = {
      "carrier": "humana"
     },
     "key": "otc",
-    "vendor": "Humana Healthy Options Allowance (Humana Spending Account Card)",
-    "note": "Allowance is loaded to the Humana Spending Account Card; check balance at MyHumana.com. Monthly accrual/rollover mechanics are EOC facts pending product approval. Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+    "vendor": "Humana Spending Account Card",
+    "note": "Your allowance is loaded to the Humana Spending Account Card \u2014 check your balance at MyHumana.com.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity. Monthly accrual/rollover mechanics are EOC facts pending product approval."
    },
    "meals": {
     "$schema": "duos-benefit-content/v1",
@@ -1362,7 +1364,8 @@ window.WB_CONTENT = {
     },
     "key": "meals",
     "vendor": "Humana Well Dine",
-    "note": "Post-discharge meal program. Quantities/frequency are EOC facts pending product approval. Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+    "note": "Meals delivered after a hospital stay through Humana Well Dine.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity. Quantities/frequency are EOC facts pending product approval."
    },
    "prescriptions": {
     "$schema": "duos-benefit-content/v1",
@@ -1371,7 +1374,8 @@ window.WB_CONTENT = {
     },
     "key": "prescriptions",
     "vendor": "CenterWell Pharmacy (preferred mail order)",
-    "note": "CenterWell Pharmacy is the preferred mail-order option. Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+    "note": "CenterWell Pharmacy is the preferred mail-order option.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
    "hearing": {
     "$schema": "duos-benefit-content/v1",
@@ -1386,7 +1390,8 @@ window.WB_CONTENT = {
      "action": "tel",
      "href": "tel:8442557144"
     },
-    "note": "Hearing aids are TruHearing-branded Advanced level, through TruHearing providers. Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+    "note": "Hearing aids are TruHearing-branded Advanced models through TruHearing providers \u2014 there is no out-of-network coverage for aids.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
    "flexAllowance": {
     "$schema": "duos-benefit-content/v1",
@@ -1394,24 +1399,14 @@ window.WB_CONTENT = {
      "carrier": "humana"
     },
     "key": "flexAllowance",
-    "title": "Healthy Options card",
-    "note": "Loaded to your Humana Spending Account Card. One shared allowance across all categories \u2014 check your balance at MyHumana.com.",
+    "note": "Allowances are loaded to your Humana Spending Account Card \u2014 check your balance at MyHumana.com.",
     "cta": {
      "label": "Check my balance at MyHumana",
      "icon": "open_in_new",
      "action": "web",
      "href": "https://www.myhumana.com"
     },
-    "eoc_facts": [
-     {
-      "label": "Monthly deposit",
-      "value": "$225 a month",
-      "source": "eoc",
-      "approved": true,
-      "citation": "EOC p. Chapter 4, Healthy Options Allowance (Humana-H7617076000EOC26); SB wallet section (Humana-H7617076000SB26)",
-      "requires": "vbid_packages"
-     }
-    ]
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
    "dental": {
     "$schema": "duos-benefit-content/v1",
@@ -1419,7 +1414,32 @@ window.WB_CONTENT = {
      "carrier": "humana"
     },
     "key": "dental",
-    "note": "Network: Humana Dental Medicare Network. Verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+    "note": "Use dentists in the Humana Dental Medicare Network.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
+   }
+  }
+ },
+ "contracts": {},
+ "plans": {
+  "H7617_076_0": {
+   "flexAllowance": {
+    "$schema": "duos-benefit-content/v1",
+    "appliesTo": {
+     "plan": "H7617_076_0"
+    },
+    "key": "flexAllowance",
+    "title": "Healthy Options card",
+    "eoc_facts": [
+     {
+      "label": "Monthly deposit",
+      "value": "$225 a month",
+      "source": "eoc",
+      "approved": true,
+      "citation": "EOC Chapter 4, Healthy Options Allowance (Humana-H7617076000EOC26); SB wallet section (Humana-H7617076000SB26)",
+      "requires": "vbid_packages"
+     }
+    ],
+    "verification": "Plan-scoped: the Healthy Options name and $225/month deposit are verified for H7617-076 only \u2014 do NOT promote to the carrier pack."
    }
   }
  }

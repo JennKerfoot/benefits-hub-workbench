@@ -191,6 +191,10 @@
         "ssbci"
       ],
       "description": "Compiler also stamps this from taxonomy.json; template-level copy must match taxonomy."
+    },
+    "verification": {
+      "type": "string",
+      "description": "Internal provenance: which SB/EOC the content was verified against and any scoping caveats. NEVER rendered to members (spec 2b); carried into the compiled JSON for QA/audit only."
     }
   },
   "definitions": {

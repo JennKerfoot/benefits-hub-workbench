@@ -1,0 +1,19 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "appliesTo": {
+    "plan": "H7617_076_0"
+  },
+  "key": "flexAllowance",
+  "title": "Healthy Options card",
+  "eoc_facts": [
+    {
+      "label": "Monthly deposit",
+      "value": "$225 a month",
+      "source": "eoc",
+      "approved": true,
+      "citation": "EOC Chapter 4, Healthy Options Allowance (Humana-H7617076000EOC26); SB wallet section (Humana-H7617076000SB26)",
+      "requires": "vbid_packages"
+    }
+  ],
+  "verification": "Plan-scoped: the Healthy Options name and $225/month deposit are verified for H7617-076 only \u2014 do NOT promote to the carrier pack."
+}

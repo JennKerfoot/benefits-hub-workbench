@@ -11,5 +11,6 @@
     "action": "tel",
     "href": "tel:8442557144"
   },
-  "note": "Hearing aids are TruHearing-branded Advanced level, through TruHearing providers. Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+  "note": "Hearing aids are TruHearing-branded Advanced models through TruHearing providers \u2014 there is no out-of-network coverage for aids.",
+  "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
 }
