@@ -1,0 +1,52 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "dental",
+  "title": "Dental",
+  "icon": "dentistry",
+  "iconBg": "#EAF3FA",
+  "iconColor": "#2278B4",
+  "barColor": "#2278B4",
+  "tagline": "Preventive and comprehensive dental coverage",
+  "tileSubtitle": "Dental coverage included",
+  "sections": [
+    {
+      "icon": "dentistry",
+      "label": "Preventive Dental",
+      "facts": [
+        {
+          "forEach": "dental_preventive.sub_types",
+          "label": "{item.label}",
+          "slot": "item.copay"
+        },
+        {
+          "label": "Preventive dental maximum",
+          "slot": "dental_preventive.max_plan_benefit",
+          "highlight": true
+        }
+      ]
+    },
+    {
+      "icon": "dentistry",
+      "label": "Comprehensive Dental",
+      "facts": [
+        {
+          "forEach": "dental_comprehensive.sub_types",
+          "label": "{item.label}",
+          "slot": "item.copay",
+          "altSlot": "item.coinsurance"
+        },
+        {
+          "label": "Comprehensive dental maximum",
+          "slot": "dental_comprehensive.max_plan_benefit",
+          "highlight": true
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Routine cleanings do more than clean teeth \u2014 they help prevent costly procedures like root canals and extractions down the road."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "prescriptions",
+  "title": "Prescription Drugs",
+  "icon": "medication",
+  "iconBg": "#F9F0F9",
+  "iconColor": "#AC3EA4",
+  "barColor": "#AC3EA4",
+  "tagline": "Part D prescription drug coverage included",
+  "tileSubtitle": "Drug coverage included",
+  "sections": [
+    {
+      "icon": "medication",
+      "label": "Drug Cost-Sharing",
+      "facts": [
+        {
+          "label": "Annual drug deductible",
+          "slot": "drug_coverage.deductible",
+          "highlight": true
+        },
+        {
+          "forEach": "drug_coverage.tiers",
+          "label": "{item.tier_label} \u2014 30-day supply",
+          "slot": "item.preferred_retail_copay_30day",
+          "altSlot": "item.retail_copay_30day"
+        },
+        {
+          "forEach": "drug_coverage.tiers",
+          "label": "{item.tier_label} \u2014 30-day supply",
+          "slot": "item.preferred_retail_coinsurance_30day",
+          "altSlot": "item.retail_coinsurance_30day"
+        },
+        {
+          "forEach": "drug_coverage.tiers",
+          "label": "{item.tier_label} \u2014 90-day supply",
+          "slot": "item.mail_copay_90day",
+          "altSlot": "item.preferred_retail_copay_90day"
+        }
+      ]
+    },
+    {
+      "icon": "vaccines",
+      "label": "Insulin & Vaccines",
+      "facts": [
+        {
+          "label": "Insulin cap",
+          "value": "No more than {yearConstants.insulinMonthlyCap}/month, any tier",
+          "source": "computed"
+        },
+        {
+          "label": "Yearly out-of-pocket maximum",
+          "value": "{yearConstants.partDOopCap} \u2014 then $0 for the rest of the year",
+          "source": "computed"
+        },
+        {
+          "label": "Adult vaccines (Part D)",
+          "value": "$0 copay",
+          "source": "computed"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "savings",
+      "text": "If you qualify for Extra Help (LIS), your drug costs could drop significantly \u2014 ask us about applying."
+    }
+  ]
+}

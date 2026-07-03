@@ -1,0 +1,39 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "fitness",
+  "title": "Fitness",
+  "icon": "fitness_center",
+  "iconBg": "#E6F8DE",
+  "iconColor": "#386F19",
+  "barColor": "#386F19",
+  "tagline": "{fitness.copay|$0} fitness benefit included in your plan",
+  "tileSubtitle": "{fitness.copay|$0} fitness benefit",
+  "sections": [
+    {
+      "icon": "fitness_center",
+      "label": "Fitness Benefit",
+      "facts": [
+        {
+          "label": "Included programs",
+          "slot": "fitness.fitness_types"
+        },
+        {
+          "label": "Your cost",
+          "slot": "fitness.copay",
+          "highlight": true
+        },
+        {
+          "label": "Plan pays up to",
+          "slot": "fitness.max_plan_benefit",
+          "suffix": " {fitness.max_plan_benefit_period}"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Regular physical activity is one of the most effective ways to reduce fall risk and support heart health."
+    }
+  ]
+}

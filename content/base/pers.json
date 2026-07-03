@@ -1,0 +1,35 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "pers",
+  "title": "Emergency Response Device (PERS)",
+  "icon": "emergency_share",
+  "iconBg": "#FEF2F2",
+  "iconColor": "#B91C1C",
+  "barColor": "#B91C1C",
+  "tagline": "A wearable button that calls for help 24/7",
+  "tileSubtitle": "24/7 help button",
+  "sections": [
+    {
+      "icon": "emergency_share",
+      "label": "Personal Emergency Response System",
+      "facts": [
+        {
+          "label": "Your cost",
+          "slot": "subType.copay",
+          "default": "Covered \u2014 see plan documents",
+          "highlight": true
+        },
+        {
+          "label": "Plan pays up to",
+          "slot": "subType.max_plan_benefit"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "A PERS device means help is one button-press away, anywhere in your home \u2014 many members say it's as much peace of mind for family as for themselves."
+    }
+  ]
+}

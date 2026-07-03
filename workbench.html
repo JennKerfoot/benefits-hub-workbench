@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DUOS Benefits Hub — Carrier Onboarding Workbench</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
+<style>
+  /* DUOS brand: Poppins; text #2B2A2E default; purple #4F196F sparingly (header, CTAs, active states);
+     accents magenta #AC3EA4 / orange #B64A25 / teal #19646F / green #386F19 with light tints. */
+  :root { font-size: 15px;
+    --purple:#4F196F; --text:#2B2A2E; --muted:#55555E;
+    --magenta:#AC3EA4; --orange:#B64A25; --teal:#19646F; --green:#386F19;
+    --magenta-l:#F9F0F9; --teal-l:#DEF5F7; --green-l:#E6F8DE; --orange-l:#FCEEE7;
+    --line:#DEDEE1; --bg:#EFEEF0; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Poppins',-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); }
+  header { background:var(--purple); color:#fff; padding:12px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  header img.logo { height:26px; display:block; }
+  header h1 { margin:0; font-size:1.02rem; font-weight:600; }
+  header .tag { font-size:0.7rem; background:rgba(255,255,255,0.16); padding:4px 10px; border-radius:999px; font-weight:500; }
+  main { max-width:1280px; margin:0 auto; padding:16px 20px 40px; display:grid; grid-template-columns:minmax(330px,5fr) 7fr; gap:16px; align-items:start; }
+  @media (max-width:980px){ main { grid-template-columns:1fr; } }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:14px; }
+  .card h2 { margin:0 0 4px; font-size:0.93rem; font-weight:600; display:flex; align-items:center; gap:8px; }
+  .card h2 .ti { color:var(--purple); }
+  .hint { margin:0 0 10px; font-size:0.8rem; color:var(--muted); line-height:1.55; font-weight:400; }
+  input[type=text], select, textarea { width:100%; border:1px solid #C9C9CE; border-radius:8px; padding:8px 10px; font:inherit; font-size:0.86rem; }
+  textarea { font-family:ui-monospace,Menlo,monospace; font-size:0.76rem; min-height:200px; line-height:1.45; }
+  input:focus, select:focus, textarea:focus { outline:2px solid var(--purple); border-color:var(--purple); }
+  .btn { background:var(--purple); color:#fff; border:none; border-radius:999px; padding:9px 20px; font:inherit; font-weight:600; cursor:pointer; font-size:0.83rem; }
+  .btn.secondary { background:#fff; color:var(--purple); border:2px solid var(--purple); }
+  .btnrow { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .result { display:block; width:100%; text-align:left; border:1px solid var(--line); background:#fff; border-radius:8px; padding:8px 10px; margin-top:6px; cursor:pointer; font:inherit; font-size:0.82rem; }
+  .result:hover { border-color:var(--purple); background:var(--magenta-l); }
+  .result span { color:var(--muted); font-size:0.76rem; }
+  #planinfo, #datasource { font-size:0.81rem; line-height:1.6; background:var(--magenta-l); border-radius:8px; padding:9px 12px; margin-top:8px; }
+  .doc { font-size:0.81rem; margin-top:8px; line-height:1.5; }
+  .ok { color:var(--green); font-weight:600; } .err { color:var(--orange); font-weight:600; }
+  .banner { border-radius:10px; padding:11px 14px; font-size:0.86rem; font-weight:600; margin-bottom:12px; }
+  .banner.pass { background:var(--green-l); color:var(--green); }
+  .banner.fail { background:var(--orange-l); color:var(--orange); }
+  .banner ul { margin:6px 0 0; font-weight:400; font-size:0.8rem; }
+  .tabs { display:flex; gap:0; border-bottom:1px solid var(--line); margin-bottom:12px; flex-wrap:wrap; }
+  .tabs button { border:none; background:none; font:inherit; font-weight:600; color:var(--muted); padding:9px 14px; cursor:pointer; border-bottom:3px solid transparent; font-size:0.85rem; }
+  .tabs button.active { color:var(--purple); border-bottom-color:var(--purple); }
+  .phone { width:380px; max-width:100%; background:#fff; border:1px solid var(--line); border-radius:22px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.08); margin:0 auto; }
+  .phone .phead { background:var(--purple); color:#fff; padding:13px 15px; }
+  .phone .phead .k { font-size:0.7rem; color:#D9C7EA; } .phone .phead .n { font-weight:600; font-size:0.93rem; }
+  .dsnp { background:var(--green-l); color:var(--green); font-size:0.76rem; padding:9px 12px; margin:10px 12px 0; border-radius:9px; line-height:1.45; }
+  .ptile { border:1px solid var(--line); border-radius:10px; margin:10px 12px; overflow:hidden; }
+  .ptile .bar { height:4px; } .ptile .body { padding:9px 12px; }
+  .ptile .t { font-weight:600; font-size:0.9rem; display:flex; justify-content:space-between; align-items:center; gap:6px; }
+  .ptile .s { font-size:0.76rem; color:var(--muted); margin-top:2px; line-height:1.45; }
+  .ptile .fr { display:flex; justify-content:space-between; gap:10px; font-size:0.77rem; padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.05); }
+  .ptile .fr:last-child { border-bottom:none; } .ptile .fr b { text-align:right; max-width:58%; font-weight:600; }
+  .seclabel { font-size:0.7rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.03em; margin-top:8px; }
+  .chip { font-size:0.62rem; background:var(--green-l); color:var(--green); padding:2px 8px; border-radius:999px; font-weight:700; white-space:nowrap; }
+  .chip.warn { background:var(--orange-l); color:var(--orange); }
+  .pill { display:inline-block; font-size:0.66rem; padding:2px 8px; border-radius:999px; margin:1px 2px; background:var(--bg); }
+  .know { background:var(--teal-l); border-radius:9px; padding:8px 11px; margin-top:8px; font-size:0.76rem; color:var(--text); line-height:1.5; }
+  .know b { color:var(--teal); }
+  .howto { background:var(--bg); border-radius:9px; padding:8px 11px; margin-top:8px; font-size:0.76rem; line-height:1.5; }
+  .elig { background:var(--green-l); color:var(--green); border-radius:9px; padding:8px 11px; margin-top:8px; font-size:0.76rem; line-height:1.45; }
+  pre { background:#1E1B22; color:#EADCF5; border-radius:10px; padding:13px; font-size:0.73rem; line-height:1.5; overflow-x:auto; max-height:640px; font-family:ui-monospace,Menlo,monospace; }
+  .footnote { grid-column:1 / -1; font-size:0.76rem; color:var(--muted); line-height:1.6; }
+  #auditout { font-size:0.82rem; line-height:1.65; }
+  #auditout table { border-collapse:collapse; width:100%; font-size:0.8rem; margin-top:8px; }
+  #auditout th, #auditout td { border:1px solid var(--line); padding:5px 9px; text-align:left; }
+  #auditout td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  #auditout th { background:var(--magenta-l); font-weight:600; }
+  progress { width:100%; accent-color: var(--purple); }
+</style>
+</head>
+<body>
+<header>
+  <img class="logo" src="duos-logo-white.png" alt="DUOS">
+  <h1>Benefits Hub · Carrier Onboarding Workbench</h1>
+  <span class="tag">browser-only · real compiler over the generated plan data</span>
+  <span class="tag">COMPILER_SPEC.md reference implementation</span>
+</header>
+<main>
+  <div><!-- left column -->
+    <div class="card">
+      <h2><i class="ti ti-search"></i> 1 · Pick a plan (any of the 8,081)</h2>
+      <p class="hint">Coverage and every number come from the plan's generated PBP JSON — search by plan ID, plan name, or carrier.</p>
+      <div id="datasource" class="hint">loading…</div>
+      <input type="text" id="plansearch" placeholder="e.g. H7617_076, SCAN, HumanaChoice…" oninput="WB.renderSearch()">
+      <div id="planresults"></div>
+      <div id="planinfo" style="display:block;">No plan selected.</div>
+    </div>
+    <div class="card">
+      <h2><i class="ti ti-file-upload"></i> 2 · Attach SB &amp; EOC</h2>
+      <p class="hint">PDFs attach as <b>citation sources</b> for <code>eoc_facts</code> and side-by-side QA. The compiler never parses them — that's a spec non-goal (numbers come from PBP only).</p>
+      <div class="doc"><label><b>Summary of Benefits:</b> <input type="file" accept="application/pdf" onchange="WB.attachDoc('sb', this)"></label><div id="sblabel"></div></div>
+      <div class="doc"><label><b>Evidence of Coverage:</b> <input type="file" accept="application/pdf" onchange="WB.attachDoc('eoc', this)"></label><div id="eoclabel"></div></div>
+    </div>
+    <div class="card">
+      <h2><i class="ti ti-edit"></i> 3 · Author the carrier pack</h2>
+      <p class="hint"><b>What a carrier pack is:</b> the human-authored wording layer for one carrier — one small JSON file per benefit card holding the things CMS data can't know: <b>vendor names</b> (TruHearing, SilverSneakers), <b>vendor phone numbers &amp; URLs</b> (become the card's call/visit button), <b>network names</b> ("Humana Dental Medicare Network"), <b>how-to notes</b>, and <b>approved EOC facts</b> (the only place a typed dollar is allowed — each needs <code>approved:true</code> + a citation to the SB/EOC you attached in step 2).</p>
+      <p class="hint"><b>What it can NOT do:</b> create, remove, or re-price a benefit. Coverage and every number come from the plan's PBP data — a pack only decorates cards that already gate on. A plan with no pack still renders fully, with generic base wording. That's why one pack per carrier scales to all of that carrier's plans.</p>
+      <p class="hint">Pick a card key, edit its JSON, apply — the compile updates live and the hard rules run (a literal dollar outside <code>eoc_facts</code> fails the build). Export downloads the files for <code>03-content/carriers/&lt;carrier&gt;/</code>.</p>
+      <select id="cardkey" onchange="WB.loadEditor()"></select>
+      <textarea id="packedit" spellcheck="false"></textarea>
+      <div class="btnrow">
+        <button class="btn" onclick="WB.applyEditor()">Apply &amp; recompile</button>
+        <button class="btn secondary" onclick="WB.loadEditor()">Reset</button>
+        <button class="btn secondary" onclick="WB.exportPack()"><i class="ti ti-download"></i> Export edited files</button>
+        <span id="editerr" style="font-size:0.78rem;"></span>
+      </div>
+    </div>
+    <div class="card">
+      <h2><i class="ti ti-database-import"></i> 4 · Admin-tool rows (optional, §4b)</h2>
+      <p class="hint"><b>What admin-tool rows are:</b> the DUOS ops team already maintains an internal admin tool with one free-text row per covered benefit per plan — plain-language "how to use this benefit" instructions written by humans (which vendor to call, which website, what to bring). This panel ingests those rows so that content reaches the member cards without re-typing it.</p>
+      <p class="hint"><b>How to use it:</b> paste the rows for this plan as a JSON array of <code>{"plan_id","benefit_name","description_markdown"}</code>. Admin plan IDs like <code>H7617076000</code> (contract+pbp+segment, no separators) crosswalk to pipeline IDs automatically. What the compiler does with each row: the text renders as a <b>"How to use this benefit"</b> box on the mapped card · phones/URLs found in the text become the card's CTA if it has none · free-text dollar amounts and SSBCI-specific language on the universal OTC card are <b>flagged in the report</b> for review (numbers stay PBP-owned) · a benefit name missing from <code>admin-benefit-mapping.json</code> <b>fails the build</b> — never silently dropped · the PBP gate still rules: a row can never make an uncovered benefit appear.</p>
+      <textarea id="adminrows" spellcheck="false" style="min-height:110px;" placeholder='[{"plan_id":"H7617076000","benefit_name":"fitness","description_markdown":"Visit **silversneakers.com** or call 866-584-7389 to find a gym."}]'></textarea>
+      <div class="btnrow">
+        <button class="btn" onclick="WB.applyAdminRows()">Apply rows</button>
+        <button class="btn secondary" onclick="WB.clearAdminRows()">Clear</button>
+        <span id="adminerr" style="font-size:0.78rem;"></span>
+      </div>
+    </div>
+  </div>
+  <div><!-- right column -->
+    <div id="buildbanner"></div>
+    <div class="tabs">
+      <button id="preview" class="active" onclick="WB.tab('preview')">Member preview</button>
+      <button id="reportt" onclick="WB.tab('reportt')">Compiler report</button>
+      <button id="jsont" onclick="WB.tab('jsont')">Compiled JSON</button>
+      <button id="auditt" onclick="WB.tab('auditt')">Corpus audit</button>
+    </div>
+    <p id="outempty" class="hint">Pick a plan on the left — the compile runs automatically and updates live as you edit content.</p>
+    <div id="phonewrap"><div class="phone" id="phone"></div></div>
+    <div id="reportwrap" style="display:none;"><pre id="reportjson"></pre></div>
+    <div id="jsonwrap" style="display:none;"><pre id="compiledjson"></pre></div>
+    <div id="auditwrap" style="display:none;">
+      <div class="card">
+        <h2><i class="ti ti-checklist"></i> Corpus audit — compile every plan</h2>
+        <p class="hint">Runs the full compiler (with the current content layer + your edits) across all plans and aggregates the results: build failures, internal errors, single-surface violations, wallet consolidations, card counts. This is the "works for any plan" proof — run it after any content or spec change.</p>
+        <div class="btnrow">
+          <button class="btn" onclick="WB.runAudit()"><i class="ti ti-player-play"></i> Audit all plans</button>
+          <button class="btn secondary" onclick="WB.stopAudit()">Stop</button>
+        </div>
+        <progress id="auditbar" max="100" value="0" style="margin-top:10px;"></progress>
+        <div id="auditout"></div>
+      </div>
+    </div>
+  </div>
+  <p class="footnote"><b>How to run:</b> from the dashboard folder, <code>node serve.js 8790</code> (or <code>python3 -m http.server 8790</code>) → open <code>http://localhost:8790/workbench.html</code>. The app is static — no backend, nothing saved server-side. Opened directly from file://, it asks you to point at the <code>data/</code> folder instead. Compiler rules implemented from <code>benefits-hub-handoff/01-architecture/COMPILER_SPEC.md</code>: PBP gating, content stack (base ← carrier ← workbench edits), slot resolution (null never renders as $0), §4a shared-wallet &amp; VBID consolidation with the single-surface check, hard rules 1–2, admin-tool rows (§4b), EOC-vs-PBP discrepancy flags, D-SNP zero-dollar overlay, launch-scope stamping, and the per-plan report. Content snapshot generated from <code>03-content/</code> into <code>js/workbench-content.js</code>.</p>
+</main>
+<script src="js/workbench-content.js"></script>
+<script src="js/workbench.js"></script>
+</body>
+</html>

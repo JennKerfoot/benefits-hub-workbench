@@ -1,0 +1,47 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "transportation",
+  "title": "Transportation",
+  "icon": "directions_car",
+  "iconBg": "#DBEAFE",
+  "iconColor": "#1D4ED8",
+  "barColor": "#1D4ED8",
+  "tagline": "Rides to health-related locations covered by your plan",
+  "tileSubtitle": "Covered rides",
+  "sections": [
+    {
+      "icon": "directions_car",
+      "label": "Transportation Benefit",
+      "facts": [
+        {
+          "label": "Your cost per trip",
+          "slot": "transportation.copay",
+          "highlight": true
+        },
+        {
+          "label": "Trips included",
+          "slot": "transportation.trip_limit",
+          "suffix": " {transportation.trip_limit_period}"
+        },
+        {
+          "label": "Trip type",
+          "slot": "transportation.trip_type"
+        },
+        {
+          "label": "Ways to ride",
+          "slot": "transportation.transport_modes"
+        },
+        {
+          "label": "Prior authorization",
+          "slot": "transportation.prior_auth_required"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Missed appointments are one of the biggest barriers to staying healthy \u2014 covered rides remove that barrier."
+    }
+  ]
+}

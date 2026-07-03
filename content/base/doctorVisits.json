@@ -1,0 +1,42 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "doctorVisits",
+  "title": "Doctor Visits",
+  "icon": "stethoscope",
+  "iconBg": "#E0F5FB",
+  "iconColor": "#155E75",
+  "barColor": "#155E75",
+  "tagline": "{primary_care.copay} primary care \u00b7 {specialist.copay} specialist visits",
+  "tileSubtitle": "{primary_care.copay} PCP \u00b7 {specialist.copay} specialist",
+  "sections": [
+    {
+      "icon": "stethoscope",
+      "label": "Office Visits",
+      "facts": [
+        {
+          "label": "Primary care visit (PCP)",
+          "slot": "primary_care.copay",
+          "highlight": true
+        },
+        {
+          "label": "Specialist visit",
+          "slot": "specialist.copay"
+        },
+        {
+          "label": "Specialist referral required",
+          "slot": "specialist.referral_required"
+        },
+        {
+          "label": "Telehealth visit",
+          "slot": "telehealth.copay"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Seeing your primary care doctor regularly helps catch small problems before they become big ones \u2014 and most plans cover the visit at low or no cost."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "appliesTo": {
+    "carrier": "scan"
+  },
+  "key": "fitness",
+  "vendor": "One Pass",
+  "tagline": "One Pass \u2014 {fitness.copay|$0} gym memberships, on-demand workouts & community classes",
+  "tileSubtitle": "One Pass \u2014 {fitness.copay|$0} gym & classes",
+  "note": "Vendor and included services verified against the 2026 SCAN Summary of Benefits (26C-SBH5425123), Fitness section.",
+  "cta": {
+    "label": "Explore One Pass",
+    "icon": "open_in_new",
+    "action": "web",
+    "href": "https://www.youronepass.com"
+  },
+  "eoc_facts": [
+    {
+      "label": "Includes",
+      "value": "Gym memberships \u00b7 on-demand workouts \u00b7 community classes",
+      "source": "eoc",
+      "approved": true,
+      "citation": "2026 SCAN Allied Summary of Benefits (26C-SBH5425123), Fitness section"
+    }
+  ]
+}

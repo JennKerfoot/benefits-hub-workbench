@@ -1,0 +1,8 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "comment": "Maps CMS contract numbers to carrier packs in carriers/. A contract not listed here still compiles \u2014 it just uses base/ wording only.",
+  "contracts": {
+    "H5425": "scan",
+    "H7617": "humana"
+  }
+}

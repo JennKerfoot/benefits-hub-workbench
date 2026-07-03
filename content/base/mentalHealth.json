@@ -1,0 +1,45 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "mentalHealth",
+  "title": "Mental Health",
+  "icon": "psychology",
+  "iconBg": "#FAF5FF",
+  "iconColor": "#7E22CE",
+  "barColor": "#7E22CE",
+  "tagline": "Mental health visits covered by your plan",
+  "tileSubtitle": "Counseling & psychiatry",
+  "sections": [
+    {
+      "icon": "psychology",
+      "label": "Mental Health Care",
+      "facts": [
+        {
+          "label": "Therapy visit (individual)",
+          "slot": "mental_health_outpatient.copay_individual",
+          "altSlot": "mental_health_outpatient.coinsurance_individual",
+          "highlight": true
+        },
+        {
+          "label": "Therapy visit (group)",
+          "slot": "mental_health_outpatient.copay_group",
+          "altSlot": "mental_health_outpatient.coinsurance_group"
+        },
+        {
+          "label": "Psychiatrist visit",
+          "slot": "mental_health_specialist.copay_individual",
+          "altSlot": "mental_health_specialist.coinsurance_individual"
+        },
+        {
+          "label": "Referral",
+          "slot": "mental_health_outpatient.referral_required"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Mental health is health \u2014 talking to a professional about mood, sleep, grief, or worry is as routine as seeing your doctor for blood pressure."
+    }
+  ]
+}

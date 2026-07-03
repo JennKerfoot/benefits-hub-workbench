@@ -1,0 +1,45 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "outpatientRehab",
+  "title": "Rehabilitation Therapy",
+  "icon": "directions_walk",
+  "iconBg": "#FEFCE8",
+  "iconColor": "#A16207",
+  "barColor": "#A16207",
+  "tagline": "Physical, occupational & speech therapy",
+  "tileSubtitle": "PT \u00b7 OT \u00b7 speech therapy",
+  "sections": [
+    {
+      "icon": "directions_walk",
+      "label": "Outpatient Rehabilitation",
+      "facts": [
+        {
+          "label": "Physical / speech therapy visit",
+          "slot": "physical_speech_therapy.copay",
+          "altSlot": "physical_speech_therapy.coinsurance",
+          "highlight": true
+        },
+        {
+          "label": "Occupational therapy visit",
+          "slot": "occupational_therapy.copay",
+          "altSlot": "occupational_therapy.coinsurance"
+        },
+        {
+          "label": "Outpatient rehabilitation services",
+          "slot": "outpatient_rehabilitation.copay",
+          "altSlot": "outpatient_rehabilitation.coinsurance"
+        },
+        {
+          "label": "Prior authorization",
+          "slot": "physical_speech_therapy.prior_auth_required"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Therapy after surgery, a fall, or a stroke is one of the strongest predictors of getting back to normal life \u2014 don't skip sessions."
+    }
+  ]
+}

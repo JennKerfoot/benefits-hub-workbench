@@ -1,0 +1,29 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "vbidPackages",
+  "title": "Special Benefit Packages",
+  "icon": "redeem",
+  "iconBg": "#FFF1F2",
+  "iconColor": "#9F1239",
+  "barColor": "#9F1239",
+  "requiresEligibility": "ssbci",
+  "eligibilityBanner": "Available to members with qualifying conditions — your plan has confirmed you qualify.",
+  "tagline": "Extra benefits you qualify for based on your health conditions",
+  "tileSubtitle": "Extra benefits you qualify for",
+  "sections": [
+    {
+      "icon": "redeem",
+      "label": "{package.name}",
+      "forEach": "vbid_packages.packages",
+      "facts": [
+        { "label": "Allowance", "slot": "package.aggregate_allowance", "highlight": true },
+        { "label": "Can be used for", "slot": "package.benefit_categories", "join": " · " },
+        { "label": "Cost-sharing reduced on", "slot": "package.reduced_benefits" },
+        { "label": "Qualifying conditions", "slot": "package.eligibility" }
+      ]
+    }
+  ],
+  "connections": [
+    { "icon": "lightbulb", "text": "These packages exist because of your specific health conditions — they're designed to help with the everyday costs that come with managing them." }
+  ]
+}

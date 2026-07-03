@@ -1,0 +1,228 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "comment": "Card taxonomy: which PBP benefit keys produce which member-facing cards. A card renders if ANY of its pbpSources keys is present in the plan's benefits object \u2014 EXCEPT drug_coverage, which is a top-level key gated on has_drug_benefit=true. This file \u2014 not the carrier packs \u2014 is what makes the Hub scale to plans with different benefit mixes. Order = display order. pbpCategories = PBP service-category code prefixes the card represents (longest-prefix match, e.g. '14c4' beats '14'); used by the compiler's shared-wallet/VBID consolidation (COMPILER_SPEC.md 4a) to detect when a wallet group or VBID package's categories are already represented by rendered cards.",
+  "cards": [
+    {
+      "key": "doctorVisits",
+      "pbpSources": [
+        "primary_care",
+        "specialist",
+        "telehealth"
+      ],
+      "pbpCategories": [
+        "7a",
+        "7c",
+        "7j"
+      ]
+    },
+    {
+      "key": "prescriptions",
+      "pbpSources": [
+        "drug_coverage"
+      ],
+      "note": "top-level drug_coverage object, gated on has_drug_benefit=true"
+    },
+    {
+      "key": "dental",
+      "pbpSources": [
+        "dental_preventive",
+        "dental_comprehensive",
+        "dental_medicare"
+      ],
+      "pbpCategories": [
+        "16"
+      ]
+    },
+    {
+      "key": "vision",
+      "pbpSources": [
+        "eye_exams",
+        "eyewear"
+      ],
+      "pbpCategories": [
+        "17"
+      ]
+    },
+    {
+      "key": "hearing",
+      "pbpSources": [
+        "hearing_exams",
+        "hearing_aids",
+        "otc_hearing_aids"
+      ],
+      "pbpCategories": [
+        "18"
+      ]
+    },
+    {
+      "key": "fitness",
+      "pbpSources": [
+        "fitness"
+      ],
+      "pbpCategories": [
+        "14c4"
+      ]
+    },
+    {
+      "key": "otc",
+      "pbpSources": [
+        "otc_items"
+      ],
+      "pbpCategories": [
+        "13b"
+      ]
+    },
+    {
+      "key": "flexAllowance",
+      "pbpSources": [
+        "combined_benefits"
+      ],
+      "note": "one section per combined_benefits.groups[] entry; suppress standalone dollar display of any benefit listed in a group's includes[]"
+    },
+    {
+      "key": "meals",
+      "pbpSources": [
+        "meals"
+      ],
+      "pbpCategories": [
+        "13c"
+      ]
+    },
+    {
+      "key": "transportation",
+      "pbpSources": [
+        "transportation"
+      ],
+      "pbpCategories": [
+        "10b"
+      ]
+    },
+    {
+      "key": "acupuncture",
+      "pbpSources": [
+        "acupuncture_supplemental"
+      ],
+      "pbpCategories": [
+        "13a"
+      ]
+    },
+    {
+      "key": "chiropractor",
+      "pbpSources": [
+        "chiropractic"
+      ],
+      "pbpCategories": [
+        "7b"
+      ]
+    },
+    {
+      "key": "mentalHealth",
+      "pbpSources": [
+        "mental_health_outpatient",
+        "mental_health_specialist",
+        "outpatient_psychiatric"
+      ],
+      "pbpCategories": [
+        "7e",
+        "7h",
+        "9c"
+      ]
+    },
+    {
+      "key": "homeHealth",
+      "pbpSources": [
+        "home_health"
+      ],
+      "pbpCategories": [
+        "6"
+      ]
+    },
+    {
+      "key": "dme",
+      "pbpSources": [
+        "dme",
+        "prosthetics",
+        "medical_supplies"
+      ],
+      "pbpCategories": [
+        "11"
+      ]
+    },
+    {
+      "key": "outpatientRehab",
+      "pbpSources": [
+        "outpatient_rehabilitation",
+        "physical_speech_therapy",
+        "occupational_therapy"
+      ],
+      "pbpCategories": [
+        "7d",
+        "7i",
+        "9d"
+      ]
+    },
+    {
+      "key": "inHomeSafety",
+      "pbpSources": [
+        "additional_preventive"
+      ],
+      "subTypeFilter": "In-Home Safety Assessment"
+    },
+    {
+      "key": "pers",
+      "pbpSources": [
+        "additional_preventive"
+      ],
+      "subTypeFilter": "Personal Emergency Response System"
+    },
+    {
+      "key": "wigs",
+      "pbpSources": [
+        "additional_preventive"
+      ],
+      "subTypeFilter": "Wigs"
+    },
+    {
+      "key": "preventiveCare",
+      "pbpSources": [
+        "annual_physical",
+        "additional_preventive",
+        "preventive_attestation"
+      ],
+      "note": "renders the additional_preventive sub_types NOT claimed by a subTypeFilter card above",
+      "pbpCategories": [
+        "14"
+      ]
+    },
+    {
+      "key": "emergencyCare",
+      "pbpSources": [
+        "emergency_care",
+        "urgent_care",
+        "worldwide_emergency"
+      ],
+      "pbpCategories": [
+        "4"
+      ]
+    },
+    {
+      "key": "socialSupports",
+      "pbpSources": [
+        "social_supports"
+      ],
+      "requiresEligibility": "ssbci",
+      "note": "SSBCI is chronic-condition gated. Compiler emits the card with requiresEligibility; the app shows/hides it at render time using the existing member-eligibility-file flag. Live at launch for eligible members.",
+      "pbpCategories": [
+        "13i"
+      ]
+    },
+    {
+      "key": "vbidPackages",
+      "pbpSources": [
+        "vbid_packages"
+      ],
+      "requiresEligibility": "ssbci",
+      "note": "VBID/UF special supplemental packages use the SAME member-eligibility flag as SSBCI (product confirmed). Compiled per plan, displayed per member."
+    }
+  ]
+}

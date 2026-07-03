@@ -1,0 +1,51 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "dme",
+  "title": "Medical Equipment & Supplies",
+  "icon": "accessible",
+  "iconBg": "#F1F5F9",
+  "iconColor": "#334155",
+  "barColor": "#334155",
+  "tagline": "Durable medical equipment, prosthetics & supplies",
+  "tileSubtitle": "Equipment & supplies",
+  "sections": [
+    {
+      "icon": "accessible",
+      "label": "Durable Medical Equipment",
+      "facts": [
+        {
+          "label": "Your cost",
+          "slot": "dme.copay",
+          "altSlot": "dme.coinsurance",
+          "highlight": true
+        },
+        {
+          "label": "Prior authorization",
+          "slot": "dme.prior_auth_required"
+        }
+      ]
+    },
+    {
+      "icon": "medical_services",
+      "label": "Prosthetics & Medical Supplies",
+      "facts": [
+        {
+          "label": "Prosthetic devices",
+          "slot": "prosthetics.copay",
+          "altSlot": "prosthetics.coinsurance"
+        },
+        {
+          "label": "Medical supplies",
+          "slot": "medical_supplies.copay",
+          "altSlot": "medical_supplies.coinsurance"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Walkers, wheelchairs, hospital beds, CGMs, and oxygen equipment usually fall under DME \u2014 get them through contracted suppliers to make sure they're covered."
+    }
+  ]
+}

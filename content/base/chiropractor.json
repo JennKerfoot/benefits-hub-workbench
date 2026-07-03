@@ -1,0 +1,39 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "chiropractor",
+  "title": "Chiropractic Care",
+  "icon": "healing",
+  "iconBg": "#FFF7ED",
+  "iconColor": "#C2410C",
+  "barColor": "#C2410C",
+  "tagline": "Chiropractic visits covered by your plan",
+  "tileSubtitle": "Chiropractic covered",
+  "sections": [
+    {
+      "icon": "healing",
+      "label": "Chiropractic Care",
+      "facts": [
+        {
+          "label": "Your cost per visit",
+          "slot": "chiropractic.copay",
+          "altSlot": "chiropractic.coinsurance",
+          "highlight": true
+        },
+        {
+          "label": "Referral required",
+          "slot": "chiropractic.referral_required"
+        },
+        {
+          "label": "Prior authorization",
+          "slot": "chiropractic.prior_auth_required"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Medicare covers chiropractic care for spinal manipulation \u2014 a drug-free option for back and neck pain."
+    }
+  ]
+}

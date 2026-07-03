@@ -1,0 +1,9 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "appliesTo": {
+    "carrier": "humana"
+  },
+  "key": "otc",
+  "vendor": "Humana Healthy Options Allowance (Humana Spending Account Card)",
+  "note": "Allowance is loaded to the Humana Spending Account Card; check balance at MyHumana.com. Monthly accrual/rollover mechanics are EOC facts pending product approval. Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "otc",
+  "title": "OTC Allowance",
+  "icon": "shopping_bag",
+  "iconBg": "#FEF3C7",
+  "iconColor": "#D97706",
+  "barColor": "#D97706",
+  "tagline": "{otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period} for health products",
+  "tileSubtitle": "{otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period}",
+  "sections": [
+    {
+      "icon": "shopping_bag",
+      "label": "Over-the-Counter (OTC) Allowance",
+      "facts": [
+        {
+          "label": "Allowance",
+          "slot": "otc_items.max_plan_benefit",
+          "suffix": " {otc_items.max_plan_benefit_period}",
+          "highlight": true
+        }
+      ],
+      "chips": [
+        "Vitamins & Supplements",
+        "Pain Relief",
+        "First Aid",
+        "Cold & Flu",
+        "Allergy",
+        "Digestive Health",
+        "Eye Care",
+        "Oral Care"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Check your plan's OTC catalog for eligible items \u2014 allowances typically expire, so use them each period."
+    }
+  ]
+}

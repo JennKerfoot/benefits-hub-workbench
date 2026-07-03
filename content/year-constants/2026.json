@@ -1,0 +1,7 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "planYear": 2026,
+  "partDOopCap": "$2,100",
+  "insulinMonthlyCap": "$35",
+  "comment": "Statutory Part D values. Compliance confirms annually; facts referencing these are marked source: computed."
+}

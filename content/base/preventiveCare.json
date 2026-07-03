@@ -1,0 +1,48 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "preventiveCare",
+  "title": "Preventive Care",
+  "icon": "ecg_heart",
+  "iconBg": "#DEF5F7",
+  "iconColor": "#0D4F54",
+  "barColor": "#0D4F54",
+  "tagline": "Medicare preventive services at no cost to you",
+  "tileSubtitle": "No-cost screenings & wellness",
+  "sections": [
+    {
+      "icon": "ecg_heart",
+      "label": "Preventive Services",
+      "facts": [
+        {
+          "label": "Medicare preventive services",
+          "value": "$0 copay",
+          "source": "computed",
+          "note": "Gated on preventive_attestation.zero_cost_attestation"
+        },
+        {
+          "label": "Annual physical exam",
+          "slot": "annual_physical.copay",
+          "highlight": true
+        }
+      ]
+    },
+    {
+      "icon": "add_circle",
+      "label": "Additional Preventive Benefits",
+      "facts": [
+        {
+          "forEach": "additional_preventive.sub_types",
+          "label": "{item.label}",
+          "slot": "item.copay",
+          "altSlot": "item.benefit_type"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "health_and_safety",
+      "text": "When a service is billed as preventive (screening, no symptoms) it is usually covered at no cost; if it becomes diagnostic, normal cost-sharing may apply. Ask your provider how a service will be billed."
+    }
+  ]
+}

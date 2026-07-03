@@ -1,0 +1,35 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "socialSupports",
+  "title": "Everyday Living Support",
+  "icon": "volunteer_activism",
+  "iconBg": "#ECFDF5",
+  "iconColor": "#047857",
+  "barColor": "#047857",
+  "launchScope": "deferred",
+  "eligibilityBanner": "Available to members with qualifying chronic conditions \u2014 contact your plan to see if you qualify.",
+  "tagline": "Extra support for food, home, and daily needs",
+  "tileSubtitle": "Food, home & daily support",
+  "sections": [
+    {
+      "icon": "volunteer_activism",
+      "label": "Special Supplemental Benefits (SSBCI)",
+      "facts": [
+        {
+          "forEach": "social_supports.items",
+          "label": "{item.label}",
+          "slot": "item.max_plan_benefit",
+          "suffix": " {item.max_plan_benefit_period}",
+          "pooledNote": "Included in your combined allowance"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "These benefits are designed for members managing chronic conditions \u2014 they cover practical needs that affect health, like food and a safe home."
+    }
+  ],
+  "requiresEligibility": "ssbci"
+}

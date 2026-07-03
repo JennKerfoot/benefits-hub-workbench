@@ -1,0 +1,35 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "inHomeSafety",
+  "title": "In-Home Safety Assessment",
+  "icon": "gpp_good",
+  "iconBg": "#ECFEFF",
+  "iconColor": "#0E7490",
+  "barColor": "#0E7490",
+  "tagline": "A professional home safety check covered by your plan",
+  "tileSubtitle": "Home safety check",
+  "sections": [
+    {
+      "icon": "gpp_good",
+      "label": "In-Home Safety Assessment",
+      "facts": [
+        {
+          "label": "Your cost",
+          "slot": "subType.copay",
+          "default": "Covered \u2014 see plan documents",
+          "highlight": true
+        },
+        {
+          "label": "Plan pays up to",
+          "slot": "subType.max_plan_benefit"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Most falls happen at home \u2014 a safety assessment spots risks like loose rugs, poor lighting, and missing grab bars before they cause an injury."
+    }
+  ]
+}

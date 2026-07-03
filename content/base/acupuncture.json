@@ -1,0 +1,35 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "acupuncture",
+  "title": "Acupuncture",
+  "icon": "spa",
+  "iconBg": "#ECFDF5",
+  "iconColor": "#059669",
+  "barColor": "#059669",
+  "tagline": "Acupuncture visits covered by your plan",
+  "tileSubtitle": "Acupuncture covered",
+  "sections": [
+    {
+      "icon": "spa",
+      "label": "Acupuncture",
+      "facts": [
+        {
+          "label": "Your cost per visit",
+          "slot": "acupuncture_supplemental.copay",
+          "altSlot": "acupuncture_supplemental.coinsurance",
+          "highlight": true
+        },
+        {
+          "label": "Prior authorization",
+          "slot": "acupuncture_supplemental.prior_auth_required"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Acupuncture can help manage chronic pain without adding medications \u2014 many members use it alongside physical therapy."
+    }
+  ]
+}

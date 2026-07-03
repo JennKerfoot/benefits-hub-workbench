@@ -1,0 +1,256 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "duos-benefit-content/v1",
+  "title": "DUOS Benefits Hub content file",
+  "description": "Validates base templates, carrier packs, and contract/plan overrides. Compiler-enforced rules beyond this schema: no literal dollar amounts outside eoc_facts; eoc_facts require approved+citation.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "key"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "duos-benefit-content/v1"
+    },
+    "key": {
+      "type": "string",
+      "description": "Card key from taxonomy.json"
+    },
+    "appliesTo": {
+      "type": "object",
+      "properties": {
+        "carrier": {
+          "type": "string"
+        },
+        "contract": {
+          "type": "string",
+          "pattern": "^[HRES][0-9]{4}$"
+        },
+        "plan": {
+          "type": "string",
+          "pattern": "^[HRES][0-9]{4}_[0-9]{3}(_[0-9]{1,3})?$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "title": {
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "iconBg": {
+      "type": "string"
+    },
+    "iconColor": {
+      "type": "string"
+    },
+    "barColor": {
+      "type": "string"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "tileSubtitle": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "launchScope": {
+      "enum": [
+        "live",
+        "deferred"
+      ]
+    },
+    "eligibilityBanner": {
+      "type": "string"
+    },
+    "cta": {
+      "type": "object",
+      "required": [
+        "label",
+        "action"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "action": {
+          "enum": [
+            "tel",
+            "web",
+            "nav"
+          ]
+        },
+        "href": {
+          "type": "string"
+        },
+        "navTarget": {
+          "type": "string"
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "facts"
+        ],
+        "properties": {
+          "icon": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "forEach": {
+            "type": "string"
+          },
+          "chips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string"
+          },
+          "facts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/factTemplate"
+            }
+          }
+        }
+      }
+    },
+    "connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "icon",
+          "text"
+        ],
+        "properties": {
+          "icon": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "eoc_facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "value",
+          "source",
+          "approved",
+          "citation"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "source": {
+            "const": "eoc"
+          },
+          "approved": {
+            "const": true
+          },
+          "citation": {
+            "type": "string",
+            "minLength": 5
+          },
+          "requires": {
+            "type": "string",
+            "description": "PBP benefit key that must be present for this fact to render"
+          }
+        }
+      }
+    },
+    "requiresEligibility": {
+      "enum": [
+        "ssbci"
+      ],
+      "description": "Compiler also stamps this from taxonomy.json; template-level copy must match taxonomy."
+    }
+  },
+  "definitions": {
+    "factTemplate": {
+      "type": "object",
+      "required": [
+        "label"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string",
+          "description": "Path into plan JSON, e.g. fitness.copay. Row drops if unresolved."
+        },
+        "altSlot": {
+          "type": "string",
+          "description": "Fallback slot if primary doesn't resolve (e.g. coinsurance when no copay)."
+        },
+        "value": {
+          "type": "string",
+          "description": "Literal value \u2014 only for source 'computed'; may reference yearConstants."
+        },
+        "source": {
+          "enum": [
+            "pbp",
+            "eoc",
+            "computed"
+          ]
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "suffix": {
+          "type": "string"
+        },
+        "join": {
+          "type": "string",
+          "description": "Separator when the slot resolves to an array."
+        },
+        "forEach": {
+          "type": "string",
+          "description": "Iterate an array; use {item.*} in label/slot."
+        },
+        "highlight": {
+          "type": "boolean"
+        },
+        "pooledNote": {
+          "type": "string",
+          "description": "Rendered instead of a dollar value when the item is part of a combined-benefits group."
+        },
+        "note": {
+          "type": "string"
+        },
+        "default": {
+          "type": "string",
+          "description": "Fallback display value when slot and altSlot are unresolved. Row renders with this text instead of dropping."
+        }
+      }
+    }
+  }
+}

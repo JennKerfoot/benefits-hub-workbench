@@ -1,0 +1,39 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "homeHealth",
+  "title": "Home Health Care",
+  "icon": "home_health",
+  "iconBg": "#E0E7FF",
+  "iconColor": "#4338CA",
+  "barColor": "#4338CA",
+  "tagline": "Skilled care at home covered by your plan",
+  "tileSubtitle": "Home health covered",
+  "sections": [
+    {
+      "icon": "home_health",
+      "label": "Home Health Agency Care",
+      "facts": [
+        {
+          "label": "Your cost",
+          "slot": "home_health.copay",
+          "altSlot": "home_health.coinsurance",
+          "highlight": true
+        },
+        {
+          "label": "Prior authorization",
+          "slot": "home_health.prior_auth_required"
+        },
+        {
+          "label": "Referral required",
+          "slot": "home_health.referral_required"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Home health brings skilled nursing and therapy to you after an illness or hospital stay \u2014 ask your doctor if you qualify."
+    }
+  ]
+}

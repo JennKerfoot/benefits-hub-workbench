@@ -1,0 +1,34 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "meals",
+  "title": "Meals",
+  "icon": "restaurant",
+  "iconBg": "#FFE4E6",
+  "iconColor": "#BE123C",
+  "barColor": "#BE123C",
+  "tagline": "Meal benefit included in your plan",
+  "tileSubtitle": "Meal benefit included",
+  "sections": [
+    {
+      "icon": "restaurant",
+      "label": "Meal Benefit",
+      "facts": [
+        {
+          "label": "Your cost",
+          "slot": "meals.copay",
+          "highlight": true
+        },
+        {
+          "label": "Plan pays up to",
+          "slot": "meals.max_plan_benefit"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Meal benefits are often available after a hospital stay \u2014 ask your care team how to activate them."
+    }
+  ]
+}

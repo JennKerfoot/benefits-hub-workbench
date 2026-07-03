@@ -1,0 +1,37 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "flexAllowance",
+  "title": "Flex Allowance",
+  "icon": "account_balance_wallet",
+  "iconBg": "#F3E8FF",
+  "iconColor": "#7C3AED",
+  "barColor": "#7C3AED",
+  "tagline": "A shared allowance you can spend across benefit categories",
+  "tileSubtitle": "Shared benefit allowance",
+  "sections": [
+    {
+      "icon": "account_balance_wallet",
+      "label": "{group.name}",
+      "forEach": "combined_benefits.groups",
+      "facts": [
+        {
+          "label": "Allowance",
+          "slot": "group.max_plan_benefit",
+          "suffix": " {group.max_plan_benefit_period}",
+          "highlight": true
+        },
+        {
+          "label": "Can be used for",
+          "slot": "group.includes",
+          "join": " \u00b7 "
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "This is one pooled amount shared across the listed categories \u2014 spending in one category reduces what's left for the others in the same period."
+    }
+  ]
+}

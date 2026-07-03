@@ -1,0 +1,35 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "key": "wigs",
+  "title": "Wigs for Hair Loss",
+  "icon": "face",
+  "iconBg": "#FDF2F8",
+  "iconColor": "#BE185D",
+  "barColor": "#BE185D",
+  "tagline": "Wigs covered for medical hair loss",
+  "tileSubtitle": "Wigs covered",
+  "sections": [
+    {
+      "icon": "face",
+      "label": "Wigs",
+      "facts": [
+        {
+          "label": "Your cost",
+          "slot": "subType.copay",
+          "default": "Covered \u2014 see plan documents",
+          "highlight": true
+        },
+        {
+          "label": "Plan pays up to",
+          "slot": "subType.max_plan_benefit"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "icon": "lightbulb",
+      "text": "Wigs are typically covered for hair loss from chemotherapy or other medical treatment \u2014 a prescription from your doctor is usually all you need."
+    }
+  ]
+}

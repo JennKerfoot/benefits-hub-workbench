@@ -1,0 +1,17 @@
+{
+  "$schema": "duos-benefit-content/v1",
+  "appliesTo": {
+    "carrier": "humana"
+  },
+  "key": "fitness",
+  "vendor": "SilverSneakers",
+  "tagline": "SilverSneakers \u2014 {fitness.copay|$0} gym access & classes",
+  "tileSubtitle": "SilverSneakers \u2014 {fitness.copay|$0} gym",
+  "cta": {
+    "label": "Find a SilverSneakers gym",
+    "icon": "open_in_new",
+    "action": "web",
+    "href": "https://www.silversneakers.com"
+  },
+  "note": "Vendor verified: 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26)."
+}
