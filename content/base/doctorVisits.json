@@ -6,8 +6,8 @@
   "iconBg": "#E0F5FB",
   "iconColor": "#155E75",
   "barColor": "#155E75",
-  "tagline": "{primary_care.copay} primary care \u00b7 {specialist.copay} specialist visits",
-  "tileSubtitle": "{primary_care.copay} PCP \u00b7 {specialist.copay} specialist",
+  "tagline": "{primary_care.copay} primary care · {specialist.copay} specialist visits",
+  "tileSubtitle": "{primary_care.copay} PCP · {specialist.copay} specialist",
   "sections": [
     {
       "icon": "stethoscope",
@@ -36,7 +36,7 @@
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "Seeing your primary care doctor regularly helps catch small problems before they become big ones \u2014 and most plans cover the visit at low or no cost."
+      "text": "Seeing your primary care doctor regularly helps catch small problems before they become big ones — and most plans cover the visit at low or no cost."
     }
   ]
 }

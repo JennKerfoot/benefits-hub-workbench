@@ -18,7 +18,7 @@
           "slot": "meals.copay",
           "highlight": true,
           "altSlot": "meals.coinsurance",
-          "default": "Covered \u2014 see plan documents"
+          "default": "Covered — see plan documents"
         },
         {
           "label": "Plan pays up to",
@@ -30,7 +30,7 @@
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "Meal benefits are often available after a hospital stay \u2014 ask your care team how to activate them."
+      "text": "Meal benefits are often available after a hospital stay — ask your care team how to activate them."
     }
   ]
 }

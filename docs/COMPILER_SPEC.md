@@ -92,15 +92,30 @@ allowance. The card type and name depend on what the plan filed:
 | Plan shape | Card shown | Contents |
 |---|---|---|
 | Standalone OTC dollar, no wallet | OTC card | Allowance amount, how to use it, covered benefit (OTC) |
-| Shared wallet spanning card types | One wallet card | Allowance amount + period, how to use it, everything the money covers (OTC, SSBCI items, healthy foods… whatever the plan filed) |
-| Allowance scoped to ONE card type (e.g. a dental annual maximum) | No separate card | Renders as the max row on that benefit's own card |
+| Shared wallet spanning card types (or carrying SSBCI `includes[]`) | One wallet card | Allowance amount + period, how to use it, everything the money covers (OTC, SSBCI items, healthy foods… whatever the plan filed) |
+| Allowance scoped to ONE card type, no `includes[]` (e.g. a dental annual maximum) | No separate card | Renders as the max row on that benefit's own card |
+| Combined group with NO pooled dollar (e.g. a Transportation linkage group) | No card | Link-only: stamps eligibility on the benefit's own card; reported |
+| Supplemental VBID package WITH its own aggregate allowance | Its own section on the Special Benefit Packages card | Allowance + period + categories — NEVER merged into (or allowed to rename) another wallet |
 
 The card always contains: the allowance amount, how to use the allowance, and
 the benefits covered by that allowance. **Card naming ladder** (first match
-wins): carrier-pack title ("Healthy Options card") → VBID package name from
-the filing, only when descriptive/multi-word ("Healthy Options Allowance";
-a single-word package name like "Food" defers) → combined-group name
-("Grocery-OTC") → generic base template ("Flex allowance").
+wins): content-layer title, most specific layer wins ("Healthy Options card")
+→ NON-GENERIC combined-group name ("Grocery-OTC", "Food-OTC-Utilities") →
+donated package name, given to AT MOST ONE wallet and only when that wallet's
+group name is generic → base template ("Flex Allowance"). **Generic filing
+labels never reach a member**: names like "SSBCI Pkg", "Package 1", "Combined
+Supplemental Benefits 2" render as "Flex Allowance" / "Special benefit
+package" instead.
+
+**SSBCI items absorb PER ITEM, not per card:** the pipeline's period-matched
+`includes[]` on each combined group says which wallet funds which item
+(H0976-001: Food & Produce → the $115/mo wallet; Pest Control + Indoor Air
+Quality → the $1,300/yr Home Modifications wallet; Transportation → a
+dollarless link-only group). Each claimed item renders as an "Included" row on
+ITS wallet; the socialSupports card renders only unclaimed items, and drops
+entirely when everything is claimed. A merged package's name/eligibility never
+broadcasts to every 19b3-carrying wallet — eligibility stamps flow to the
+touched cards, the name to at most one wallet (see ladder).
 
 **Reference implementation:** `dashboard/workbench.html` (+ `js/workbench.js`)
 in the CMS package — a browser-only workbench that runs these rules against any

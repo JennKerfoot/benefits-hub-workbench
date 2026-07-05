@@ -23,7 +23,7 @@
         {
           "label": "Can be used for",
           "slot": "group.includes",
-          "join": " \u00b7 "
+          "join": " · "
         }
       ]
     }
@@ -31,7 +31,7 @@
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "This is one pooled amount shared across the listed categories \u2014 spending in one category reduces what's left for the others in the same period."
+      "text": "This is one pooled amount shared across the listed categories — spending in one category reduces what's left for the others in the same period."
     }
   ]
 }

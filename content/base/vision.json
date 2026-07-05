@@ -6,8 +6,8 @@
   "iconBg": "#E0F5FB",
   "iconColor": "#0891B2",
   "barColor": "#0891B2",
-  "tagline": "{eye_exams.copay} eye exam \u00b7 up to {eyewear.max_plan_benefit} for eyewear",
-  "tileSubtitle": "{eye_exams.copay} exam \u00b7 {eyewear.max_plan_benefit} eyewear",
+  "tagline": "{eye_exams.copay} eye exam · up to {eyewear.max_plan_benefit} for eyewear",
+  "tileSubtitle": "{eye_exams.copay} exam · {eyewear.max_plan_benefit} eyewear",
   "sections": [
     {
       "icon": "visibility",
@@ -37,7 +37,7 @@
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "A routine eye exam is more than an eyesight check \u2014 it can reveal early signs of conditions like diabetes, high blood pressure, and glaucoma."
+      "text": "A routine eye exam is more than an eyesight check — it can reveal early signs of conditions like diabetes, high blood pressure, and glaucoma."
     }
   ]
 }

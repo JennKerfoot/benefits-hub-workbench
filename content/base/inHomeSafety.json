@@ -16,7 +16,7 @@
         {
           "label": "Your cost",
           "slot": "subType.copay",
-          "default": "Covered \u2014 see plan documents",
+          "default": "Covered — see plan documents",
           "highlight": true
         },
         {
@@ -29,7 +29,7 @@
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "Most falls happen at home \u2014 a safety assessment spots risks like loose rugs, poor lighting, and missing grab bars before they cause an injury."
+      "text": "Most falls happen at home — a safety assessment spots risks like loose rugs, poor lighting, and missing grab bars before they cause an injury."
     }
   ]
 }

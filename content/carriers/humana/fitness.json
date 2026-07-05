@@ -5,8 +5,8 @@
   },
   "key": "fitness",
   "vendor": "SilverSneakers",
-  "tagline": "SilverSneakers \u2014 {fitness.copay|$0} gym access & classes",
-  "tileSubtitle": "SilverSneakers \u2014 {fitness.copay|$0} gym",
+  "tagline": "SilverSneakers — {fitness.copay|$0} gym access & classes",
+  "tileSubtitle": "SilverSneakers — {fitness.copay|$0} gym",
   "cta": {
     "label": "Find a SilverSneakers gym",
     "icon": "open_in_new",

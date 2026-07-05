@@ -7,7 +7,7 @@
   "iconColor": "#047857",
   "barColor": "#047857",
   "launchScope": "deferred",
-  "eligibilityBanner": "Available to members with qualifying chronic conditions \u2014 contact your plan to see if you qualify.",
+  "eligibilityBanner": "Available to members with qualifying chronic conditions — contact your plan to see if you qualify.",
   "tagline": "Extra support for food, home, and daily needs",
   "tileSubtitle": "Food, home & daily support",
   "sections": [
@@ -29,7 +29,7 @@
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "These benefits are designed for members managing chronic conditions \u2014 they cover practical needs that affect health, like food and a safe home."
+      "text": "These benefits are designed for members managing chronic conditions — they cover practical needs that affect health, like food and a safe home."
     }
   ],
   "requiresEligibility": "ssbci"

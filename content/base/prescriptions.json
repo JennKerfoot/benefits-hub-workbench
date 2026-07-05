@@ -20,19 +20,19 @@
         },
         {
           "forEach": "drug_coverage.tiers",
-          "label": "{item.tier_label} \u2014 30-day supply",
+          "label": "{item.tier_label} — 30-day supply",
           "slot": "item.preferred_retail_copay_30day",
           "altSlot": "item.retail_copay_30day"
         },
         {
           "forEach": "drug_coverage.tiers",
-          "label": "{item.tier_label} \u2014 30-day supply",
+          "label": "{item.tier_label} — 30-day supply",
           "slot": "item.preferred_retail_coinsurance_30day",
           "altSlot": "item.retail_coinsurance_30day"
         },
         {
           "forEach": "drug_coverage.tiers",
-          "label": "{item.tier_label} \u2014 90-day supply",
+          "label": "{item.tier_label} — 90-day supply",
           "slot": "item.mail_copay_90day",
           "altSlot": "item.preferred_retail_copay_90day"
         }
@@ -49,7 +49,7 @@
         },
         {
           "label": "Yearly out-of-pocket maximum",
-          "value": "{yearConstants.partDOopCap} \u2014 then $0 for the rest of the year",
+          "value": "{yearConstants.partDOopCap} — then $0 for the rest of the year",
           "source": "computed"
         },
         {
@@ -63,7 +63,7 @@
   "connections": [
     {
       "icon": "savings",
-      "text": "If you qualify for Extra Help (LIS), your drug costs could drop significantly \u2014 ask us about applying."
+      "text": "If you qualify for Extra Help (LIS), your drug costs could drop significantly — ask us about applying."
     }
   ]
 }

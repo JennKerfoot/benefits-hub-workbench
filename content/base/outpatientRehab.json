@@ -7,7 +7,7 @@
   "iconColor": "#A16207",
   "barColor": "#A16207",
   "tagline": "Physical, occupational & speech therapy",
-  "tileSubtitle": "PT \u00b7 OT \u00b7 speech therapy",
+  "tileSubtitle": "PT · OT · speech therapy",
   "sections": [
     {
       "icon": "directions_walk",
@@ -39,7 +39,7 @@
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "Therapy after surgery, a fall, or a stroke is one of the strongest predictors of getting back to normal life \u2014 don't skip sessions."
+      "text": "Therapy after surgery, a fall, or a stroke is one of the strongest predictors of getting back to normal life — don't skip sessions."
     }
   ]
 }

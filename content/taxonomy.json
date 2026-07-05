@@ -1,6 +1,6 @@
 {
   "$schema": "duos-benefit-content/v1",
-  "comment": "Card taxonomy: which PBP benefit keys produce which member-facing cards. A card renders if ANY of its pbpSources keys is present in the plan's benefits object \u2014 EXCEPT drug_coverage, which is a top-level key gated on has_drug_benefit=true. This file \u2014 not the carrier packs \u2014 is what makes the Hub scale to plans with different benefit mixes. Order = display order. pbpCategories = PBP service-category code prefixes the card represents (longest-prefix match, e.g. '14c4' beats '14'); used by the compiler's shared-wallet/VBID consolidation (COMPILER_SPEC.md 4a) to detect when a wallet group or VBID package's categories are already represented by rendered cards.",
+  "comment": "Card taxonomy: which PBP benefit keys produce which member-facing cards. A card renders if ANY of its pbpSources keys is present in the plan's benefits object — EXCEPT drug_coverage, which is a top-level key gated on has_drug_benefit=true. This file — not the carrier packs — is what makes the Hub scale to plans with different benefit mixes. Order = display order. pbpCategories = PBP service-category code prefixes the card represents (longest-prefix match, e.g. '14c4' beats '14'); used by the compiler's shared-wallet/VBID consolidation (COMPILER_SPEC.md 4a) to detect when a wallet group or VBID package's categories are already represented by rendered cards.",
   "cards": [
     {
       "key": "doctorVisits",

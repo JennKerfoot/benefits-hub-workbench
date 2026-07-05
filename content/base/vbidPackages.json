@@ -16,14 +16,31 @@
       "label": "{package.name}",
       "forEach": "vbid_packages.packages",
       "facts": [
-        { "label": "Allowance", "slot": "package.aggregate_allowance", "highlight": true },
-        { "label": "Can be used for", "slot": "package.benefit_categories", "join": " · " },
-        { "label": "Cost-sharing reduced on", "slot": "package.reduced_benefits" },
-        { "label": "Qualifying conditions", "slot": "package.eligibility" }
+        {
+          "label": "Allowance",
+          "slot": "package.aggregate_allowance",
+          "highlight": true
+        },
+        {
+          "label": "Can be used for",
+          "slot": "package.benefit_categories",
+          "join": " · "
+        },
+        {
+          "label": "Cost-sharing reduced on",
+          "slot": "package.reduced_benefits"
+        },
+        {
+          "label": "Qualifying conditions",
+          "slot": "package.eligibility"
+        }
       ]
     }
   ],
   "connections": [
-    { "icon": "lightbulb", "text": "These packages exist because of your specific health conditions — they're designed to help with the everyday costs that come with managing them." }
+    {
+      "icon": "lightbulb",
+      "text": "These packages exist because of your specific health conditions — they're designed to help with the everyday costs that come with managing them."
+    }
   ]
 }

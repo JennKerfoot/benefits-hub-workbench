@@ -6,8 +6,8 @@
   "iconBg": "#EEECFD",
   "iconColor": "#6366F1",
   "barColor": "#6366F1",
-  "tagline": "{hearing_exams.copay} hearing exam \u00b7 hearing aid coverage",
-  "tileSubtitle": "{hearing_exams.copay} exam \u00b7 aids covered",
+  "tagline": "{hearing_exams.copay} hearing exam · hearing aid coverage",
+  "tileSubtitle": "{hearing_exams.copay} exam · aids covered",
   "sections": [
     {
       "icon": "hearing",
@@ -22,13 +22,10 @@
           "slot": "hearing_aids.copay"
         },
         {
-          "label": "Plan pays up to (per ear)",
-          "slot": "hearing_aids.max_plan_benefit_per_ear",
+          "label": "Plan pays up to",
+          "slot": "hearing_aids.max_plan_benefit",
+          "suffix": " {hearing_aids.max_plan_benefit_scope}",
           "highlight": true
-        },
-        {
-          "label": "Plan pays up to (total)",
-          "slot": "hearing_aids.max_plan_benefit"
         },
         {
           "label": "Over-the-counter hearing aids",

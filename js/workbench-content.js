@@ -2,7 +2,7 @@
 window.WB_CONTENT = {
  "taxonomy": {
   "$schema": "duos-benefit-content/v1",
-  "comment": "Card taxonomy: which PBP benefit keys produce which member-facing cards. A card renders if ANY of its pbpSources keys is present in the plan's benefits object \u2014 EXCEPT drug_coverage, which is a top-level key gated on has_drug_benefit=true. This file \u2014 not the carrier packs \u2014 is what makes the Hub scale to plans with different benefit mixes. Order = display order. pbpCategories = PBP service-category code prefixes the card represents (longest-prefix match, e.g. '14c4' beats '14'); used by the compiler's shared-wallet/VBID consolidation (COMPILER_SPEC.md 4a) to detect when a wallet group or VBID package's categories are already represented by rendered cards.",
+  "comment": "Card taxonomy: which PBP benefit keys produce which member-facing cards. A card renders if ANY of its pbpSources keys is present in the plan's benefits object — EXCEPT drug_coverage, which is a top-level key gated on has_drug_benefit=true. This file — not the carrier packs — is what makes the Hub scale to plans with different benefit mixes. Order = display order. pbpCategories = PBP service-category code prefixes the card represents (longest-prefix match, e.g. '14c4' beats '14'); used by the compiler's shared-wallet/VBID consolidation (COMPILER_SPEC.md 4a) to detect when a wallet group or VBID package's categories are already represented by rendered cards.",
   "cards": [
    {
     "key": "doctorVisits",
@@ -230,7 +230,7 @@ window.WB_CONTENT = {
  },
  "registry": {
   "$schema": "duos-benefit-content/v1",
-  "comment": "Maps CMS contract numbers to carrier packs in carriers/. A contract not listed here still compiles \u2014 it just uses base/ wording only.",
+  "comment": "Maps CMS contract numbers to carrier packs in carriers/. A contract not listed here still compiles — it just uses base/ wording only.",
   "contracts": {
    "H5425": "scan",
    "H7617": "humana"
@@ -245,7 +245,7 @@ window.WB_CONTENT = {
  },
  "adminMapping": {
   "$schema": "duos-benefit-content/v1",
-  "comment": "Crosswalk from admin-tool benefit names (one row per covered benefit per PBP) to Hub taxonomy card keys. The card's PBP gate still decides whether anything renders \u2014 an admin row can never un-gate a card.",
+  "comment": "Crosswalk from admin-tool benefit names (one row per covered benefit per PBP) to Hub taxonomy card keys. The card's PBP gate still decides whether anything renders — an admin row can never un-gate a card.",
   "planIdFormat": {
    "adminPattern": "H5425123001 = contract(5) + pbp(3) + segment(3), no separators",
    "parse": {
@@ -254,7 +254,7 @@ window.WB_CONTENT = {
     "segment": "chars 9-11"
    },
    "pipelineFormat": "H{contract}_{pbp}_{segment} e.g. H5425_123_0",
-   "segmentRule": "CONFIRMED by product 2026-07-01: no defined segment = '000'; defined segment = its value zero-padded to 3 digits. Crosswalk: admin segment = pipeline segment zero-padded to 3 (pipeline '0' \u2194 admin '000')."
+   "segmentRule": "CONFIRMED by product 2026-07-01: no defined segment = '000'; defined segment = its value zero-padded to 3 digits. Crosswalk: admin segment = pipeline segment zero-padded to 3 (pipeline '0' ↔ admin '000')."
   },
   "benefits": {
    "acupuncture": {
@@ -312,206 +312,6 @@ window.WB_CONTENT = {
   }
  },
  "base": {
-  "fitness": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "fitness",
-   "title": "Fitness",
-   "icon": "fitness_center",
-   "iconBg": "#E6F8DE",
-   "iconColor": "#386F19",
-   "barColor": "#386F19",
-   "tagline": "{fitness.copay|$0} fitness benefit included in your plan",
-   "tileSubtitle": "{fitness.copay|$0} fitness benefit",
-   "sections": [
-    {
-     "icon": "fitness_center",
-     "label": "Fitness Benefit",
-     "facts": [
-      {
-       "label": "Included programs",
-       "slot": "fitness.fitness_types"
-      },
-      {
-       "label": "Your cost",
-       "slot": "fitness.copay",
-       "highlight": true
-      },
-      {
-       "label": "Plan pays up to",
-       "slot": "fitness.max_plan_benefit",
-       "suffix": " {fitness.max_plan_benefit_period}"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Regular physical activity is one of the most effective ways to reduce fall risk and support heart health."
-    }
-   ]
-  },
-  "inHomeSafety": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "inHomeSafety",
-   "title": "In-Home Safety Assessment",
-   "icon": "gpp_good",
-   "iconBg": "#ECFEFF",
-   "iconColor": "#0E7490",
-   "barColor": "#0E7490",
-   "tagline": "A professional home safety check covered by your plan",
-   "tileSubtitle": "Home safety check",
-   "sections": [
-    {
-     "icon": "gpp_good",
-     "label": "In-Home Safety Assessment",
-     "facts": [
-      {
-       "label": "Your cost",
-       "slot": "subType.copay",
-       "default": "Covered \u2014 see plan documents",
-       "highlight": true
-      },
-      {
-       "label": "Plan pays up to",
-       "slot": "subType.max_plan_benefit"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Most falls happen at home \u2014 a safety assessment spots risks like loose rugs, poor lighting, and missing grab bars before they cause an injury."
-    }
-   ]
-  },
-  "socialSupports": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "socialSupports",
-   "title": "Everyday Living Support",
-   "icon": "volunteer_activism",
-   "iconBg": "#ECFDF5",
-   "iconColor": "#047857",
-   "barColor": "#047857",
-   "launchScope": "deferred",
-   "eligibilityBanner": "Available to members with qualifying chronic conditions \u2014 contact your plan to see if you qualify.",
-   "tagline": "Extra support for food, home, and daily needs",
-   "tileSubtitle": "Food, home & daily support",
-   "sections": [
-    {
-     "icon": "volunteer_activism",
-     "label": "Special Supplemental Benefits (SSBCI)",
-     "facts": [
-      {
-       "forEach": "social_supports.items",
-       "label": "{item.label}",
-       "slot": "item.max_plan_benefit",
-       "suffix": " {item.max_plan_benefit_period}",
-       "pooledNote": "Included in your combined allowance",
-       "default": "Included"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "These benefits are designed for members managing chronic conditions \u2014 they cover practical needs that affect health, like food and a safe home."
-    }
-   ],
-   "requiresEligibility": "ssbci"
-  },
-  "transportation": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "transportation",
-   "title": "Transportation",
-   "icon": "directions_car",
-   "iconBg": "#DBEAFE",
-   "iconColor": "#1D4ED8",
-   "barColor": "#1D4ED8",
-   "tagline": "Rides to health-related locations covered by your plan",
-   "tileSubtitle": "Covered rides",
-   "sections": [
-    {
-     "icon": "directions_car",
-     "label": "Transportation Benefit",
-     "facts": [
-      {
-       "label": "Your cost per trip",
-       "slot": "transportation.copay",
-       "highlight": true
-      },
-      {
-       "label": "Trips included",
-       "slot": "transportation.trip_limit",
-       "suffix": " {transportation.trip_limit_period}"
-      },
-      {
-       "label": "Trip type",
-       "slot": "transportation.trip_type"
-      },
-      {
-       "label": "Ways to ride",
-       "slot": "transportation.transport_modes"
-      },
-      {
-       "label": "Prior authorization",
-       "slot": "transportation.prior_auth_required"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Missed appointments are one of the biggest barriers to staying healthy \u2014 covered rides remove that barrier."
-    }
-   ]
-  },
-  "vision": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "vision",
-   "title": "Vision",
-   "icon": "visibility",
-   "iconBg": "#E0F5FB",
-   "iconColor": "#0891B2",
-   "barColor": "#0891B2",
-   "tagline": "{eye_exams.copay} eye exam \u00b7 up to {eyewear.max_plan_benefit} for eyewear",
-   "tileSubtitle": "{eye_exams.copay} exam \u00b7 {eyewear.max_plan_benefit} eyewear",
-   "sections": [
-    {
-     "icon": "visibility",
-     "label": "Vision Coverage",
-     "facts": [
-      {
-       "label": "Routine eye exam",
-       "slot": "eye_exams.copay"
-      },
-      {
-       "label": "Eyewear allowance (glasses or contacts)",
-       "slot": "eyewear.max_plan_benefit",
-       "prefix": "Up to ",
-       "highlight": true
-      },
-      {
-       "label": "Glasses copay",
-       "slot": "eyewear.glasses_copay"
-      },
-      {
-       "label": "Contacts copay",
-       "slot": "eyewear.contacts_copay"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "A routine eye exam is more than an eyesight check \u2014 it can reveal early signs of conditions like diabetes, high blood pressure, and glaucoma."
-    }
-   ]
-  },
   "acupuncture": {
    "$schema": "duos-benefit-content/v1",
    "key": "acupuncture",
@@ -543,528 +343,38 @@ window.WB_CONTENT = {
    "connections": [
     {
      "icon": "lightbulb",
-     "text": "Acupuncture can help manage chronic pain without adding medications \u2014 many members use it alongside physical therapy."
+     "text": "Acupuncture can help manage chronic pain without adding medications — many members use it alongside physical therapy."
     }
    ]
   },
-  "otc": {
+  "chiropractor": {
    "$schema": "duos-benefit-content/v1",
-   "key": "otc",
-   "title": "OTC Allowance",
-   "icon": "shopping_bag",
-   "iconBg": "#FEF3C7",
-   "iconColor": "#D97706",
-   "barColor": "#D97706",
-   "tagline": "{otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period} for health products",
-   "tileSubtitle": "{otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period}",
+   "key": "chiropractor",
+   "title": "Chiropractic Care",
+   "icon": "healing",
+   "iconBg": "#FFF7ED",
+   "iconColor": "#C2410C",
+   "barColor": "#C2410C",
+   "tagline": "Chiropractic visits covered by your plan",
+   "tileSubtitle": "Chiropractic covered",
    "sections": [
     {
-     "icon": "shopping_bag",
-     "label": "Over-the-Counter (OTC) Allowance",
+     "icon": "healing",
+     "label": "Chiropractic Care",
      "facts": [
       {
-       "label": "Allowance",
-       "slot": "otc_items.max_plan_benefit",
-       "suffix": " {otc_items.max_plan_benefit_period}",
+       "label": "Your cost per visit",
+       "slot": "chiropractic.copay",
+       "altSlot": "chiropractic.coinsurance",
        "highlight": true
-      }
-     ],
-     "chips": [
-      "Vitamins & Supplements",
-      "Pain Relief",
-      "First Aid",
-      "Cold & Flu",
-      "Allergy",
-      "Digestive Health",
-      "Eye Care",
-      "Oral Care"
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Check your plan's OTC catalog for eligible items \u2014 allowances typically expire, so use them each period."
-    }
-   ]
-  },
-  "meals": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "meals",
-   "title": "Meals",
-   "icon": "restaurant",
-   "iconBg": "#FFE4E6",
-   "iconColor": "#BE123C",
-   "barColor": "#BE123C",
-   "tagline": "Meal benefit included in your plan",
-   "tileSubtitle": "Meal benefit included",
-   "sections": [
-    {
-     "icon": "restaurant",
-     "label": "Meal Benefit",
-     "facts": [
-      {
-       "label": "Your cost",
-       "slot": "meals.copay",
-       "highlight": true,
-       "altSlot": "meals.coinsurance",
-       "default": "Covered \u2014 see plan documents"
-      },
-      {
-       "label": "Plan pays up to",
-       "slot": "meals.max_plan_benefit"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Meal benefits are often available after a hospital stay \u2014 ask your care team how to activate them."
-    }
-   ]
-  },
-  "prescriptions": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "prescriptions",
-   "title": "Prescription Drugs",
-   "icon": "medication",
-   "iconBg": "#F9F0F9",
-   "iconColor": "#AC3EA4",
-   "barColor": "#AC3EA4",
-   "tagline": "Part D prescription drug coverage included",
-   "tileSubtitle": "Drug coverage included",
-   "sections": [
-    {
-     "icon": "medication",
-     "label": "Drug Cost-Sharing",
-     "facts": [
-      {
-       "label": "Annual drug deductible",
-       "slot": "drug_coverage.deductible",
-       "highlight": true
-      },
-      {
-       "forEach": "drug_coverage.tiers",
-       "label": "{item.tier_label} \u2014 30-day supply",
-       "slot": "item.preferred_retail_copay_30day",
-       "altSlot": "item.retail_copay_30day"
-      },
-      {
-       "forEach": "drug_coverage.tiers",
-       "label": "{item.tier_label} \u2014 30-day supply",
-       "slot": "item.preferred_retail_coinsurance_30day",
-       "altSlot": "item.retail_coinsurance_30day"
-      },
-      {
-       "forEach": "drug_coverage.tiers",
-       "label": "{item.tier_label} \u2014 90-day supply",
-       "slot": "item.mail_copay_90day",
-       "altSlot": "item.preferred_retail_copay_90day"
-      }
-     ]
-    },
-    {
-     "icon": "vaccines",
-     "label": "Insulin & Vaccines",
-     "facts": [
-      {
-       "label": "Insulin cap",
-       "value": "No more than {yearConstants.insulinMonthlyCap}/month, any tier",
-       "source": "computed"
-      },
-      {
-       "label": "Yearly out-of-pocket maximum",
-       "value": "{yearConstants.partDOopCap} \u2014 then $0 for the rest of the year",
-       "source": "computed"
-      },
-      {
-       "label": "Adult vaccines (Part D)",
-       "value": "$0 copay",
-       "source": "computed"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "savings",
-     "text": "If you qualify for Extra Help (LIS), your drug costs could drop significantly \u2014 ask us about applying."
-    }
-   ]
-  },
-  "vbidPackages": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "vbidPackages",
-   "title": "Special Benefit Packages",
-   "icon": "redeem",
-   "iconBg": "#FFF1F2",
-   "iconColor": "#9F1239",
-   "barColor": "#9F1239",
-   "requiresEligibility": "ssbci",
-   "eligibilityBanner": "Available to members with qualifying conditions \u2014 your plan has confirmed you qualify.",
-   "tagline": "Extra benefits you qualify for based on your health conditions",
-   "tileSubtitle": "Extra benefits you qualify for",
-   "sections": [
-    {
-     "icon": "redeem",
-     "label": "{package.name}",
-     "forEach": "vbid_packages.packages",
-     "facts": [
-      {
-       "label": "Allowance",
-       "slot": "package.aggregate_allowance",
-       "highlight": true
-      },
-      {
-       "label": "Can be used for",
-       "slot": "package.benefit_categories",
-       "join": " \u00b7 "
-      },
-      {
-       "label": "Cost-sharing reduced on",
-       "slot": "package.reduced_benefits"
-      },
-      {
-       "label": "Qualifying conditions",
-       "slot": "package.eligibility"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "These packages exist because of your specific health conditions \u2014 they're designed to help with the everyday costs that come with managing them."
-    }
-   ]
-  },
-  "hearing": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "hearing",
-   "title": "Hearing",
-   "icon": "hearing",
-   "iconBg": "#EEECFD",
-   "iconColor": "#6366F1",
-   "barColor": "#6366F1",
-   "tagline": "{hearing_exams.copay} hearing exam \u00b7 hearing aid coverage",
-   "tileSubtitle": "{hearing_exams.copay} exam \u00b7 aids covered",
-   "sections": [
-    {
-     "icon": "hearing",
-     "label": "Hearing Coverage",
-     "facts": [
-      {
-       "label": "Routine hearing exam",
-       "slot": "hearing_exams.copay"
-      },
-      {
-       "label": "Hearing aids",
-       "slot": "hearing_aids.copay"
-      },
-      {
-       "label": "Plan pays up to (per ear)",
-       "slot": "hearing_aids.max_plan_benefit_per_ear",
-       "highlight": true
-      },
-      {
-       "label": "Plan pays up to (total)",
-       "slot": "hearing_aids.max_plan_benefit"
-      },
-      {
-       "label": "Over-the-counter hearing aids",
-       "slot": "otc_hearing_aids.max_plan_benefit",
-       "prefix": "Up to "
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Research links untreated hearing loss to higher risk of cognitive decline and social isolation. Addressing hearing early protects long-term brain health."
-    }
-   ]
-  },
-  "preventiveCare": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "preventiveCare",
-   "title": "Preventive Care",
-   "icon": "ecg_heart",
-   "iconBg": "#DEF5F7",
-   "iconColor": "#0D4F54",
-   "barColor": "#0D4F54",
-   "tagline": "Medicare preventive services at no cost to you",
-   "tileSubtitle": "No-cost screenings & wellness",
-   "sections": [
-    {
-     "icon": "ecg_heart",
-     "label": "Preventive Services",
-     "facts": [
-      {
-       "label": "Medicare preventive services",
-       "value": "$0 copay",
-       "source": "computed",
-       "note": "Gated on preventive_attestation.zero_cost_attestation"
-      },
-      {
-       "label": "Annual physical exam",
-       "slot": "annual_physical.copay",
-       "highlight": true
-      }
-     ]
-    },
-    {
-     "icon": "add_circle",
-     "label": "Additional Preventive Benefits",
-     "facts": [
-      {
-       "forEach": "additional_preventive.sub_types",
-       "label": "{item.label}",
-       "slot": "item.copay",
-       "default": "Covered"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "health_and_safety",
-     "text": "When a service is billed as preventive (screening, no symptoms) it is usually covered at no cost; if it becomes diagnostic, normal cost-sharing may apply. Ask your provider how a service will be billed."
-    }
-   ]
-  },
-  "emergencyCare": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "emergencyCare",
-   "title": "Emergency & Urgent Care",
-   "icon": "emergency",
-   "iconBg": "#FEE2E2",
-   "iconColor": "#DC2626",
-   "barColor": "#DC2626",
-   "tagline": "Emergency room, urgent care, and worldwide coverage",
-   "tileSubtitle": "ER & urgent care",
-   "sections": [
-    {
-     "icon": "emergency",
-     "label": "When You Need Care Fast",
-     "facts": [
-      {
-       "label": "Emergency room",
-       "slot": "emergency_care.copay",
-       "highlight": true,
-       "altSlot": "emergency_care.coinsurance"
-      },
-      {
-       "label": "Urgent care",
-       "slot": "urgent_care.copay",
-       "altSlot": "urgent_care.coinsurance"
-      },
-      {
-       "label": "Emergency care while traveling abroad",
-       "slot": "worldwide_emergency.copay_emergency",
-       "altSlot": "worldwide_emergency.coinsurance_emergency"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "For non-life-threatening issues, urgent care is usually faster and cheaper than the ER. For emergencies, always call 911 \u2014 coverage follows you."
-    }
-   ]
-  },
-  "pers": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "pers",
-   "title": "Emergency Response Device (PERS)",
-   "icon": "emergency_share",
-   "iconBg": "#FEF2F2",
-   "iconColor": "#B91C1C",
-   "barColor": "#B91C1C",
-   "tagline": "A wearable button that calls for help 24/7",
-   "tileSubtitle": "24/7 help button",
-   "sections": [
-    {
-     "icon": "emergency_share",
-     "label": "Personal Emergency Response System",
-     "facts": [
-      {
-       "label": "Your cost",
-       "slot": "subType.copay",
-       "default": "Covered \u2014 see plan documents",
-       "highlight": true
-      },
-      {
-       "label": "Plan pays up to",
-       "slot": "subType.max_plan_benefit"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "A PERS device means help is one button-press away, anywhere in your home \u2014 many members say it's as much peace of mind for family as for themselves."
-    }
-   ]
-  },
-  "mentalHealth": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "mentalHealth",
-   "title": "Mental Health",
-   "icon": "psychology",
-   "iconBg": "#FAF5FF",
-   "iconColor": "#7E22CE",
-   "barColor": "#7E22CE",
-   "tagline": "Mental health visits covered by your plan",
-   "tileSubtitle": "Counseling & psychiatry",
-   "sections": [
-    {
-     "icon": "psychology",
-     "label": "Mental Health Care",
-     "facts": [
-      {
-       "label": "Therapy visit (individual)",
-       "slot": "mental_health_outpatient.copay_individual",
-       "altSlot": "mental_health_outpatient.coinsurance_individual",
-       "highlight": true
-      },
-      {
-       "label": "Therapy visit (group)",
-       "slot": "mental_health_outpatient.copay_group",
-       "altSlot": "mental_health_outpatient.coinsurance_group"
-      },
-      {
-       "label": "Psychiatrist visit",
-       "slot": "mental_health_specialist.copay_individual",
-       "altSlot": "mental_health_specialist.coinsurance_individual"
-      },
-      {
-       "label": "Referral",
-       "slot": "mental_health_outpatient.referral_required"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Mental health is health \u2014 talking to a professional about mood, sleep, grief, or worry is as routine as seeing your doctor for blood pressure."
-    }
-   ]
-  },
-  "flexAllowance": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "flexAllowance",
-   "title": "Flex Allowance",
-   "icon": "account_balance_wallet",
-   "iconBg": "#F3E8FF",
-   "iconColor": "#7C3AED",
-   "barColor": "#7C3AED",
-   "tagline": "A shared allowance you can spend across benefit categories",
-   "tileSubtitle": "Shared benefit allowance",
-   "sections": [
-    {
-     "icon": "account_balance_wallet",
-     "label": "{group.name}",
-     "forEach": "combined_benefits.groups",
-     "facts": [
-      {
-       "label": "Allowance",
-       "slot": "group.max_plan_benefit",
-       "suffix": " {group.max_plan_benefit_period}",
-       "highlight": true
-      },
-      {
-       "label": "Can be used for",
-       "slot": "group.includes",
-       "join": " \u00b7 "
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "This is one pooled amount shared across the listed categories \u2014 spending in one category reduces what's left for the others in the same period."
-    }
-   ]
-  },
-  "outpatientRehab": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "outpatientRehab",
-   "title": "Rehabilitation Therapy",
-   "icon": "directions_walk",
-   "iconBg": "#FEFCE8",
-   "iconColor": "#A16207",
-   "barColor": "#A16207",
-   "tagline": "Physical, occupational & speech therapy",
-   "tileSubtitle": "PT \u00b7 OT \u00b7 speech therapy",
-   "sections": [
-    {
-     "icon": "directions_walk",
-     "label": "Outpatient Rehabilitation",
-     "facts": [
-      {
-       "label": "Physical / speech therapy visit",
-       "slot": "physical_speech_therapy.copay",
-       "altSlot": "physical_speech_therapy.coinsurance",
-       "highlight": true
-      },
-      {
-       "label": "Occupational therapy visit",
-       "slot": "occupational_therapy.copay",
-       "altSlot": "occupational_therapy.coinsurance"
-      },
-      {
-       "label": "Outpatient rehabilitation services",
-       "slot": "outpatient_rehabilitation.copay",
-       "altSlot": "outpatient_rehabilitation.coinsurance"
-      },
-      {
-       "label": "Prior authorization",
-       "slot": "physical_speech_therapy.prior_auth_required"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Therapy after surgery, a fall, or a stroke is one of the strongest predictors of getting back to normal life \u2014 don't skip sessions."
-    }
-   ]
-  },
-  "homeHealth": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "homeHealth",
-   "title": "Home Health Care",
-   "icon": "home_health",
-   "iconBg": "#E0E7FF",
-   "iconColor": "#4338CA",
-   "barColor": "#4338CA",
-   "tagline": "Skilled care at home covered by your plan",
-   "tileSubtitle": "Home health covered",
-   "sections": [
-    {
-     "icon": "home_health",
-     "label": "Home Health Agency Care",
-     "facts": [
-      {
-       "label": "Your cost",
-       "slot": "home_health.copay",
-       "altSlot": "home_health.coinsurance",
-       "highlight": true
-      },
-      {
-       "label": "Prior authorization",
-       "slot": "home_health.prior_auth_required"
       },
       {
        "label": "Referral required",
-       "slot": "home_health.referral_required"
+       "slot": "chiropractic.referral_required"
+      },
+      {
+       "label": "Prior authorization",
+       "slot": "chiropractic.prior_auth_required"
       }
      ]
     }
@@ -1072,7 +382,7 @@ window.WB_CONTENT = {
    "connections": [
     {
      "icon": "lightbulb",
-     "text": "Home health brings skilled nursing and therapy to you after an illness or hospital stay \u2014 ask your doctor if you qualify."
+     "text": "Medicare covers chiropractic care for spinal manipulation — a drug-free option for back and neck pain."
     }
    ]
   },
@@ -1130,42 +440,7 @@ window.WB_CONTENT = {
    "connections": [
     {
      "icon": "lightbulb",
-     "text": "Routine cleanings do more than clean teeth \u2014 they help prevent costly procedures like root canals and extractions down the road."
-    }
-   ]
-  },
-  "wigs": {
-   "$schema": "duos-benefit-content/v1",
-   "key": "wigs",
-   "title": "Wigs for Hair Loss",
-   "icon": "face",
-   "iconBg": "#FDF2F8",
-   "iconColor": "#BE185D",
-   "barColor": "#BE185D",
-   "tagline": "Wigs covered for medical hair loss",
-   "tileSubtitle": "Wigs covered",
-   "sections": [
-    {
-     "icon": "face",
-     "label": "Wigs",
-     "facts": [
-      {
-       "label": "Your cost",
-       "slot": "subType.copay",
-       "default": "Covered \u2014 see plan documents",
-       "highlight": true
-      },
-      {
-       "label": "Plan pays up to",
-       "slot": "subType.max_plan_benefit"
-      }
-     ]
-    }
-   ],
-   "connections": [
-    {
-     "icon": "lightbulb",
-     "text": "Wigs are typically covered for hair loss from chemotherapy or other medical treatment \u2014 a prescription from your doctor is usually all you need."
+     "text": "Routine cleanings do more than clean teeth — they help prevent costly procedures like root canals and extractions down the road."
     }
    ]
   },
@@ -1216,7 +491,7 @@ window.WB_CONTENT = {
    "connections": [
     {
      "icon": "lightbulb",
-     "text": "Walkers, wheelchairs, hospital beds, CGMs, and oxygen equipment usually fall under DME \u2014 get them through contracted suppliers to make sure they're covered."
+     "text": "Walkers, wheelchairs, hospital beds, CGMs, and oxygen equipment usually fall under DME — get them through contracted suppliers to make sure they're covered."
     }
    ]
   },
@@ -1228,8 +503,8 @@ window.WB_CONTENT = {
    "iconBg": "#E0F5FB",
    "iconColor": "#155E75",
    "barColor": "#155E75",
-   "tagline": "{primary_care.copay} primary care \u00b7 {specialist.copay} specialist visits",
-   "tileSubtitle": "{primary_care.copay} PCP \u00b7 {specialist.copay} specialist",
+   "tagline": "{primary_care.copay} primary care · {specialist.copay} specialist visits",
+   "tileSubtitle": "{primary_care.copay} PCP · {specialist.copay} specialist",
    "sections": [
     {
      "icon": "stethoscope",
@@ -1258,38 +533,40 @@ window.WB_CONTENT = {
    "connections": [
     {
      "icon": "lightbulb",
-     "text": "Seeing your primary care doctor regularly helps catch small problems before they become big ones \u2014 and most plans cover the visit at low or no cost."
+     "text": "Seeing your primary care doctor regularly helps catch small problems before they become big ones — and most plans cover the visit at low or no cost."
     }
    ]
   },
-  "chiropractor": {
+  "emergencyCare": {
    "$schema": "duos-benefit-content/v1",
-   "key": "chiropractor",
-   "title": "Chiropractic Care",
-   "icon": "healing",
-   "iconBg": "#FFF7ED",
-   "iconColor": "#C2410C",
-   "barColor": "#C2410C",
-   "tagline": "Chiropractic visits covered by your plan",
-   "tileSubtitle": "Chiropractic covered",
+   "key": "emergencyCare",
+   "title": "Emergency & Urgent Care",
+   "icon": "emergency",
+   "iconBg": "#FEE2E2",
+   "iconColor": "#DC2626",
+   "barColor": "#DC2626",
+   "tagline": "Emergency room, urgent care, and worldwide coverage",
+   "tileSubtitle": "ER & urgent care",
    "sections": [
     {
-     "icon": "healing",
-     "label": "Chiropractic Care",
+     "icon": "emergency",
+     "label": "When You Need Care Fast",
      "facts": [
       {
-       "label": "Your cost per visit",
-       "slot": "chiropractic.copay",
-       "altSlot": "chiropractic.coinsurance",
-       "highlight": true
+       "label": "Emergency room",
+       "slot": "emergency_care.copay",
+       "highlight": true,
+       "altSlot": "emergency_care.coinsurance"
       },
       {
-       "label": "Referral required",
-       "slot": "chiropractic.referral_required"
+       "label": "Urgent care",
+       "slot": "urgent_care.copay",
+       "altSlot": "urgent_care.coinsurance"
       },
       {
-       "label": "Prior authorization",
-       "slot": "chiropractic.prior_auth_required"
+       "label": "Emergency care while traveling abroad",
+       "slot": "worldwide_emergency.copay_emergency",
+       "altSlot": "worldwide_emergency.coinsurance_emergency"
       }
      ]
     }
@@ -1297,41 +574,742 @@ window.WB_CONTENT = {
    "connections": [
     {
      "icon": "lightbulb",
-     "text": "Medicare covers chiropractic care for spinal manipulation \u2014 a drug-free option for back and neck pain."
+     "text": "For non-life-threatening issues, urgent care is usually faster and cheaper than the ER. For emergencies, always call 911 — coverage follows you."
+    }
+   ]
+  },
+  "fitness": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "fitness",
+   "title": "Fitness",
+   "icon": "fitness_center",
+   "iconBg": "#E6F8DE",
+   "iconColor": "#386F19",
+   "barColor": "#386F19",
+   "tagline": "{fitness.copay|$0} fitness benefit included in your plan",
+   "tileSubtitle": "{fitness.copay|$0} fitness benefit",
+   "sections": [
+    {
+     "icon": "fitness_center",
+     "label": "Fitness Benefit",
+     "facts": [
+      {
+       "label": "Included programs",
+       "slot": "fitness.fitness_types"
+      },
+      {
+       "label": "Your cost",
+       "slot": "fitness.copay",
+       "highlight": true
+      },
+      {
+       "label": "Plan pays up to",
+       "slot": "fitness.max_plan_benefit",
+       "suffix": " {fitness.max_plan_benefit_period}"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Regular physical activity is one of the most effective ways to reduce fall risk and support heart health."
+    }
+   ]
+  },
+  "flexAllowance": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "flexAllowance",
+   "title": "Flex Allowance",
+   "icon": "account_balance_wallet",
+   "iconBg": "#F3E8FF",
+   "iconColor": "#7C3AED",
+   "barColor": "#7C3AED",
+   "tagline": "A shared allowance you can spend across benefit categories",
+   "tileSubtitle": "Shared benefit allowance",
+   "sections": [
+    {
+     "icon": "account_balance_wallet",
+     "label": "{group.name}",
+     "forEach": "combined_benefits.groups",
+     "facts": [
+      {
+       "label": "Allowance",
+       "slot": "group.max_plan_benefit",
+       "suffix": " {group.max_plan_benefit_period}",
+       "highlight": true
+      },
+      {
+       "label": "Can be used for",
+       "slot": "group.includes",
+       "join": " · "
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "This is one pooled amount shared across the listed categories — spending in one category reduces what's left for the others in the same period."
+    }
+   ]
+  },
+  "hearing": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "hearing",
+   "title": "Hearing",
+   "icon": "hearing",
+   "iconBg": "#EEECFD",
+   "iconColor": "#6366F1",
+   "barColor": "#6366F1",
+   "tagline": "{hearing_exams.copay} hearing exam · hearing aid coverage",
+   "tileSubtitle": "{hearing_exams.copay} exam · aids covered",
+   "sections": [
+    {
+     "icon": "hearing",
+     "label": "Hearing Coverage",
+     "facts": [
+      {
+       "label": "Routine hearing exam",
+       "slot": "hearing_exams.copay"
+      },
+      {
+       "label": "Hearing aids",
+       "slot": "hearing_aids.copay"
+      },
+      {
+       "label": "Plan pays up to",
+       "slot": "hearing_aids.max_plan_benefit",
+       "suffix": " {hearing_aids.max_plan_benefit_scope}",
+       "highlight": true
+      },
+      {
+       "label": "Over-the-counter hearing aids",
+       "slot": "otc_hearing_aids.max_plan_benefit",
+       "prefix": "Up to "
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Research links untreated hearing loss to higher risk of cognitive decline and social isolation. Addressing hearing early protects long-term brain health."
+    }
+   ]
+  },
+  "homeHealth": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "homeHealth",
+   "title": "Home Health Care",
+   "icon": "home_health",
+   "iconBg": "#E0E7FF",
+   "iconColor": "#4338CA",
+   "barColor": "#4338CA",
+   "tagline": "Skilled care at home covered by your plan",
+   "tileSubtitle": "Home health covered",
+   "sections": [
+    {
+     "icon": "home_health",
+     "label": "Home Health Agency Care",
+     "facts": [
+      {
+       "label": "Your cost",
+       "slot": "home_health.copay",
+       "altSlot": "home_health.coinsurance",
+       "highlight": true
+      },
+      {
+       "label": "Prior authorization",
+       "slot": "home_health.prior_auth_required"
+      },
+      {
+       "label": "Referral required",
+       "slot": "home_health.referral_required"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Home health brings skilled nursing and therapy to you after an illness or hospital stay — ask your doctor if you qualify."
+    }
+   ]
+  },
+  "inHomeSafety": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "inHomeSafety",
+   "title": "In-Home Safety Assessment",
+   "icon": "gpp_good",
+   "iconBg": "#ECFEFF",
+   "iconColor": "#0E7490",
+   "barColor": "#0E7490",
+   "tagline": "A professional home safety check covered by your plan",
+   "tileSubtitle": "Home safety check",
+   "sections": [
+    {
+     "icon": "gpp_good",
+     "label": "In-Home Safety Assessment",
+     "facts": [
+      {
+       "label": "Your cost",
+       "slot": "subType.copay",
+       "default": "Covered — see plan documents",
+       "highlight": true
+      },
+      {
+       "label": "Plan pays up to",
+       "slot": "subType.max_plan_benefit"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Most falls happen at home — a safety assessment spots risks like loose rugs, poor lighting, and missing grab bars before they cause an injury."
+    }
+   ]
+  },
+  "meals": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "meals",
+   "title": "Meals",
+   "icon": "restaurant",
+   "iconBg": "#FFE4E6",
+   "iconColor": "#BE123C",
+   "barColor": "#BE123C",
+   "tagline": "Meal benefit included in your plan",
+   "tileSubtitle": "Meal benefit included",
+   "sections": [
+    {
+     "icon": "restaurant",
+     "label": "Meal Benefit",
+     "facts": [
+      {
+       "label": "Your cost",
+       "slot": "meals.copay",
+       "highlight": true,
+       "altSlot": "meals.coinsurance",
+       "default": "Covered — see plan documents"
+      },
+      {
+       "label": "Plan pays up to",
+       "slot": "meals.max_plan_benefit"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Meal benefits are often available after a hospital stay — ask your care team how to activate them."
+    }
+   ]
+  },
+  "mentalHealth": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "mentalHealth",
+   "title": "Mental Health",
+   "icon": "psychology",
+   "iconBg": "#FAF5FF",
+   "iconColor": "#7E22CE",
+   "barColor": "#7E22CE",
+   "tagline": "Mental health visits covered by your plan",
+   "tileSubtitle": "Counseling & psychiatry",
+   "sections": [
+    {
+     "icon": "psychology",
+     "label": "Mental Health Care",
+     "facts": [
+      {
+       "label": "Therapy visit (individual)",
+       "slot": "mental_health_outpatient.copay_individual",
+       "altSlot": "mental_health_outpatient.coinsurance_individual",
+       "highlight": true
+      },
+      {
+       "label": "Therapy visit (group)",
+       "slot": "mental_health_outpatient.copay_group",
+       "altSlot": "mental_health_outpatient.coinsurance_group"
+      },
+      {
+       "label": "Psychiatrist visit",
+       "slot": "mental_health_specialist.copay_individual",
+       "altSlot": "mental_health_specialist.coinsurance_individual"
+      },
+      {
+       "label": "Referral",
+       "slot": "mental_health_outpatient.referral_required"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Mental health is health — talking to a professional about mood, sleep, grief, or worry is as routine as seeing your doctor for blood pressure."
+    }
+   ]
+  },
+  "otc": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "otc",
+   "title": "OTC Allowance",
+   "icon": "shopping_bag",
+   "iconBg": "#FEF3C7",
+   "iconColor": "#D97706",
+   "barColor": "#D97706",
+   "tagline": "{otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period} for health products",
+   "tileSubtitle": "{otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period}",
+   "sections": [
+    {
+     "icon": "shopping_bag",
+     "label": "Over-the-Counter (OTC) Allowance",
+     "facts": [
+      {
+       "label": "Allowance",
+       "slot": "otc_items.max_plan_benefit",
+       "suffix": " {otc_items.max_plan_benefit_period}",
+       "highlight": true
+      }
+     ],
+     "chips": [
+      "Vitamins & Supplements",
+      "Pain Relief",
+      "First Aid",
+      "Cold & Flu",
+      "Allergy",
+      "Digestive Health",
+      "Eye Care",
+      "Oral Care"
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Check your plan's OTC catalog for eligible items — allowances typically expire, so use them each period."
+    }
+   ]
+  },
+  "outpatientRehab": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "outpatientRehab",
+   "title": "Rehabilitation Therapy",
+   "icon": "directions_walk",
+   "iconBg": "#FEFCE8",
+   "iconColor": "#A16207",
+   "barColor": "#A16207",
+   "tagline": "Physical, occupational & speech therapy",
+   "tileSubtitle": "PT · OT · speech therapy",
+   "sections": [
+    {
+     "icon": "directions_walk",
+     "label": "Outpatient Rehabilitation",
+     "facts": [
+      {
+       "label": "Physical / speech therapy visit",
+       "slot": "physical_speech_therapy.copay",
+       "altSlot": "physical_speech_therapy.coinsurance",
+       "highlight": true
+      },
+      {
+       "label": "Occupational therapy visit",
+       "slot": "occupational_therapy.copay",
+       "altSlot": "occupational_therapy.coinsurance"
+      },
+      {
+       "label": "Outpatient rehabilitation services",
+       "slot": "outpatient_rehabilitation.copay",
+       "altSlot": "outpatient_rehabilitation.coinsurance"
+      },
+      {
+       "label": "Prior authorization",
+       "slot": "physical_speech_therapy.prior_auth_required"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Therapy after surgery, a fall, or a stroke is one of the strongest predictors of getting back to normal life — don't skip sessions."
+    }
+   ]
+  },
+  "pers": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "pers",
+   "title": "Emergency Response Device (PERS)",
+   "icon": "emergency_share",
+   "iconBg": "#FEF2F2",
+   "iconColor": "#B91C1C",
+   "barColor": "#B91C1C",
+   "tagline": "A wearable button that calls for help 24/7",
+   "tileSubtitle": "24/7 help button",
+   "sections": [
+    {
+     "icon": "emergency_share",
+     "label": "Personal Emergency Response System",
+     "facts": [
+      {
+       "label": "Your cost",
+       "slot": "subType.copay",
+       "default": "Covered — see plan documents",
+       "highlight": true
+      },
+      {
+       "label": "Plan pays up to",
+       "slot": "subType.max_plan_benefit"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "A PERS device means help is one button-press away, anywhere in your home — many members say it's as much peace of mind for family as for themselves."
+    }
+   ]
+  },
+  "prescriptions": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "prescriptions",
+   "title": "Prescription Drugs",
+   "icon": "medication",
+   "iconBg": "#F9F0F9",
+   "iconColor": "#AC3EA4",
+   "barColor": "#AC3EA4",
+   "tagline": "Part D prescription drug coverage included",
+   "tileSubtitle": "Drug coverage included",
+   "sections": [
+    {
+     "icon": "medication",
+     "label": "Drug Cost-Sharing",
+     "facts": [
+      {
+       "label": "Annual drug deductible",
+       "slot": "drug_coverage.deductible",
+       "highlight": true
+      },
+      {
+       "forEach": "drug_coverage.tiers",
+       "label": "{item.tier_label} — 30-day supply",
+       "slot": "item.preferred_retail_copay_30day",
+       "altSlot": "item.retail_copay_30day"
+      },
+      {
+       "forEach": "drug_coverage.tiers",
+       "label": "{item.tier_label} — 30-day supply",
+       "slot": "item.preferred_retail_coinsurance_30day",
+       "altSlot": "item.retail_coinsurance_30day"
+      },
+      {
+       "forEach": "drug_coverage.tiers",
+       "label": "{item.tier_label} — 90-day supply",
+       "slot": "item.mail_copay_90day",
+       "altSlot": "item.preferred_retail_copay_90day"
+      }
+     ]
+    },
+    {
+     "icon": "vaccines",
+     "label": "Insulin & Vaccines",
+     "facts": [
+      {
+       "label": "Insulin cap",
+       "value": "No more than {yearConstants.insulinMonthlyCap}/month, any tier",
+       "source": "computed"
+      },
+      {
+       "label": "Yearly out-of-pocket maximum",
+       "value": "{yearConstants.partDOopCap} — then $0 for the rest of the year",
+       "source": "computed"
+      },
+      {
+       "label": "Adult vaccines (Part D)",
+       "value": "$0 copay",
+       "source": "computed"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "savings",
+     "text": "If you qualify for Extra Help (LIS), your drug costs could drop significantly — ask us about applying."
+    }
+   ]
+  },
+  "preventiveCare": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "preventiveCare",
+   "title": "Preventive Care",
+   "icon": "ecg_heart",
+   "iconBg": "#DEF5F7",
+   "iconColor": "#0D4F54",
+   "barColor": "#0D4F54",
+   "tagline": "Medicare preventive services at no cost to you",
+   "tileSubtitle": "No-cost screenings & wellness",
+   "sections": [
+    {
+     "icon": "ecg_heart",
+     "label": "Preventive Services",
+     "facts": [
+      {
+       "label": "Medicare preventive services",
+       "value": "$0 copay",
+       "source": "computed",
+       "note": "Gated on preventive_attestation.zero_cost_attestation"
+      },
+      {
+       "label": "Annual physical exam",
+       "slot": "annual_physical.copay",
+       "highlight": true
+      }
+     ]
+    },
+    {
+     "icon": "add_circle",
+     "label": "Additional Preventive Benefits",
+     "facts": [
+      {
+       "forEach": "additional_preventive.sub_types",
+       "label": "{item.label}",
+       "slot": "item.copay",
+       "default": "Covered"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "health_and_safety",
+     "text": "When a service is billed as preventive (screening, no symptoms) it is usually covered at no cost; if it becomes diagnostic, normal cost-sharing may apply. Ask your provider how a service will be billed."
+    }
+   ]
+  },
+  "socialSupports": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "socialSupports",
+   "title": "Everyday Living Support",
+   "icon": "volunteer_activism",
+   "iconBg": "#ECFDF5",
+   "iconColor": "#047857",
+   "barColor": "#047857",
+   "launchScope": "deferred",
+   "eligibilityBanner": "Available to members with qualifying chronic conditions — contact your plan to see if you qualify.",
+   "tagline": "Extra support for food, home, and daily needs",
+   "tileSubtitle": "Food, home & daily support",
+   "sections": [
+    {
+     "icon": "volunteer_activism",
+     "label": "Special Supplemental Benefits (SSBCI)",
+     "facts": [
+      {
+       "forEach": "social_supports.items",
+       "label": "{item.label}",
+       "slot": "item.max_plan_benefit",
+       "suffix": " {item.max_plan_benefit_period}",
+       "pooledNote": "Included in your combined allowance",
+       "default": "Included"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "These benefits are designed for members managing chronic conditions — they cover practical needs that affect health, like food and a safe home."
+    }
+   ],
+   "requiresEligibility": "ssbci"
+  },
+  "transportation": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "transportation",
+   "title": "Transportation",
+   "icon": "directions_car",
+   "iconBg": "#DBEAFE",
+   "iconColor": "#1D4ED8",
+   "barColor": "#1D4ED8",
+   "tagline": "Rides to health-related locations covered by your plan",
+   "tileSubtitle": "Covered rides",
+   "sections": [
+    {
+     "icon": "directions_car",
+     "label": "Transportation Benefit",
+     "facts": [
+      {
+       "label": "Your cost per trip",
+       "slot": "transportation.copay",
+       "highlight": true
+      },
+      {
+       "label": "Trips included",
+       "slot": "transportation.trip_limit",
+       "suffix": " {transportation.trip_limit_period}"
+      },
+      {
+       "label": "Trip type",
+       "slot": "transportation.trip_type"
+      },
+      {
+       "label": "Ways to ride",
+       "slot": "transportation.transport_modes"
+      },
+      {
+       "label": "Prior authorization",
+       "slot": "transportation.prior_auth_required"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Missed appointments are one of the biggest barriers to staying healthy — covered rides remove that barrier."
+    }
+   ]
+  },
+  "vbidPackages": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "vbidPackages",
+   "title": "Special Benefit Packages",
+   "icon": "redeem",
+   "iconBg": "#FFF1F2",
+   "iconColor": "#9F1239",
+   "barColor": "#9F1239",
+   "requiresEligibility": "ssbci",
+   "eligibilityBanner": "Available to members with qualifying conditions — your plan has confirmed you qualify.",
+   "tagline": "Extra benefits you qualify for based on your health conditions",
+   "tileSubtitle": "Extra benefits you qualify for",
+   "sections": [
+    {
+     "icon": "redeem",
+     "label": "{package.name}",
+     "forEach": "vbid_packages.packages",
+     "facts": [
+      {
+       "label": "Allowance",
+       "slot": "package.aggregate_allowance",
+       "highlight": true
+      },
+      {
+       "label": "Can be used for",
+       "slot": "package.benefit_categories",
+       "join": " · "
+      },
+      {
+       "label": "Cost-sharing reduced on",
+       "slot": "package.reduced_benefits"
+      },
+      {
+       "label": "Qualifying conditions",
+       "slot": "package.eligibility"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "These packages exist because of your specific health conditions — they're designed to help with the everyday costs that come with managing them."
+    }
+   ]
+  },
+  "vision": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "vision",
+   "title": "Vision",
+   "icon": "visibility",
+   "iconBg": "#E0F5FB",
+   "iconColor": "#0891B2",
+   "barColor": "#0891B2",
+   "tagline": "{eye_exams.copay} eye exam · up to {eyewear.max_plan_benefit} for eyewear",
+   "tileSubtitle": "{eye_exams.copay} exam · {eyewear.max_plan_benefit} eyewear",
+   "sections": [
+    {
+     "icon": "visibility",
+     "label": "Vision Coverage",
+     "facts": [
+      {
+       "label": "Routine eye exam",
+       "slot": "eye_exams.copay"
+      },
+      {
+       "label": "Eyewear allowance (glasses or contacts)",
+       "slot": "eyewear.max_plan_benefit",
+       "prefix": "Up to ",
+       "highlight": true
+      },
+      {
+       "label": "Glasses copay",
+       "slot": "eyewear.glasses_copay"
+      },
+      {
+       "label": "Contacts copay",
+       "slot": "eyewear.contacts_copay"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "A routine eye exam is more than an eyesight check — it can reveal early signs of conditions like diabetes, high blood pressure, and glaucoma."
+    }
+   ]
+  },
+  "wigs": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "wigs",
+   "title": "Wigs for Hair Loss",
+   "icon": "face",
+   "iconBg": "#FDF2F8",
+   "iconColor": "#BE185D",
+   "barColor": "#BE185D",
+   "tagline": "Wigs covered for medical hair loss",
+   "tileSubtitle": "Wigs covered",
+   "sections": [
+    {
+     "icon": "face",
+     "label": "Wigs",
+     "facts": [
+      {
+       "label": "Your cost",
+       "slot": "subType.copay",
+       "default": "Covered — see plan documents",
+       "highlight": true
+      },
+      {
+       "label": "Plan pays up to",
+       "slot": "subType.max_plan_benefit"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Wigs are typically covered for hair loss from chemotherapy or other medical treatment — a prescription from your doctor is usually all you need."
     }
    ]
   }
  },
  "carriers": {
-  "scan": {
-   "fitness": {
+  "humana": {
+   "dental": {
     "$schema": "duos-benefit-content/v1",
     "appliesTo": {
-     "carrier": "scan"
+     "carrier": "humana"
     },
-    "key": "fitness",
-    "vendor": "One Pass",
-    "tagline": "One Pass \u2014 {fitness.copay|$0} gym memberships, on-demand workouts & community classes",
-    "tileSubtitle": "One Pass \u2014 {fitness.copay|$0} gym & classes",
-    "note": "Vendor and included services verified against the 2026 SCAN Summary of Benefits (26C-SBH5425123), Fitness section.",
-    "cta": {
-     "label": "Explore One Pass",
-     "icon": "open_in_new",
-     "action": "web",
-     "href": "https://www.youronepass.com"
-    },
-    "eoc_facts": [
-     {
-      "label": "Includes",
-      "value": "Gym memberships \u00b7 on-demand workouts \u00b7 community classes",
-      "source": "eoc",
-      "approved": true,
-      "citation": "2026 SCAN Allied Summary of Benefits (26C-SBH5425123), Fitness section"
-     }
-    ]
-   }
-  },
-  "humana": {
+    "key": "dental",
+    "note": "Use dentists in the Humana Dental Medicare Network.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
+   },
    "fitness": {
     "$schema": "duos-benefit-content/v1",
     "appliesTo": {
@@ -1339,8 +1317,8 @@ window.WB_CONTENT = {
     },
     "key": "fitness",
     "vendor": "SilverSneakers",
-    "tagline": "SilverSneakers \u2014 {fitness.copay|$0} gym access & classes",
-    "tileSubtitle": "SilverSneakers \u2014 {fitness.copay|$0} gym",
+    "tagline": "SilverSneakers — {fitness.copay|$0} gym access & classes",
+    "tileSubtitle": "SilverSneakers — {fitness.copay|$0} gym",
     "cta": {
      "label": "Find a SilverSneakers gym",
      "icon": "open_in_new",
@@ -1349,43 +1327,19 @@ window.WB_CONTENT = {
     },
     "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
-   "vision": {
+   "flexAllowance": {
     "$schema": "duos-benefit-content/v1",
     "appliesTo": {
      "carrier": "humana"
     },
-    "key": "vision",
-    "note": "Network: Humana Medicare Insight Network; a higher eyewear allowance applies at PLUS providers.",
-    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
-   },
-   "otc": {
-    "$schema": "duos-benefit-content/v1",
-    "appliesTo": {
-     "carrier": "humana"
+    "key": "flexAllowance",
+    "note": "Allowances are loaded to your Humana Spending Account Card — check your balance at MyHumana.com.",
+    "cta": {
+     "label": "Check my balance at MyHumana",
+     "icon": "open_in_new",
+     "action": "web",
+     "href": "https://www.myhumana.com"
     },
-    "key": "otc",
-    "vendor": "Humana Spending Account Card",
-    "note": "Your allowance is loaded to the Humana Spending Account Card \u2014 check your balance at MyHumana.com.",
-    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity. Monthly accrual/rollover mechanics are EOC facts pending product approval."
-   },
-   "meals": {
-    "$schema": "duos-benefit-content/v1",
-    "appliesTo": {
-     "carrier": "humana"
-    },
-    "key": "meals",
-    "vendor": "Humana Well Dine",
-    "note": "Meals delivered after a hospital stay through Humana Well Dine.",
-    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity. Quantities/frequency are EOC facts pending product approval."
-   },
-   "prescriptions": {
-    "$schema": "duos-benefit-content/v1",
-    "appliesTo": {
-     "carrier": "humana"
-    },
-    "key": "prescriptions",
-    "vendor": "CenterWell Pharmacy (preferred mail order)",
-    "note": "CenterWell Pharmacy is the preferred mail-order option.",
     "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
    "hearing": {
@@ -1401,32 +1355,75 @@ window.WB_CONTENT = {
      "action": "tel",
      "href": "tel:8442557144"
     },
-    "note": "Hearing aids are TruHearing-branded Advanced models through TruHearing providers \u2014 there is no out-of-network coverage for aids.",
+    "note": "Hearing aids are TruHearing-branded Advanced models through TruHearing providers — there is no out-of-network coverage for aids.",
     "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
-   "flexAllowance": {
+   "meals": {
     "$schema": "duos-benefit-content/v1",
     "appliesTo": {
      "carrier": "humana"
     },
-    "key": "flexAllowance",
-    "note": "Allowances are loaded to your Humana Spending Account Card \u2014 check your balance at MyHumana.com.",
+    "key": "meals",
+    "vendor": "Humana Well Dine",
+    "note": "Meals delivered after a hospital stay through Humana Well Dine.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity. Quantities/frequency are EOC facts pending product approval."
+   },
+   "otc": {
+    "$schema": "duos-benefit-content/v1",
+    "appliesTo": {
+     "carrier": "humana"
+    },
+    "key": "otc",
+    "vendor": "Humana Spending Account Card",
+    "note": "Your allowance is loaded to the Humana Spending Account Card — check your balance at MyHumana.com.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity. Monthly accrual/rollover mechanics are EOC facts pending product approval."
+   },
+   "prescriptions": {
+    "$schema": "duos-benefit-content/v1",
+    "appliesTo": {
+     "carrier": "humana"
+    },
+    "key": "prescriptions",
+    "vendor": "CenterWell Pharmacy (preferred mail order)",
+    "note": "CenterWell Pharmacy is the preferred mail-order option.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
+   },
+   "vision": {
+    "$schema": "duos-benefit-content/v1",
+    "appliesTo": {
+     "carrier": "humana"
+    },
+    "key": "vision",
+    "note": "Network: Humana Medicare Insight Network; a higher eyewear allowance applies at PLUS providers.",
+    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
+   }
+  },
+  "scan": {
+   "fitness": {
+    "$schema": "duos-benefit-content/v1",
+    "appliesTo": {
+     "carrier": "scan"
+    },
+    "key": "fitness",
+    "vendor": "One Pass",
+    "tagline": "One Pass — {fitness.copay|$0} gym memberships, on-demand workouts & community classes",
+    "tileSubtitle": "One Pass — {fitness.copay|$0} gym & classes",
+    "note": "Vendor and included services verified against the 2026 SCAN Summary of Benefits (26C-SBH5425123), Fitness section.",
     "cta": {
-     "label": "Check my balance at MyHumana",
+     "label": "Explore One Pass",
      "icon": "open_in_new",
      "action": "web",
-     "href": "https://www.myhumana.com"
+     "href": "https://www.youronepass.com"
     },
-    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
-   },
-   "dental": {
-    "$schema": "duos-benefit-content/v1",
-    "appliesTo": {
-     "carrier": "humana"
-    },
-    "key": "dental",
-    "note": "Use dentists in the Humana Dental Medicare Network.",
-    "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
+    "eoc_facts": [
+     {
+      "label": "Includes",
+      "value": "Gym memberships · on-demand workouts · community classes",
+      "source": "eoc",
+      "approved": true,
+      "citation": "2026 SCAN Allied Summary of Benefits (26C-SBH5425123), Fitness section"
+     }
+    ]
    }
   }
  },
@@ -1450,7 +1447,7 @@ window.WB_CONTENT = {
       "requires": "vbid_packages"
      }
     ],
-    "verification": "Plan-scoped: the Healthy Options name and $225/month deposit are verified for H7617-076 only \u2014 do NOT promote to the carrier pack."
+    "verification": "Plan-scoped: the Healthy Options name and $225/month deposit are verified for H7617-076 only — do NOT promote to the carrier pack."
    }
   }
  }

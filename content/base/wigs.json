@@ -16,7 +16,7 @@
         {
           "label": "Your cost",
           "slot": "subType.copay",
-          "default": "Covered \u2014 see plan documents",
+          "default": "Covered — see plan documents",
           "highlight": true
         },
         {
@@ -29,7 +29,7 @@
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "Wigs are typically covered for hair loss from chemotherapy or other medical treatment \u2014 a prescription from your doctor is usually all you need."
+      "text": "Wigs are typically covered for hair loss from chemotherapy or other medical treatment — a prescription from your doctor is usually all you need."
     }
   ]
 }
