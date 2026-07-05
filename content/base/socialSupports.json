@@ -18,8 +18,8 @@
         {
           "label": "Your cost",
           "slot": "item.copay",
-          "altSlot": "item.coinsurance",
-          "highlight": true
+          "highlight": true,
+          "plusSlot": "item.coinsurance"
         },
         {
           "label": "Plan pays up to",

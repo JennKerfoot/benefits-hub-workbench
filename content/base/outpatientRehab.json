@@ -16,18 +16,18 @@
         {
           "label": "Physical / speech therapy visit",
           "slot": "physical_speech_therapy.copay",
-          "altSlot": "physical_speech_therapy.coinsurance",
-          "highlight": true
+          "highlight": true,
+          "plusSlot": "physical_speech_therapy.coinsurance"
         },
         {
           "label": "Occupational therapy visit",
           "slot": "occupational_therapy.copay",
-          "altSlot": "occupational_therapy.coinsurance"
+          "plusSlot": "occupational_therapy.coinsurance"
         },
         {
           "label": "Outpatient rehabilitation services",
           "slot": "outpatient_rehabilitation.copay",
-          "altSlot": "outpatient_rehabilitation.coinsurance"
+          "plusSlot": "outpatient_rehabilitation.coinsurance"
         },
         {
           "label": "Prior authorization",

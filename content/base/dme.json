@@ -16,8 +16,8 @@
         {
           "label": "Your cost",
           "slot": "dme.copay",
-          "altSlot": "dme.coinsurance",
-          "highlight": true
+          "highlight": true,
+          "plusSlot": "dme.coinsurance"
         },
         {
           "label": "Prior authorization",
@@ -32,12 +32,12 @@
         {
           "label": "Prosthetic devices",
           "slot": "prosthetics.copay",
-          "altSlot": "prosthetics.coinsurance"
+          "plusSlot": "prosthetics.coinsurance"
         },
         {
           "label": "Medical supplies",
           "slot": "medical_supplies.copay",
-          "altSlot": "medical_supplies.coinsurance"
+          "plusSlot": "medical_supplies.coinsurance"
         }
       ]
     }

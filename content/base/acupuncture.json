@@ -16,8 +16,8 @@
         {
           "label": "Your cost per visit",
           "slot": "acupuncture_supplemental.copay",
-          "altSlot": "acupuncture_supplemental.coinsurance",
-          "highlight": true
+          "highlight": true,
+          "plusSlot": "acupuncture_supplemental.coinsurance"
         },
         {
           "label": "Visits included",

@@ -375,8 +375,8 @@ window.WB_CONTENT = {
       {
        "label": "Your cost per visit",
        "slot": "acupuncture_supplemental.copay",
-       "altSlot": "acupuncture_supplemental.coinsurance",
-       "highlight": true
+       "highlight": true,
+       "plusSlot": "acupuncture_supplemental.coinsurance"
       },
       {
        "label": "Visits included",
@@ -415,8 +415,8 @@ window.WB_CONTENT = {
       {
        "label": "Your cost per visit",
        "slot": "chiropractic.copay",
-       "altSlot": "chiropractic.coinsurance",
-       "highlight": true
+       "highlight": true,
+       "plusSlot": "chiropractic.coinsurance"
       },
       {
        "label": "Referral required",
@@ -454,13 +454,13 @@ window.WB_CONTENT = {
       {
        "label": "Medicare-covered dental services",
        "slot": "dental_medicare.copay",
-       "altSlot": "dental_medicare.coinsurance"
+       "plusSlot": "dental_medicare.coinsurance"
       },
       {
        "forEach": "dental_preventive.sub_types",
        "label": "{item.label}",
        "slot": "item.copay",
-       "altSlot": "item.coinsurance"
+       "plusSlot": "item.coinsurance"
       },
       {
        "label": "Preventive dental maximum",
@@ -477,7 +477,7 @@ window.WB_CONTENT = {
        "forEach": "dental_comprehensive.sub_types",
        "label": "{item.label}",
        "slot": "item.copay",
-       "altSlot": "item.coinsurance"
+       "plusSlot": "item.coinsurance"
       },
       {
        "label": "Comprehensive dental maximum",
@@ -512,8 +512,8 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "dme.copay",
-       "altSlot": "dme.coinsurance",
-       "highlight": true
+       "highlight": true,
+       "plusSlot": "dme.coinsurance"
       },
       {
        "label": "Prior authorization",
@@ -528,12 +528,12 @@ window.WB_CONTENT = {
       {
        "label": "Prosthetic devices",
        "slot": "prosthetics.copay",
-       "altSlot": "prosthetics.coinsurance"
+       "plusSlot": "prosthetics.coinsurance"
       },
       {
        "label": "Medical supplies",
        "slot": "medical_supplies.copay",
-       "altSlot": "medical_supplies.coinsurance"
+       "plusSlot": "medical_supplies.coinsurance"
       }
      ]
     }
@@ -606,17 +606,17 @@ window.WB_CONTENT = {
        "label": "Emergency room",
        "slot": "emergency_care.copay",
        "highlight": true,
-       "altSlot": "emergency_care.coinsurance"
+       "plusSlot": "emergency_care.coinsurance"
       },
       {
        "label": "Urgent care",
        "slot": "urgent_care.copay",
-       "altSlot": "urgent_care.coinsurance"
+       "plusSlot": "urgent_care.coinsurance"
       },
       {
        "label": "Emergency care while traveling abroad",
        "slot": "worldwide_emergency.copay_emergency",
-       "altSlot": "worldwide_emergency.coinsurance_emergency"
+       "plusSlot": "worldwide_emergency.coinsurance_emergency"
       }
      ]
     }
@@ -766,8 +766,8 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "home_health.copay",
-       "altSlot": "home_health.coinsurance",
-       "highlight": true
+       "highlight": true,
+       "plusSlot": "home_health.coinsurance"
       },
       {
        "label": "Prior authorization",
@@ -845,7 +845,7 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "meals.copay",
-       "altSlot": "meals.coinsurance"
+       "plusSlot": "meals.coinsurance"
       },
       {
        "label": "Plan pays up to",
@@ -880,18 +880,18 @@ window.WB_CONTENT = {
       {
        "label": "Therapy visit (individual)",
        "slot": "mental_health_outpatient.copay_individual",
-       "altSlot": "mental_health_outpatient.coinsurance_individual",
-       "highlight": true
+       "highlight": true,
+       "plusSlot": "mental_health_outpatient.coinsurance_individual"
       },
       {
        "label": "Therapy visit (group)",
        "slot": "mental_health_outpatient.copay_group",
-       "altSlot": "mental_health_outpatient.coinsurance_group"
+       "plusSlot": "mental_health_outpatient.coinsurance_group"
       },
       {
        "label": "Psychiatrist visit",
        "slot": "mental_health_specialist.copay_individual",
-       "altSlot": "mental_health_specialist.coinsurance_individual"
+       "plusSlot": "mental_health_specialist.coinsurance_individual"
       },
       {
        "label": "Referral",
@@ -966,18 +966,18 @@ window.WB_CONTENT = {
       {
        "label": "Physical / speech therapy visit",
        "slot": "physical_speech_therapy.copay",
-       "altSlot": "physical_speech_therapy.coinsurance",
-       "highlight": true
+       "highlight": true,
+       "plusSlot": "physical_speech_therapy.coinsurance"
       },
       {
        "label": "Occupational therapy visit",
        "slot": "occupational_therapy.copay",
-       "altSlot": "occupational_therapy.coinsurance"
+       "plusSlot": "occupational_therapy.coinsurance"
       },
       {
        "label": "Outpatient rehabilitation services",
        "slot": "outpatient_rehabilitation.copay",
-       "altSlot": "outpatient_rehabilitation.coinsurance"
+       "plusSlot": "outpatient_rehabilitation.coinsurance"
       },
       {
        "label": "Prior authorization",
@@ -1165,8 +1165,8 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "item.copay",
-       "altSlot": "item.coinsurance",
-       "highlight": true
+       "highlight": true,
+       "plusSlot": "item.coinsurance"
       },
       {
        "label": "Plan pays up to",

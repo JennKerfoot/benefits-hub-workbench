@@ -16,8 +16,8 @@
         {
           "label": "Your cost",
           "slot": "home_health.copay",
-          "altSlot": "home_health.coinsurance",
-          "highlight": true
+          "highlight": true,
+          "plusSlot": "home_health.coinsurance"
         },
         {
           "label": "Prior authorization",

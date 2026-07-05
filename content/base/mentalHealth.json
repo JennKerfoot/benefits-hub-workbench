@@ -16,18 +16,18 @@
         {
           "label": "Therapy visit (individual)",
           "slot": "mental_health_outpatient.copay_individual",
-          "altSlot": "mental_health_outpatient.coinsurance_individual",
-          "highlight": true
+          "highlight": true,
+          "plusSlot": "mental_health_outpatient.coinsurance_individual"
         },
         {
           "label": "Therapy visit (group)",
           "slot": "mental_health_outpatient.copay_group",
-          "altSlot": "mental_health_outpatient.coinsurance_group"
+          "plusSlot": "mental_health_outpatient.coinsurance_group"
         },
         {
           "label": "Psychiatrist visit",
           "slot": "mental_health_specialist.copay_individual",
-          "altSlot": "mental_health_specialist.coinsurance_individual"
+          "plusSlot": "mental_health_specialist.coinsurance_individual"
         },
         {
           "label": "Referral",

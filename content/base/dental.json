@@ -16,13 +16,13 @@
         {
           "label": "Medicare-covered dental services",
           "slot": "dental_medicare.copay",
-          "altSlot": "dental_medicare.coinsurance"
+          "plusSlot": "dental_medicare.coinsurance"
         },
         {
           "forEach": "dental_preventive.sub_types",
           "label": "{item.label}",
           "slot": "item.copay",
-          "altSlot": "item.coinsurance"
+          "plusSlot": "item.coinsurance"
         },
         {
           "label": "Preventive dental maximum",
@@ -39,7 +39,7 @@
           "forEach": "dental_comprehensive.sub_types",
           "label": "{item.label}",
           "slot": "item.copay",
-          "altSlot": "item.coinsurance"
+          "plusSlot": "item.coinsurance"
         },
         {
           "label": "Comprehensive dental maximum",

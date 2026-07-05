@@ -16,8 +16,8 @@
         {
           "label": "Your cost per visit",
           "slot": "chiropractic.copay",
-          "altSlot": "chiropractic.coinsurance",
-          "highlight": true
+          "highlight": true,
+          "plusSlot": "chiropractic.coinsurance"
         },
         {
           "label": "Referral required",
