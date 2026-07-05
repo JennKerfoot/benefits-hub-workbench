@@ -16,7 +16,7 @@
         {
           "label": "Your cost",
           "slot": "subType.copay",
-          "default": "Covered — see plan documents",
+          "default": "See your plan documents",
           "highlight": true
         },
         {

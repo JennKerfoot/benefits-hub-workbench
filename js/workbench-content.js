@@ -755,7 +755,7 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "subType.copay",
-       "default": "Covered — see plan documents",
+       "default": "See your plan documents",
        "highlight": true
       },
       {
@@ -792,7 +792,7 @@ window.WB_CONTENT = {
        "slot": "meals.copay",
        "highlight": true,
        "altSlot": "meals.coinsurance",
-       "default": "Covered — see plan documents"
+       "default": "See your plan documents"
       },
       {
        "label": "Plan pays up to",
@@ -957,7 +957,7 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "subType.copay",
-       "default": "Covered — see plan documents",
+       "default": "See your plan documents",
        "highlight": true
       },
       {
@@ -1281,7 +1281,7 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "subType.copay",
-       "default": "Covered — see plan documents",
+       "default": "See your plan documents",
        "highlight": true
       },
       {
@@ -1408,7 +1408,7 @@ window.WB_CONTENT = {
     "vendor": "One Pass",
     "tagline": "One Pass — {fitness.copay|$0} gym memberships, on-demand workouts & community classes",
     "tileSubtitle": "One Pass — {fitness.copay|$0} gym & classes",
-    "note": "Vendor and included services verified against the 2026 SCAN Summary of Benefits (26C-SBH5425123), Fitness section.",
+    "note": "Your fitness benefit is provided through One Pass. Enroll at youronepass.com or call One Pass to get started at any participating gym.",
     "cta": {
      "label": "Explore One Pass",
      "icon": "open_in_new",
@@ -1423,7 +1423,8 @@ window.WB_CONTENT = {
       "approved": true,
       "citation": "2026 SCAN Allied Summary of Benefits (26C-SBH5425123), Fitness section"
      }
-    ]
+    ],
+    "verification": "Vendor (One Pass) and included services verified against the 2026 SCAN Summary of Benefits (26C-SBH5425123), Fitness section. Internal provenance — never rendered to members (COMPILER_SPEC §2b)."
    }
   }
  },
