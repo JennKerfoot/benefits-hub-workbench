@@ -16,7 +16,6 @@
         {
           "label": "Your cost",
           "slot": "subType.copay",
-          "default": "See your plan documents",
           "highlight": true
         },
         {
@@ -31,5 +30,6 @@
       "icon": "lightbulb",
       "text": "A PERS device means help is one button-press away, anywhere in your home — many members say it's as much peace of mind for family as for themselves."
     }
-  ]
+  ],
+  "note": "Call us and we'll explain how to use this benefit."
 }

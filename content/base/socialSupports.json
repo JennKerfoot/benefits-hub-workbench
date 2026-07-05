@@ -6,30 +6,23 @@
   "iconBg": "#ECFDF5",
   "iconColor": "#047857",
   "barColor": "#047857",
-  "launchScope": "deferred",
-  "eligibilityBanner": "Available to members with qualifying chronic conditions — contact your plan to see if you qualify.",
-  "tagline": "Extra support for food, home, and daily needs",
+  "eligibilityBanner": "You're eligible for these extra everyday-living supports because of a qualifying health condition.",
+  "tagline": "Extra help with food, home, and getting to appointments",
   "tileSubtitle": "Food, home & daily support",
   "sections": [
     {
       "icon": "volunteer_activism",
-      "label": "Special Supplemental Benefits (SSBCI)",
-      "facts": [
-        {
-          "forEach": "social_supports.items",
-          "label": "{item.label}",
-          "slot": "item.max_plan_benefit",
-          "suffix": " {item.max_plan_benefit_period}",
-          "pooledNote": "Included in your combined allowance",
-          "default": "Included"
-        }
-      ]
+      "label": "What's included for you",
+      "chipsFrom": "social_supports.items",
+      "chipLabel": "{item.label}",
+      "facts": []
     }
   ],
+  "note": "Call us and we'll help you start using these supports.",
   "connections": [
     {
       "icon": "lightbulb",
-      "text": "These benefits are designed for members managing chronic conditions — they cover practical needs that affect health, like food and a safe home."
+      "text": "These supports cover practical needs that affect your health — like healthy food, a safe home, and rides to appointments."
     }
   ],
   "requiresEligibility": "ssbci"

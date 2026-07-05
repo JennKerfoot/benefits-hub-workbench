@@ -334,6 +334,11 @@ window.WB_CONTENT = {
        "highlight": true
       },
       {
+       "label": "Visits included",
+       "slot": "acupuncture_supplemental.visit_limit",
+       "suffix": " {acupuncture_supplemental.visit_limit_period}"
+      },
+      {
        "label": "Prior authorization",
        "slot": "acupuncture_supplemental.prior_auth_required"
       }
@@ -755,7 +760,6 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "subType.copay",
-       "default": "See your plan documents",
        "highlight": true
       },
       {
@@ -770,7 +774,8 @@ window.WB_CONTENT = {
      "icon": "lightbulb",
      "text": "Most falls happen at home — a safety assessment spots risks like loose rugs, poor lighting, and missing grab bars before they cause an injury."
     }
-   ]
+   ],
+   "note": "Call us and we'll explain how to use this benefit."
   },
   "meals": {
    "$schema": "duos-benefit-content/v1",
@@ -795,8 +800,7 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "meals.copay",
-       "altSlot": "meals.coinsurance",
-       "default": "See your plan documents"
+       "altSlot": "meals.coinsurance"
       },
       {
        "label": "Plan pays up to",
@@ -962,7 +966,6 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "subType.copay",
-       "default": "See your plan documents",
        "highlight": true
       },
       {
@@ -977,7 +980,8 @@ window.WB_CONTENT = {
      "icon": "lightbulb",
      "text": "A PERS device means help is one button-press away, anywhere in your home — many members say it's as much peace of mind for family as for themselves."
     }
-   ]
+   ],
+   "note": "Call us and we'll explain how to use this benefit."
   },
   "prescriptions": {
    "$schema": "duos-benefit-content/v1",
@@ -1104,30 +1108,23 @@ window.WB_CONTENT = {
    "iconBg": "#ECFDF5",
    "iconColor": "#047857",
    "barColor": "#047857",
-   "launchScope": "deferred",
-   "eligibilityBanner": "Available to members with qualifying chronic conditions — contact your plan to see if you qualify.",
-   "tagline": "Extra support for food, home, and daily needs",
+   "eligibilityBanner": "You're eligible for these extra everyday-living supports because of a qualifying health condition.",
+   "tagline": "Extra help with food, home, and getting to appointments",
    "tileSubtitle": "Food, home & daily support",
    "sections": [
     {
      "icon": "volunteer_activism",
-     "label": "Special Supplemental Benefits (SSBCI)",
-     "facts": [
-      {
-       "forEach": "social_supports.items",
-       "label": "{item.label}",
-       "slot": "item.max_plan_benefit",
-       "suffix": " {item.max_plan_benefit_period}",
-       "pooledNote": "Included in your combined allowance",
-       "default": "Included"
-      }
-     ]
+     "label": "What's included for you",
+     "chipsFrom": "social_supports.items",
+     "chipLabel": "{item.label}",
+     "facts": []
     }
    ],
+   "note": "Call us and we'll help you start using these supports.",
    "connections": [
     {
      "icon": "lightbulb",
-     "text": "These benefits are designed for members managing chronic conditions — they cover practical needs that affect health, like food and a safe home."
+     "text": "These supports cover practical needs that affect your health — like healthy food, a safe home, and rides to appointments."
     }
    ],
    "requiresEligibility": "ssbci"
@@ -1286,7 +1283,6 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "subType.copay",
-       "default": "See your plan documents",
        "highlight": true
       },
       {
@@ -1301,7 +1297,8 @@ window.WB_CONTENT = {
      "icon": "lightbulb",
      "text": "Wigs are typically covered for hair loss from chemotherapy or other medical treatment — a prescription from your doctor is usually all you need."
     }
-   ]
+   ],
+   "note": "Call us and we'll explain how to use this benefit."
   }
  },
  "carriers": {

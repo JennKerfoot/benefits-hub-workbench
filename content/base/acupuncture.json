@@ -20,6 +20,11 @@
           "highlight": true
         },
         {
+          "label": "Visits included",
+          "slot": "acupuncture_supplemental.visit_limit",
+          "suffix": " {acupuncture_supplemental.visit_limit_period}"
+        },
+        {
           "label": "Prior authorization",
           "slot": "acupuncture_supplemental.prior_auth_required"
         }
