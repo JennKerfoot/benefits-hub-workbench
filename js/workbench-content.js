@@ -780,23 +780,28 @@ window.WB_CONTENT = {
    "iconBg": "#FFE4E6",
    "iconColor": "#BE123C",
    "barColor": "#BE123C",
-   "tagline": "Meal benefit included in your plan",
-   "tileSubtitle": "Meal benefit included",
+   "tagline": "Healthy meals delivered during a covered health situation",
+   "tileSubtitle": "Meals for a covered health situation",
    "sections": [
     {
      "icon": "restaurant",
      "label": "Meal Benefit",
      "facts": [
       {
+       "label": "When you can use it",
+       "slot": "meals.meal_types",
+       "highlight": true
+      },
+      {
        "label": "Your cost",
        "slot": "meals.copay",
-       "highlight": true,
        "altSlot": "meals.coinsurance",
        "default": "See your plan documents"
       },
       {
        "label": "Plan pays up to",
-       "slot": "meals.max_plan_benefit"
+       "slot": "meals.max_plan_benefit",
+       "suffix": " {meals.max_plan_benefit_period}"
       }
      ]
     }
@@ -804,7 +809,7 @@ window.WB_CONTENT = {
    "connections": [
     {
      "icon": "lightbulb",
-     "text": "Meal benefits are often available after a hospital stay — ask your care team how to activate them."
+     "text": "Meal benefits give you healthy, ready-made meals during a covered health situation — ask your care team or call us to set them up."
     }
    ]
   },
