@@ -12,10 +12,34 @@
   "sections": [
     {
       "icon": "volunteer_activism",
-      "label": "What's included for you",
-      "chipsFrom": "social_supports.items",
-      "chipLabel": "{item.label}",
-      "facts": []
+      "forEach": "social_supports.items",
+      "label": "{item.label}",
+      "facts": [
+        {
+          "label": "Your cost",
+          "slot": "item.copay",
+          "altSlot": "item.coinsurance",
+          "highlight": true
+        },
+        {
+          "label": "Plan pays up to",
+          "slot": "item.max_plan_benefit",
+          "suffix": " {item.max_plan_benefit_period}",
+          "pooledNote": "Included in your combined allowance"
+        },
+        {
+          "label": "Ways to travel",
+          "slot": "item.transport_modes"
+        },
+        {
+          "label": "Trip type",
+          "slot": "item.trip_type"
+        },
+        {
+          "label": "Prior authorization",
+          "slot": "item.prior_auth_required"
+        }
+      ]
     }
   ],
   "note": "Call us and we'll help you start using these supports.",

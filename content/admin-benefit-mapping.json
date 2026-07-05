@@ -1,29 +1,113 @@
 {
   "$schema": "duos-benefit-content/v1",
-  "comment": "Crosswalk from admin-tool benefit names (one row per covered benefit per PBP) to Hub taxonomy card keys. The card's PBP gate still decides whether anything renders — an admin row can never un-gate a card.",
+  "comment": "Crosswalk from admin-tool benefit names (one row per covered benefit per PBP) to Hub taxonomy card keys. The card's PBP gate still decides whether anything renders. SSBCI is split into one row per sub-benefit (ssbci_<item>) routing to that item's section on the socialSupports card — never lumped onto OTC.",
   "planIdFormat": {
     "adminPattern": "H5425123001 = contract(5) + pbp(3) + segment(3), no separators",
-    "parse": { "contract": "chars 1-5", "pbp": "chars 6-8", "segment": "chars 9-11" },
+    "parse": {
+      "contract": "chars 1-5",
+      "pbp": "chars 6-8",
+      "segment": "chars 9-11"
+    },
     "pipelineFormat": "H{contract}_{pbp}_{segment} e.g. H5425_123_0",
     "segmentRule": "CONFIRMED by product 2026-07-01: no defined segment = '000'; defined segment = its value zero-padded to 3 digits. Crosswalk: admin segment = pipeline segment zero-padded to 3 (pipeline '0' ↔ admin '000')."
   },
   "benefits": {
-    "acupuncture":                            { "card": "acupuncture" },
-    "chiropractor":                           { "card": "chiropractor" },
-    "home_health_agency_care":                { "card": "homeHealth" },
-    "in_home_safety_assessment":              { "card": "inHomeSafety" },
-    "mental_health_provider":                 { "card": "mentalHealth" },
-    "durable_medical_equipment":              { "card": "dme" },
-    "home_delivered_meals_health":            { "card": "meals" },
-    "outpatient_rehabilitation_services":     { "card": "outpatientRehab" },
-    "pcp_and_specialist":                     { "card": "doctorVisits" },
-    "hearing_exam_and_hearing_aids":          { "card": "hearing" },
-    "pers":                                   { "card": "pers" },
-    "transportation_health":                  { "card": "transportation" },
-    "vision":                                 { "card": "vision" },
-    "over_the_counter_otc_and_ssbci_benefit": { "card": "otc", "note": "DECISION (default unless product objects): blob renders on the otc card only; the flexAllowance card carries a cross-reference line to it when OTC is wallet-pooled; compiler flags blobs containing SSBCI-specific language for product review (SSBCI text on the universal OTC card would reach non-eligible members). Durable fix requested of product: split this admin row into separate 'otc' and 'ssbci' benefits so SSBCI instructions live behind the eligibility gate." },
-    "wigs_for_hair_loss":                     { "card": "wigs" },
-    "dental":                                 { "card": "dental" },
-    "fitness":                                { "card": "fitness" }
+    "acupuncture": {
+      "card": "acupuncture"
+    },
+    "chiropractor": {
+      "card": "chiropractor"
+    },
+    "home_health_agency_care": {
+      "card": "homeHealth"
+    },
+    "in_home_safety_assessment": {
+      "card": "inHomeSafety"
+    },
+    "mental_health_provider": {
+      "card": "mentalHealth"
+    },
+    "durable_medical_equipment": {
+      "card": "dme"
+    },
+    "home_delivered_meals_health": {
+      "card": "meals"
+    },
+    "outpatient_rehabilitation_services": {
+      "card": "outpatientRehab"
+    },
+    "pcp_and_specialist": {
+      "card": "doctorVisits"
+    },
+    "hearing_exam_and_hearing_aids": {
+      "card": "hearing"
+    },
+    "pers": {
+      "card": "pers"
+    },
+    "transportation_health": {
+      "card": "transportation"
+    },
+    "vision": {
+      "card": "vision"
+    },
+    "wigs_for_hair_loss": {
+      "card": "wigs"
+    },
+    "dental": {
+      "card": "dental"
+    },
+    "fitness": {
+      "card": "fitness"
+    },
+    "otc": {
+      "card": "otc",
+      "note": "Plain OTC (13b) only. SSBCI sub-benefits are separate rows below."
+    },
+    "ssbci_food_produce": {
+      "card": "socialSupports",
+      "ssbciItem": "food_produce",
+      "note": "Routes the how-to/vendor blob to the food_produce section of the SSBCI card (eligibility-gated)."
+    },
+    "ssbci_meals": {
+      "card": "socialSupports",
+      "ssbciItem": "meals",
+      "note": "Routes the how-to/vendor blob to the meals section of the SSBCI card (eligibility-gated)."
+    },
+    "ssbci_transportation": {
+      "card": "socialSupports",
+      "ssbciItem": "transportation",
+      "note": "Routes the how-to/vendor blob to the transportation section of the SSBCI card (eligibility-gated)."
+    },
+    "ssbci_pest_control": {
+      "card": "socialSupports",
+      "ssbciItem": "pest_control",
+      "note": "Routes the how-to/vendor blob to the pest_control section of the SSBCI card (eligibility-gated)."
+    },
+    "ssbci_indoor_air_quality": {
+      "card": "socialSupports",
+      "ssbciItem": "indoor_air_quality",
+      "note": "Routes the how-to/vendor blob to the indoor_air_quality section of the SSBCI card (eligibility-gated)."
+    },
+    "ssbci_social_needs": {
+      "card": "socialSupports",
+      "ssbciItem": "social_needs",
+      "note": "Routes the how-to/vendor blob to the social_needs section of the SSBCI card (eligibility-gated)."
+    },
+    "ssbci_home_modifications": {
+      "card": "socialSupports",
+      "ssbciItem": "home_modifications",
+      "note": "Routes the how-to/vendor blob to the home_modifications section of the SSBCI card (eligibility-gated)."
+    },
+    "ssbci_self_directed": {
+      "card": "socialSupports",
+      "ssbciItem": "self_directed",
+      "note": "Routes the how-to/vendor blob to the self_directed section of the SSBCI card (eligibility-gated)."
+    },
+    "ssbci_complementary_therapies": {
+      "card": "socialSupports",
+      "ssbciItem": "complementary_therapies",
+      "note": "Routes the how-to/vendor blob to the complementary_therapies section of the SSBCI card (eligibility-gated)."
+    }
   }
 }

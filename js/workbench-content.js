@@ -245,7 +245,7 @@ window.WB_CONTENT = {
  },
  "adminMapping": {
   "$schema": "duos-benefit-content/v1",
-  "comment": "Crosswalk from admin-tool benefit names (one row per covered benefit per PBP) to Hub taxonomy card keys. The card's PBP gate still decides whether anything renders — an admin row can never un-gate a card.",
+  "comment": "Crosswalk from admin-tool benefit names (one row per covered benefit per PBP) to Hub taxonomy card keys. The card's PBP gate still decides whether anything renders. SSBCI is split into one row per sub-benefit (ssbci_<item>) routing to that item's section on the socialSupports card — never lumped onto OTC.",
   "planIdFormat": {
    "adminPattern": "H5425123001 = contract(5) + pbp(3) + segment(3), no separators",
    "parse": {
@@ -296,10 +296,6 @@ window.WB_CONTENT = {
    "vision": {
     "card": "vision"
    },
-   "over_the_counter_otc_and_ssbci_benefit": {
-    "card": "otc",
-    "note": "DECISION (default unless product objects): blob renders on the otc card only; the flexAllowance card carries a cross-reference line to it when OTC is wallet-pooled; compiler flags blobs containing SSBCI-specific language for product review (SSBCI text on the universal OTC card would reach non-eligible members). Durable fix requested of product: split this admin row into separate 'otc' and 'ssbci' benefits so SSBCI instructions live behind the eligibility gate."
-   },
    "wigs_for_hair_loss": {
     "card": "wigs"
    },
@@ -308,6 +304,55 @@ window.WB_CONTENT = {
    },
    "fitness": {
     "card": "fitness"
+   },
+   "otc": {
+    "card": "otc",
+    "note": "Plain OTC (13b) only. SSBCI sub-benefits are separate rows below."
+   },
+   "ssbci_food_produce": {
+    "card": "socialSupports",
+    "ssbciItem": "food_produce",
+    "note": "Routes the how-to/vendor blob to the food_produce section of the SSBCI card (eligibility-gated)."
+   },
+   "ssbci_meals": {
+    "card": "socialSupports",
+    "ssbciItem": "meals",
+    "note": "Routes the how-to/vendor blob to the meals section of the SSBCI card (eligibility-gated)."
+   },
+   "ssbci_transportation": {
+    "card": "socialSupports",
+    "ssbciItem": "transportation",
+    "note": "Routes the how-to/vendor blob to the transportation section of the SSBCI card (eligibility-gated)."
+   },
+   "ssbci_pest_control": {
+    "card": "socialSupports",
+    "ssbciItem": "pest_control",
+    "note": "Routes the how-to/vendor blob to the pest_control section of the SSBCI card (eligibility-gated)."
+   },
+   "ssbci_indoor_air_quality": {
+    "card": "socialSupports",
+    "ssbciItem": "indoor_air_quality",
+    "note": "Routes the how-to/vendor blob to the indoor_air_quality section of the SSBCI card (eligibility-gated)."
+   },
+   "ssbci_social_needs": {
+    "card": "socialSupports",
+    "ssbciItem": "social_needs",
+    "note": "Routes the how-to/vendor blob to the social_needs section of the SSBCI card (eligibility-gated)."
+   },
+   "ssbci_home_modifications": {
+    "card": "socialSupports",
+    "ssbciItem": "home_modifications",
+    "note": "Routes the how-to/vendor blob to the home_modifications section of the SSBCI card (eligibility-gated)."
+   },
+   "ssbci_self_directed": {
+    "card": "socialSupports",
+    "ssbciItem": "self_directed",
+    "note": "Routes the how-to/vendor blob to the self_directed section of the SSBCI card (eligibility-gated)."
+   },
+   "ssbci_complementary_therapies": {
+    "card": "socialSupports",
+    "ssbciItem": "complementary_therapies",
+    "note": "Routes the how-to/vendor blob to the complementary_therapies section of the SSBCI card (eligibility-gated)."
    }
   }
  },
@@ -1114,10 +1159,34 @@ window.WB_CONTENT = {
    "sections": [
     {
      "icon": "volunteer_activism",
-     "label": "What's included for you",
-     "chipsFrom": "social_supports.items",
-     "chipLabel": "{item.label}",
-     "facts": []
+     "forEach": "social_supports.items",
+     "label": "{item.label}",
+     "facts": [
+      {
+       "label": "Your cost",
+       "slot": "item.copay",
+       "altSlot": "item.coinsurance",
+       "highlight": true
+      },
+      {
+       "label": "Plan pays up to",
+       "slot": "item.max_plan_benefit",
+       "suffix": " {item.max_plan_benefit_period}",
+       "pooledNote": "Included in your combined allowance"
+      },
+      {
+       "label": "Ways to travel",
+       "slot": "item.transport_modes"
+      },
+      {
+       "label": "Trip type",
+       "slot": "item.trip_type"
+      },
+      {
+       "label": "Prior authorization",
+       "slot": "item.prior_auth_required"
+      }
+     ]
     }
    ],
    "note": "Call us and we'll help you start using these supports.",
