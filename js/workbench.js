@@ -857,18 +857,12 @@
   function closeForm() { $("authorform").innerHTML = ""; state.authKey = null; }
   function savePack() {
     const key = state.authKey, A = window.WBAuthor, sc = state.authScope;
-    const edited = readForm();
-    let form = edited;
-    if (sc.level !== "carrier") {                 // contract/plan store only the delta vs inherited
-      form = A.overrideDelta(A.effectiveForm(C, sc, key), edited);
-      form.eocFacts = form.eocFacts || edited.eocFacts; // formToPack handles empties
-    }
-    const pack = A.formToPack(form, key);
+    const pack = A.buildSavePack(sc, currentPackFor(key), readForm(), A.effectiveForm(C, sc, key), key);
     if (Object.keys(pack).length <= 2) { $("saveerr").innerHTML = '<span class="err">nothing to save at this scope (matches inherited)</span>'; return; }
-    const path = A.exportPath(sc, key);           // e.g. plans/H7617_076_0/hearing.json
+    const path = A.exportPath(sc, key);
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([JSON.stringify(pack, null, 2)], { type: "application/json" }));
-    a.download = path.replace(/\//g, "__");       // browsers can't write folders; encode the path
+    a.download = path.replace(/\//g, "__");
     a.click();
     $("saveerr").innerHTML = `<span class="ok">✓ ${path}</span>`;
   }

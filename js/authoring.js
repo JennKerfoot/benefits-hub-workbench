@@ -60,6 +60,10 @@
     const facts = (form.eocFacts || [])
       .filter(f => f.label && f.value && f.citation) // hard rule 2: all three required
       .map(f => ({ label: f.label.trim(), value: f.value.trim(), source: "eoc", approved: true, citation: f.citation.trim() }));
+    // Omit the key entirely when empty (never emit eoc_facts: []). The compiler's
+    // mergeContent concatenates eoc_facts only when the key is PRESENT, so this
+    // omission is load-bearing: it keeps a userPack/preview edit from clobbering
+    // inherited facts.
     if (facts.length) pack.eoc_facts = facts;
     return pack;
   }
@@ -100,5 +104,21 @@
     return `plans/${scope.planId}/${cardKey}.json`;
   }
 
-  window.WBAuthor = { boardStatus, FORM_FIELDS, packToForm, formToPack, effectiveForm, overrideDelta, exportPath };
+  // Build the content pack to SAVE at a scope. Carrier scope OVERLAYS the form's
+  // managed fields onto the existing on-disk pack, preserving keys the Phase-1 form
+  // does not surface (eoc_facts, verification, appliesTo, itemContent, cta.icon, ...) —
+  // so a scalar edit never silently drops an approved+cited fact or provenance.
+  // Contract/plan scope save only the override delta vs the inherited form.
+  function buildSavePack(scope, existingPack, editedForm, inheritedForm, cardKey) {
+    if (scope.level === "carrier") {
+      const existing = existingPack || {};
+      const managed = formToPack(editedForm, cardKey);
+      const pack = Object.assign({}, existing, managed);
+      if (existing.cta && managed.cta) pack.cta = Object.assign({}, existing.cta, managed.cta);
+      return pack;
+    }
+    return formToPack(overrideDelta(inheritedForm, editedForm), cardKey);
+  }
+
+  window.WBAuthor = { boardStatus, FORM_FIELDS, packToForm, formToPack, effectiveForm, overrideDelta, exportPath, buildSavePack };
 })();
