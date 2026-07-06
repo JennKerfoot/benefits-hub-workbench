@@ -717,7 +717,7 @@ window.WB_CONTENT = {
    "iconColor": "#6366F1",
    "barColor": "#6366F1",
    "tagline": "{hearing_exams.copay} hearing exam · hearing aid coverage",
-   "tileSubtitle": "{hearing_exams.copay} exam · aids covered",
+   "tileSubtitle": "{hearing_exams.copay} exam · hearing aids covered",
    "sections": [
     {
      "icon": "hearing",
@@ -1434,7 +1434,7 @@ window.WB_CONTENT = {
      "action": "tel",
      "href": "tel:8442557144"
     },
-    "note": "Hearing aids are TruHearing-branded Advanced models through TruHearing providers — there is no out-of-network coverage for aids.",
+    "note": "Hearing aids are TruHearing-branded Advanced models through TruHearing providers — there is no out-of-network coverage for hearing aids.",
     "verification": "Verified against 2026 HumanaChoice SNP-DE H7617-076 SB (Humana-H7617076000SB26) / EOC (Humana-H7617076000EOC26). Re-verify per plan before extending claims beyond vendor identity."
    },
    "meals": {
