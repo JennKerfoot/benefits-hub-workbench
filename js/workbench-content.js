@@ -563,11 +563,13 @@ window.WB_CONTENT = {
       {
        "label": "Primary care visit (PCP)",
        "slot": "primary_care.copay",
+       "plusSlot": "primary_care.coinsurance",
        "highlight": true
       },
       {
        "label": "Specialist visit",
-       "slot": "specialist.copay"
+       "slot": "specialist.copay",
+       "plusSlot": "specialist.coinsurance"
       },
       {
        "label": "Specialist referral required",
@@ -575,7 +577,8 @@ window.WB_CONTENT = {
       },
       {
        "label": "Telehealth visit",
-       "slot": "telehealth.copay"
+       "slot": "telehealth.copay",
+       "plusSlot": "telehealth.coinsurance"
       }
      ]
     }
@@ -650,6 +653,7 @@ window.WB_CONTENT = {
       {
        "label": "Your cost",
        "slot": "fitness.copay",
+       "plusSlot": "fitness.coinsurance",
        "highlight": true
       },
       {
@@ -721,11 +725,13 @@ window.WB_CONTENT = {
      "facts": [
       {
        "label": "Routine hearing exam",
-       "slot": "hearing_exams.copay"
+       "slot": "hearing_exams.copay",
+       "plusSlot": "hearing_exams.coinsurance"
       },
       {
        "label": "Hearing aids",
-       "slot": "hearing_aids.copay"
+       "slot": "hearing_aids.copay",
+       "plusSlot": "hearing_aids.coinsurance"
       },
       {
        "label": "Plan pays up to",
@@ -1216,6 +1222,7 @@ window.WB_CONTENT = {
       {
        "label": "Your cost per trip",
        "slot": "transportation.copay",
+       "plusSlot": "transportation.coinsurance",
        "highlight": true
       },
       {
@@ -1299,7 +1306,7 @@ window.WB_CONTENT = {
    "iconBg": "#E0F5FB",
    "iconColor": "#0891B2",
    "barColor": "#0891B2",
-   "tagline": "{eye_exams.copay} eye exam · up to {eyewear.max_plan_benefit} for eyewear",
+   "tagline": "Routine eye exams and an eyewear allowance",
    "tileSubtitle": "{eye_exams.copay} exam · {eyewear.max_plan_benefit} eyewear",
    "sections": [
     {
@@ -1308,7 +1315,8 @@ window.WB_CONTENT = {
      "facts": [
       {
        "label": "Routine eye exam",
-       "slot": "eye_exams.copay"
+       "slot": "eye_exams.copay",
+       "plusSlot": "eye_exams.coinsurance"
       },
       {
        "label": "Eyewear allowance (glasses or contacts)",
