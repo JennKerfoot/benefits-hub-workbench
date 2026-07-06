@@ -99,29 +99,10 @@
       <div class="doc"><label><b>Evidence of Coverage:</b> <input type="file" accept="application/pdf" onchange="WB.attachDoc('eoc', this)"></label><div id="eoclabel"></div></div>
     </div>
     <div class="card">
-      <h2><i class="ti ti-edit"></i> 3 · Author the carrier pack</h2>
-      <p class="hint"><b>What a carrier pack is:</b> the human-authored wording layer for one carrier — one small JSON file per benefit card holding the things CMS data can't know: <b>vendor names</b> (TruHearing, SilverSneakers), <b>vendor phone numbers &amp; URLs</b> (become the card's call/visit button), <b>network names</b> ("Humana Dental Medicare Network"), <b>how-to notes</b>, and <b>approved EOC facts</b> (the only place a typed dollar is allowed — each needs <code>approved:true</code> + a citation to the SB/EOC you attached in step 2).</p>
-      <p class="hint"><b>What it can NOT do:</b> create, remove, or re-price a benefit. Coverage and every number come from the plan's PBP data — a pack only decorates cards that already gate on. A plan with no pack still renders fully, with generic base wording. That's why one pack per carrier scales to all of that carrier's plans.</p>
-      <p class="hint">Pick a card key, edit its JSON, apply — the compile updates live and the hard rules run (a literal dollar outside <code>eoc_facts</code> fails the build). Export downloads the files for <code>03-content/carriers/&lt;carrier&gt;/</code>.</p>
-      <select id="cardkey" onchange="WB.loadEditor()"></select>
-      <textarea id="packedit" spellcheck="false"></textarea>
-      <div class="btnrow">
-        <button class="btn" onclick="WB.applyEditor()">Apply &amp; recompile</button>
-        <button class="btn secondary" onclick="WB.loadEditor()">Reset</button>
-        <button class="btn secondary" onclick="WB.exportPack()"><i class="ti ti-download"></i> Export edited files</button>
-        <span id="editerr" style="font-size:0.78rem;"></span>
-      </div>
-    </div>
-    <div class="card">
-      <h2><i class="ti ti-database-import"></i> 4 · Admin-tool rows (optional, §4b)</h2>
-      <p class="hint"><b>What admin-tool rows are:</b> the DUOS ops team already maintains an internal admin tool with one free-text row per covered benefit per plan — plain-language "how to use this benefit" instructions written by humans (which vendor to call, which website, what to bring). This panel ingests those rows so that content reaches the member cards without re-typing it.</p>
-      <p class="hint"><b>How to use it:</b> paste the rows for this plan as a JSON array of <code>{"plan_id","benefit_name","description_markdown"}</code>. Admin plan IDs like <code>H7617076000</code> (contract+pbp+segment, no separators) crosswalk to pipeline IDs automatically. What the compiler does with each row: the text renders as a <b>"How to use this benefit"</b> box on the mapped card · phones/URLs found in the text become the card's CTA if it has none · free-text dollar amounts and SSBCI-specific language on the universal OTC card are <b>flagged in the report</b> for review (numbers stay PBP-owned) · a benefit name missing from <code>admin-benefit-mapping.json</code> <b>fails the build</b> — never silently dropped · the PBP gate still rules: a row can never make an uncovered benefit appear.</p>
-      <textarea id="adminrows" spellcheck="false" style="min-height:110px;" placeholder='[{"plan_id":"H7617076000","benefit_name":"fitness","description_markdown":"Visit **silversneakers.com** or call 866-584-7389 to find a gym."}]'></textarea>
-      <div class="btnrow">
-        <button class="btn" onclick="WB.applyAdminRows()">Apply rows</button>
-        <button class="btn secondary" onclick="WB.clearAdminRows()">Clear</button>
-        <span id="adminerr" style="font-size:0.78rem;"></span>
-      </div>
+      <h2><i class="ti ti-layout-grid"></i> 3 · Author content</h2>
+      <p class="hint">Pick a carrier plan on the left. Each tile is a benefit card — <b>green</b> = this carrier already has a pack, <b>outline</b> = base wording only. Click a tile to edit it as a form (no JSON).</p>
+      <div id="authorboard" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;"></div>
+      <div id="authorform"></div>
     </div>
   </div>
   <div><!-- right column -->
@@ -152,6 +133,7 @@
   <p class="footnote"><b>How to run:</b> from the dashboard folder, <code>node serve.js 8790</code> (or <code>python3 -m http.server 8790</code>) → open <code>http://localhost:8790/workbench.html</code>. The app is static — no backend, nothing saved server-side. Opened directly from file://, it asks you to point at the <code>data/</code> folder instead. Compiler rules implemented from <code>benefits-hub-handoff/01-architecture/COMPILER_SPEC.md</code>: PBP gating, content stack (base ← carrier ← workbench edits), slot resolution (null never renders as $0), §4a shared-wallet &amp; VBID consolidation with the single-surface check, hard rules 1–2, admin-tool rows (§4b), EOC-vs-PBP discrepancy flags, D-SNP zero-dollar overlay, launch-scope stamping, and the per-plan report. Content snapshot generated from <code>03-content/</code> into <code>js/workbench-content.js</code>.</p>
 </main>
 <script src="js/workbench-content.js"></script>
+<script src="js/authoring.js"></script>
 <script src="js/workbench.js"></script>
 </body>
 </html>

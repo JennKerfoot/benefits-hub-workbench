@@ -670,17 +670,6 @@
     if (!m) return String(id || "").trim();
     return `${m[1]}_${m[2]}_${parseInt(m[3], 10)}`;
   }
-  function applyAdminRows() {
-    try {
-      const rows = JSON.parse($("adminrows").value || "[]");
-      if (!Array.isArray(rows)) throw new Error("expected a JSON array");
-      rows.forEach(r => { if (!r.benefit_name) throw new Error("every row needs benefit_name"); });
-      state.adminRows = rows;
-      $("adminerr").innerHTML = `<span class="ok">✓ ${rows.length} row(s) applied</span>`;
-      recompile();
-    } catch (e) { $("adminerr").innerHTML = `<span class="err">${e.message}</span>`; }
-  }
-  function clearAdminRows() { state.adminRows = []; $("adminrows").value = ""; $("adminerr").textContent = ""; recompile(); }
 
   /* ---------- corpus audit ---------- */
   let auditAbort = false;
@@ -803,40 +792,90 @@
       $("planinfo").innerHTML = `<b>${esc(s.plan_name || id)}</b><br>${esc(s.org_marketing_name || "")} · ${esc(s.plan_type || "")} · premium ${s.premium != null ? "$" + s.premium : "—"}${(state.plan.plan_info || {}).dsnp_zero_dollar ? " · <b>D-SNP zero-dollar</b>" : ""}<br>Benefit keys: ${Object.keys(state.plan.benefits || {}).length} · Carrier pack: <b>${esc(state.carrier ? state.carrier : "none (base wording only)")}</b>`;
       $("planresults").innerHTML = "";
       $("plansearch").value = id;
-      buildEditorOptions();
       recompile();
+      renderBoard();
     } catch (e) { $("planinfo").innerHTML = `<span class="err">${e.message}</span>`; }
   }
 
-  function buildEditorOptions() {
-    const sel = $("cardkey");
-    sel.innerHTML = C.taxonomy.cards.map(c => `<option value="${c.key}">${c.key}</option>`).join("");
-    loadEditor();
+  function renderBoard() {
+    const el = $("authorboard");
+    if (!el) return;
+    if (!state.carrier) { el.innerHTML = '<p class="hint">Pick a plan to see its carrier.</p>'; return; }
+    const rows = window.WBAuthor.boardStatus(C, state.carrier);
+    el.innerHTML = rows.map(r => `
+      <button class="result" data-key="${r.key}" style="text-align:center;${r.hasCarrierPack ? 'background:var(--green-l);border-color:var(--green);' : ''}">
+        <b>${r.key}</b><br><span>${r.hasCarrierPack ? 'pack ✓' : 'base only'}${r.overrides ? ' · ' + r.overrides + ' override' + (r.overrides > 1 ? 's' : '') : ''}</span>
+      </button>`).join("");
+    el.querySelectorAll(".result").forEach(b => b.addEventListener("click", () => WB.openCardForm(b.dataset.key)));
   }
-  function loadEditor() {
-    const key = $("cardkey").value;
-    const cpack = state.userPack[key] || (state.carrier && C.carriers[state.carrier] && C.carriers[state.carrier][key]) || { $schema: "duos-benefit-content/v1", key, appliesTo: { carrier: state.carrier || "<carrier>" } };
-    $("packedit").value = JSON.stringify(cpack, null, 2);
-    $("editerr").textContent = "";
+  function currentPackFor(key) {
+    // the pack already authored at the current scope's own level (for editing), else {}
+    const sc = state.authScope;
+    if (sc.level === "carrier") return (C.carriers[sc.carrier] || {})[key] || state.userPack[key] || {};
+    if (sc.level === "contract") return ((C.contracts || {})[sc.contract] || {})[key] || {};
+    return ((C.plans || {})[sc.planId] || {})[key] || {};
   }
-  function applyEditor() {
-    try {
-      const obj = JSON.parse($("packedit").value);
-      if (obj.key !== $("cardkey").value) throw new Error(`"key" must be "${$("cardkey").value}"`);
-      state.userPack[obj.key] = obj;
-      $("editerr").innerHTML = '<span class="ok">✓ applied — recompiled</span>';
-      recompile();
-    } catch (e) { $("editerr").innerHTML = `<span class="err">${e.message}</span>`; }
+  function openCardForm(key) {
+    state.authKey = key;
+    state.authScope = state.authScope || { level: "carrier", carrier: state.carrier };
+    renderForm();
   }
-  function exportPack() {
-    const files = Object.entries(state.userPack);
-    if (!files.length) { $("editerr").innerHTML = '<span class="err">nothing edited yet</span>'; return; }
-    files.forEach(([key, obj]) => {
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" }));
-      a.download = `${key}.json`;
-      a.click();
-    });
+  function renderForm() {
+    const key = state.authKey, A = window.WBAuthor;
+    const inherited = A.effectiveForm(C, state.authScope, key);
+    const form = A.packToForm(currentPackFor(key));
+    const field = f => {
+      const val = form[f.key] || "", ph = inherited[f.key] ? `inherited: ${inherited[f.key]}` : "";
+      const hint = f.hint ? `<span class="hint" style="font-size:0.72rem">${f.hint}</span>` : "";
+      if (f.type === "textarea") return `<label class="doc"><b>${f.label}</b> ${hint}<textarea data-f="${f.key}" style="min-height:60px;font-family:inherit;font-size:0.84rem" placeholder="${ph}">${val}</textarea></label>`;
+      if (f.type === "select") return `<label class="doc"><b>${f.label}</b><br><select data-f="${f.key}"><option value=""></option>${f.options.map(o => `<option${o === val ? " selected" : ""}>${o}</option>`).join("")}</select></label>`;
+      return `<label class="doc"><b>${f.label}</b> ${hint}<br><input type="text" data-f="${f.key}" value="${val.replace(/"/g, "&quot;")}" placeholder="${ph}"></label>`;
+    };
+    $("authorform").innerHTML = `
+      <div class="card" style="margin-top:10px;">
+        <h2><i class="ti ti-edit"></i> ${key}</h2>
+        ` +
+        `<div class="btnrow" style="margin-bottom:8px;">` +
+        ["carrier", "contract", "plan"].map(l =>
+          `<button class="btn ${state.authScope.level === l ? "" : "secondary"}" style="padding:5px 12px" onclick="WB.setScope('${l}')">${l === "carrier" ? "All " + state.carrier : l === "contract" ? "Contract " + (state.planId || "").split("_")[0] : "This plan " + (state.planId || "")}</button>`
+        ).join("") + `</div>` +
+        `${window.WBAuthor.FORM_FIELDS.map(field).join("")}
+        <div class="btnrow"><button class="btn secondary" onclick="WB.closeForm()">Done</button><button class="btn" onclick="WB.savePack()"><i class="ti ti-download"></i> Save file</button><span id="saveerr" style="font-size:0.78rem"></span></div>
+      </div>`;
+    $("authorform").querySelectorAll("[data-f]").forEach(i => i.addEventListener("input", applyForm));
+  }
+  function readForm() {
+    const form = window.WBAuthor.packToForm({});
+    $("authorform").querySelectorAll("[data-f]").forEach(i => { form[i.dataset.f] = i.value; });
+    return form;
+  }
+  function applyForm() {
+    const key = state.authKey;
+    state.userPack[key] = window.WBAuthor.formToPack(readForm(), key); // live preview via existing pipeline
+    recompile();
+  }
+  function closeForm() { $("authorform").innerHTML = ""; state.authKey = null; }
+  function savePack() {
+    const key = state.authKey, A = window.WBAuthor, sc = state.authScope;
+    const edited = readForm();
+    let form = edited;
+    if (sc.level !== "carrier") {                 // contract/plan store only the delta vs inherited
+      form = A.overrideDelta(A.effectiveForm(C, sc, key), edited);
+      form.eocFacts = form.eocFacts || edited.eocFacts; // formToPack handles empties
+    }
+    const pack = A.formToPack(form, key);
+    if (Object.keys(pack).length <= 2) { $("saveerr").innerHTML = '<span class="err">nothing to save at this scope (matches inherited)</span>'; return; }
+    const path = A.exportPath(sc, key);           // e.g. plans/H7617_076_0/hearing.json
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(pack, null, 2)], { type: "application/json" }));
+    a.download = path.replace(/\//g, "__");       // browsers can't write folders; encode the path
+    a.click();
+    $("saveerr").innerHTML = `<span class="ok">✓ ${path}</span>`;
+  }
+  function setScope(level) {
+    const h = (state.planId || "").split("_")[0];
+    state.authScope = { level, carrier: state.carrier, contract: h, planId: state.planId };
+    renderForm();
   }
 
   function attachDoc(kind, input) {
@@ -907,6 +946,6 @@
   }
   function summaryIds() { return state.summary ? Object.keys(state.summary) : []; }
 
-  window.WB = { renderSearch, applyEditor, loadEditor, exportPack, attachDoc, tab, recompile, applyAdminRows, clearAdminRows, runAudit, stopAudit, compileFor, summaryIds };
+  window.WB = { renderSearch, attachDoc, tab, recompile, runAudit, stopAudit, compileFor, summaryIds, renderBoard, openCardForm, renderForm, closeForm, savePack, setScope };
   init();
 })();
