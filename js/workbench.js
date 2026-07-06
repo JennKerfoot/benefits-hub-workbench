@@ -803,8 +803,8 @@
     if (!state.carrier) { el.innerHTML = '<p class="hint">Pick a plan to see its carrier.</p>'; return; }
     const rows = window.WBAuthor.boardStatus(C, state.carrier);
     el.innerHTML = rows.map(r => `
-      <button class="result" data-key="${r.key}" style="text-align:center;${r.hasCarrierPack ? 'background:var(--green-l);border-color:var(--green);' : ''}">
-        <b>${r.key}</b><br><span>${r.hasCarrierPack ? 'pack ✓' : 'base only'}${r.overrides ? ' · ' + r.overrides + ' override' + (r.overrides > 1 ? 's' : '') : ''}</span>
+      <button class="result" data-key="${esc(r.key)}" style="text-align:center;${r.hasCarrierPack ? 'background:var(--green-l);border-color:var(--green);' : ''}">
+        <b>${esc(r.key)}</b><br><span>${r.hasCarrierPack ? 'pack ✓' : 'base only'}${r.overrides ? ' · ' + r.overrides + ' override' + (r.overrides > 1 ? 's' : '') : ''}</span>
       </button>`).join("");
     el.querySelectorAll(".result").forEach(b => b.addEventListener("click", () => WB.openCardForm(b.dataset.key)));
   }
@@ -827,17 +827,17 @@
     const field = f => {
       const val = form[f.key] || "", ph = inherited[f.key] ? `inherited: ${inherited[f.key]}` : "";
       const hint = f.hint ? `<span class="hint" style="font-size:0.72rem">${f.hint}</span>` : "";
-      if (f.type === "textarea") return `<label class="doc"><b>${f.label}</b> ${hint}<textarea data-f="${f.key}" style="min-height:60px;font-family:inherit;font-size:0.84rem" placeholder="${ph}">${val}</textarea></label>`;
+      if (f.type === "textarea") return `<label class="doc"><b>${f.label}</b> ${hint}<textarea data-f="${f.key}" style="min-height:60px;font-family:inherit;font-size:0.84rem" placeholder="${esc(ph)}">${esc(val)}</textarea></label>`;
       if (f.type === "select") return `<label class="doc"><b>${f.label}</b><br><select data-f="${f.key}"><option value=""></option>${f.options.map(o => `<option${o === val ? " selected" : ""}>${o}</option>`).join("")}</select></label>`;
-      return `<label class="doc"><b>${f.label}</b> ${hint}<br><input type="text" data-f="${f.key}" value="${val.replace(/"/g, "&quot;")}" placeholder="${ph}"></label>`;
+      return `<label class="doc"><b>${f.label}</b> ${hint}<br><input type="text" data-f="${f.key}" value="${esc(val)}" placeholder="${esc(ph)}"></label>`;
     };
     $("authorform").innerHTML = `
       <div class="card" style="margin-top:10px;">
-        <h2><i class="ti ti-edit"></i> ${key}</h2>
+        <h2><i class="ti ti-edit"></i> ${esc(key)}</h2>
         ` +
         `<div class="btnrow" style="margin-bottom:8px;">` +
         ["carrier", "contract", "plan"].map(l =>
-          `<button class="btn ${state.authScope.level === l ? "" : "secondary"}" style="padding:5px 12px" onclick="WB.setScope('${l}')">${l === "carrier" ? "All " + state.carrier : l === "contract" ? "Contract " + (state.planId || "").split("_")[0] : "This plan " + (state.planId || "")}</button>`
+          `<button class="btn ${state.authScope.level === l ? "" : "secondary"}" style="padding:5px 12px" onclick="WB.setScope('${l}')">${l === "carrier" ? "All " + esc(state.carrier) : l === "contract" ? "Contract " + esc((state.planId || "").split("_")[0]) : "This plan " + esc(state.planId || "")}</button>`
         ).join("") + `</div>` +
         `${window.WBAuthor.FORM_FIELDS.map(field).join("")}
         <div class="btnrow"><button class="btn secondary" onclick="WB.closeForm()">Done</button><button class="btn" onclick="WB.savePack()"><i class="ti ti-download"></i> Save file</button><span id="saveerr" style="font-size:0.78rem"></span></div>

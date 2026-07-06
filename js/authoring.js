@@ -15,8 +15,9 @@
       let overrides = 0;
       hnums.forEach(h => { if ((C.contracts && C.contracts[h] || {})[key]) overrides++; });
       Object.keys(C.plans || {}).forEach(pid => {
-        const h = pid.split("_")[0];
-        if (hnums.includes(h) && (C.plans[pid] || {})[key]) overrides++;
+        const m = /^([HRES]\d{4})_/.exec(pid);   // valid plan id -> capture the contract H#
+        if (!m) return;
+        if (hnums.includes(m[1]) && (C.plans[pid] || {})[key]) overrides++;
       });
       return { key, hasCarrierPack, overrides, source: hasCarrierPack ? "carrier" : "base" };
     });
@@ -101,7 +102,8 @@
   function exportPath(scope, cardKey) {
     if (scope.level === "carrier") return `carriers/${scope.carrier}/${cardKey}.json`;
     if (scope.level === "contract") return `contracts/${scope.contract}/${cardKey}.json`;
-    return `plans/${scope.planId}/${cardKey}.json`;
+    if (scope.level === "plan") return `plans/${scope.planId}/${cardKey}.json`;
+    throw new Error("exportPath: unknown scope level " + scope.level);
   }
 
   // Build the content pack to SAVE at a scope. Carrier scope OVERLAYS the form's
