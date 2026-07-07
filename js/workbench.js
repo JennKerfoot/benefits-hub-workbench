@@ -816,6 +816,17 @@
     (compiled.__wallet_ || []).forEach(wcard => ordered.push(wcard));
     C.taxonomy.cards.forEach(c => { if (compiled[c.key]) ordered.push(compiled[c.key]); });
 
+    // §3d universal SSBCI gate: the "You qualify — qualifying health condition" chip may
+    // NOT appear on a plan that explicitly files no SSBCI (model_test.ssbci === false).
+    // This catches EVERY stamp source uniformly — content-template requiresEligibility
+    // (e.g. vbidPackages.json), eligStamps, the combined-OTC card, and wallet eligibility —
+    // so a VBID/UF-only plan never shows the chronic-condition chip. A plan that did not
+    // file the B19 flag at all (model_test absent → undefined, not false) is left untouched,
+    // keeping its per-benefit isGenuineSsbci gating.
+    if (dig(state.plan, "benefits.model_test.ssbci") === false) ordered.forEach(card => {
+      if (card.requiresEligibility === "ssbci") { card.requiresEligibility = undefined; card.eligibilityBanner = null; }
+    });
+
     // 6. single-surface check — structural, not substring: each pooled group amount may
     // appear in allowance-like rows ONLY on its designated surface (the wallet card, or
     // the single card a dental-max-style group collapsed onto). Same-amount groups are
