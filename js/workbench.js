@@ -747,12 +747,22 @@
         const label = cleanNames.length ? cleanNames.join(", ") : (compiled[mk] || { title: mk }).title;
         rows.push({ label, value: "Covered by this allowance" });
       });
+      // Mixed-wallet SSBCI disclosure: a wallet that pools a genuine SSBCI benefit
+      // (socialSupports) but is NOT fully gated is a mixed SSBCI+universal pool (e.g.
+      // H8298's $315 OTC + Healthy Food). On an SSBCI plan we name the condition-gated
+      // portion in a note rather than chipping the whole wallet — chipping would
+      // over-imply the universal (OTC) part also needs a qualifying condition.
+      const mixedSsbci = !w.eligibility && w.memberCards.has("socialSupports") && dig(state.plan, "benefits.model_test.ssbci") === true;
+      const walletNote = [
+        interp(tW.note, null),
+        mixedSsbci && tW.mixedWalletNote ? interp(tW.mixedWalletNote, { ssbciBenefitName: deriveSsbciBenefitName(state.plan) }) : null,
+      ].filter(Boolean).join(" ") || null;
       compiled.__wallet_ = compiled.__wallet_ || [];
       compiled.__wallet_.push({
         key: "flexAllowance", title: w.name,
         tagline: interp(tW.tagline, null) || "One shared allowance",
         barColor: tW.barColor || "#7C3AED", iconBg: tW.iconBg || "#F3E8FF", iconColor: tW.iconColor || "#7C3AED", icon: tW.icon,
-        note: interp(tW.note, null), cta: tW.cta || null,
+        note: walletNote, cta: tW.cta || null,
         requiresEligibility: w.eligibility ? "ssbci" : undefined,
         eligibilityBanner: w.eligibility ? (tW.eligibilityBanner || ELIG_DEFAULT) : null,
         connections: tW.connections || [], sections: [{ label: w.name, rows, chips: [] }],

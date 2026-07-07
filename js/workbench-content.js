@@ -1642,6 +1642,7 @@ window.WB_CONTENT = {
    "barColor": "#7C3AED",
    "tagline": "A shared allowance you can spend across benefit categories",
    "tileSubtitle": "Shared benefit allowance",
+   "mixedWalletNote": "{ssbciBenefitName} is available to members with a qualifying health condition.",
    "sections": [
     {
      "icon": "account_balance_wallet",
