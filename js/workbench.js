@@ -119,6 +119,10 @@
     path = path.trim();
     for (const p of CTX_PREFIXES) if (path.startsWith(p)) return ctx ? dig(ctx, path.slice(p.length)) : undefined;
     if (path.startsWith("yearConstants.")) return dig(C.yearConstants, path.slice(14));
+    // computed, ctx-level tokens with no plan/PBP path of their own (e.g. the derived
+    // SSBCI benefit name for the OTC non-qualifier note) — resolved straight off ctx,
+    // never off the plan, so a template can't accidentally shadow a real PBP slot.
+    if (ctx && typeof ctx === "object" && Object.prototype.hasOwnProperty.call(ctx, path)) return ctx[path];
     const plan = state.plan, first = path.split(".")[0];
     if (plan.benefits && Object.prototype.hasOwnProperty.call(plan.benefits, first)) return dig(plan.benefits, path);
     return dig(plan, path);
@@ -185,19 +189,136 @@
     if (nouns.length === 2) return nouns.join(" & ") + " Allowance";
     return (C.base.flexAllowance || {}).title || "Flex Allowance";
   }
+  // A pooled group / VBID package is genuinely SSBCI (chronic-condition gated) only if
+  // it carries an SSBCI category code (13i family) — NOT a bare routine grouping or a
+  // pure VBID/UF package. Used together with the plan-level model_test.ssbci gate.
+  function isGenuineSsbci(codes) {
+    return (codes || []).some(c => /^13i/.test(c));
+  }
+  function planIsSsbci() {
+    return dig(state.plan, "benefits.model_test.ssbci") === true;
+  }
+  // §3b orphan fix support: true when social_supports already has its OWN genuine
+  // dollar pool — a standalone VBID/SSBCI aggregate-allowance package (13i codes)
+  // with a non-zero allowance (a $0 aggregate_allowance is a filing artifact, not a
+  // real pool — H8298's "Package 1" files $0/month while the real SSBCI money sits
+  // in the 13b+19b3 combined group). When socialSupports already has a genuine
+  // standalone home (e.g. H0885's separate $20/3mo SSBCI package), it must NOT also
+  // be pulled into an unrelated 19b3 combined group (that group's own OTC/etc.
+  // members would wrongly claim the SSBCI item's eligibility/naming).
+  function hasStandaloneSsbciHome() {
+    const pkgs = dig(state.plan, "benefits.vbid_packages.packages") || [];
+    return pkgs.some(pkg => {
+      // Parse the numeric amount rather than string-matching a leading "$0" —
+      // a leading-match regex would wrongly treat "$0.50 (Every month)" as zero.
+      const amount = parseFloat(String(pkg.aggregate_allowance || "").replace(/[^0-9.]/g, ""));
+      if (!(amount > 0)) return false;
+      const codes = (pkg.benefit_categories || []).map(parseCode).filter(Boolean);
+      return isGenuineSsbci(codes);
+    });
+  }
+  // Parse a filed dollar amount to a Number ("$50" -> 50, "$20 (Every 3 months)" -> 20,
+  // "$1,250" -> 1250). Returns null when there is no dollar figure at all — a null must
+  // never read as 0 and silently satisfy the equality bound below.
+  function parseDollar(s) {
+    const m = /\$\s?([0-9][0-9,]*(?:\.[0-9]+)?)/.exec(String(s || ""));
+    return m ? parseFloat(m[1].replace(/,/g, "")) : null;
+  }
+  // §3c computed combined OTC allowance. Returns { amount, period } (member-facing
+  // strings, e.g. { amount: "$70", period: "Every 3 months" }) ONLY when the plan holds
+  // the exact bound from COMPILER_SPEC §4 — otherwise null (never fires, never sums):
+  //   (1) benefits.otc_items.max_plan_benefit is a real dollar (the base OTC amount);
+  //   (2) a vbid_packages package includes OTC (13b) AND has an aggregate_allowance dollar;
+  //   (3) a combined_benefits group includes OTC (13b) whose max_plan_benefit EQUALS the
+  //       base OTC amount, AND every non-OTC category in that group is SSBCI-additional
+  //       (19b3) or SSBCI (13i) — never an unrelated benefit. (3) is the load-bearing
+  //       safety bound: an equal group holds only the OTC + SSBCI-additional portion, so
+  //       the package is genuinely additive. When the group already equals OTC+package
+  //       (double-counted), mixes in an unrelated category (e.g. 10b2), OR there is NO OTC
+  //       combined group at all (H1692_006_0), (3) fails and we return null — the package
+  //       is NOT summed in.
+  // Corpus-validated: 172 plans fire this bound; in ALL 172 the only non-OTC category is
+  // 19b3 — zero firing groups contain any other category (review finding, tightened).
+  function combinedOtcAllowance(plan) {
+    const otc = dig(plan, "benefits.otc_items");
+    const baseOtc = otc && parseDollar(otc.max_plan_benefit);
+    if (!(baseOtc > 0)) return null;
+    const period = otc.max_plan_benefit_period || "";
+    // (2) an OTC-inclusive package with its own aggregate allowance
+    const pkgs = dig(plan, "benefits.vbid_packages.packages") || [];
+    const pkg = pkgs.find(p => {
+      const codes = (p.benefit_categories || []).map(parseCode).filter(Boolean);
+      return codes.some(c => c === "13b" || c.startsWith("13b")) && parseDollar(p.aggregate_allowance) > 0;
+    });
+    if (!pkg) return null;
+    const pkgAggregate = parseDollar(pkg.aggregate_allowance);
+    // (3) an OTC-inclusive combined group whose dollar EQUALS the base OTC amount AND
+    // whose non-OTC categories are exclusively SSBCI-additional (19b3) / SSBCI (13i) —
+    // never an unrelated benefit that coincidentally shares the same dollar amount.
+    const groups = dig(plan, "benefits.combined_benefits.groups") || [];
+    const boundGroup = groups.find(g => {
+      const codes = (g.categories || []).map(parseCode).filter(Boolean);
+      const hasOtc = codes.some(c => c === "13b" || c.startsWith("13b"));
+      const nonOtc = codes.filter(c => !(c === "13b" || c.startsWith("13b")));
+      const onlySsbciFamily = nonOtc.every(c => /^19b3/.test(c) || /^13i/.test(c));
+      return hasOtc && onlySsbciFamily && parseDollar(g.max_plan_benefit) === baseOtc;
+    });
+    if (!boundGroup) return null;
+    return { amount: "$" + (baseOtc + pkgAggregate), period, pkg, group: boundGroup };
+  }
+  // Task 11 review fix: the OTC card's non-qualifier note used to hardcode "Food & Produce"
+  // as the SSBCI benefit name — correct for H0885 (whose SSBCI item really is named that)
+  // but wrong for any other plan in the combinedOtc corpus, whose SSBCI item(s) can be
+  // named "Pest Control", "Transportation", "Indoor Air Quality", "Social Needs", etc.
+  // Derive the member-facing name instead of assuming it:
+  //   1. Prefer benefits.social_supports.food_produce.label (the common case — food/produce
+  //      is the item most plans pool with OTC) when it is present and not filing jargon.
+  //   2. Else fall back to the first OTHER social_supports item with a clean (non-jargon)
+  //      label — any genuine SSBCI item name is accurate here, not just food/produce.
+  //   3. Else fall back to a generic phrase that names no specific benefit, so a plan with
+  //      no clean SSBCI item label (or only a jargon package/group name available) never
+  //      leaks filing jargon (e.g. "SSBCI Package 1") to a member.
+  // genericName() (the same jargon detector used for wallet/package names above) gates
+  // every candidate before it is accepted.
+  function deriveSsbciBenefitName(plan) {
+    const ss = plan && plan.benefits && plan.benefits.social_supports;
+    if (ss && ss.food_produce && ss.food_produce.label && !genericName(ss.food_produce.label))
+      return ss.food_produce.label;
+    if (ss) {
+      const other = Object.keys(ss)
+        .filter(k => k !== "food_produce" && k !== "items" && k !== "label")
+        .map(k => ss[k])
+        .find(v => v && typeof v === "object" && v.label && !genericName(v.label));
+      if (other) return other.label;
+    }
+    return "the combined benefit";
+  }
   function planWallets(gatedKeys) {
     const idx = catIndex();
     const groups = dig(state.plan, "benefits.combined_benefits.groups") || [];
     const wallets = [], singleCard = [], linkOnly = [];
+    const ssbciHasHome = hasStandaloneSsbciHome();
     groups.forEach(g => {
       const codes = (g.categories || []).map(parseCode).filter(Boolean);
       const nonPass = codes.filter(c => !c.startsWith("19b"));
       const cards = [...new Set(nonPass.map(c => codeToCard(c, idx)).filter(Boolean))];
+      // §3b orphan fix: "Additional Benefits (VBID/UF/SSBCI)" (19b3) is filing
+      // jargon that carries no card of its own via codeToCard — it stays excluded
+      // from nonPass so it never disturbs the 19b pass-through used below for
+      // package linkage/eligibility/naming (claimed[]/passWallets). But when the
+      // plan ALSO files a real social_supports benefit AND that benefit has no
+      // other genuine dollar pool of its own, 19b3 on this group is that benefit's
+      // pooled-dollar signal, so the socialSupports card is a genuine member of
+      // this pool — add it explicitly (not via nonPass) so a 13b+19b3 group
+      // resolves to ≥2 members and renders as a wallet instead of a single-card
+      // allowance that orphans the SSBCI item.
+      if (codes.some(c => c.startsWith("19b3")) && dig(state.plan, "benefits.social_supports") && !ssbciHasHome && !cards.includes("socialSupports"))
+        cards.push("socialSupports");
       if (!g.max_plan_benefit) {
         // dollarless group (e.g. a Transportation linkage group): no wallet card —
         // it only marks which benefits ride in the special package
         linkOnly.push({ group: g, cards });
-        cards.forEach(c => eligStamps.add(c));
+        if (planIsSsbci() && isGenuineSsbci(codes)) cards.forEach(c => eligStamps.add(c));
       } else if (nonPass.length && cards.length === 1 && nonPass.every(c => codeToCard(c, idx)) && !(g.includes || []).length)
         // single-card ONLY when the categories map to one card AND no SSBCI items
         // are linked in — a group with includes[] is multi-benefit by definition
@@ -226,7 +347,7 @@
       // never merged into (or allowed to rename) a combined group
       if (pkg.aggregate_allowance) {
         partial.push({ pkg, remainder: null, standalone: true });
-        codes.forEach(code => { const card = codeToCard(code, idx); if (card) eligStamps.add(card); });
+        if (planIsSsbci() && isGenuineSsbci(codes)) codes.forEach(code => { const card = codeToCard(code, idx); if (card) eligStamps.add(card); });
         return;
       }
       const notCovered = codes.filter(code => {
@@ -241,10 +362,11 @@
         const passWallets = wallets.filter(w =>
           w.codes.some(wc => wc.startsWith("19b")) ||
           codes.some(code => w.codes.some(wc => code.startsWith(wc) || wc.startsWith(code))));
-        passWallets.forEach(w => { w.eligibility = true; });
+        const genuineSsbci = planIsSsbci() && isGenuineSsbci(codes);
+        if (genuineSsbci) passWallets.forEach(w => { w.eligibility = true; });
         const nameTarget = passWallets.find(w => genericName(w.group.name));
         if (nameTarget && !genericName(pkg.name)) nameTarget.pkgNames.push(pkg.name);
-        codes.forEach(code => { const card = codeToCard(code, idx); if (card) eligStamps.add(card); });
+        if (genuineSsbci) codes.forEach(code => { const card = codeToCard(code, idx); if (card) eligStamps.add(card); });
       } else {
         partial.push({ pkg, remainder: notCovered, csr: false });
       }
@@ -260,7 +382,7 @@
     gatedKeys.forEach(key => {
       const t = effectiveTemplate(key);
       if (!t) return;
-      const fields = [["title", t.title], ["tagline", t.tagline], ["tileSubtitle", t.tileSubtitle], ["note", t.note], ["cta.label", t.cta && t.cta.label], ["eligibilityBanner", t.eligibilityBanner]];
+      const fields = [["title", t.title], ["tagline", t.tagline], ["tileSubtitle", t.tileSubtitle], ["note", t.note], ["nonQualifierNote", t.nonQualifierNote], ["cta.label", t.cta && t.cta.label], ["eligibilityBanner", t.eligibilityBanner]];
       // per-SSBCI-item member-facing content (itemContent renders as section how-to/CTA)
       Object.entries(t.itemContent || {}).forEach(([ik, ic]) => {
         fields.push([`itemContent.${ik}.howToUse`, ic.howToUse], [`itemContent.${ik}.note`, ic.note], [`itemContent.${ik}.cta.label`, ic.cta && ic.cta.label]);
@@ -299,6 +421,17 @@
       ss.items = Object.entries(ss).filter(([k, v]) => k !== "items" && v && typeof v === "object" && !Array.isArray(v)).map(([k, v]) => Object.assign({ key: k }, v));
   }
   function isAllowanceSlot(slot) { return /max_plan_benefit(?!_period)/.test(slot || ""); }
+  // §3a — a surviving wallet member is genuinely wallet-funded when the benefit it renders
+  // draws from the pooled allowance, NOT when the wallet funds a different sub-variant the
+  // card doesn't show. Proxy: the card renders NO substantive independent dollar cost of its
+  // own — no non-suppressed, non-$0 dollar value. Transportation ($0/trip only) qualifies;
+  // hearing ($699–$999 prescription-aid copay = its own cost) is excluded.
+  function walletFunds(card, wallet) {
+    if (!card || !wallet) return null;
+    const ownsDollar = (card.sections || []).some(s => (s.rows || []).some(r =>
+      !r.suppressed && r.source !== "computed" && DOLLAR.test(String(r.value)) && !/^\$0(\.00?)?\b/.test(String(r.value).trim())));
+    return ownsDollar ? null : wallet;
+  }
 
   function compileFactRows(f, ctx, opts, drops, cardKey) {
     if (f.forEach) {
@@ -462,6 +595,19 @@
     // 3. wallet & package planning
     const wp = planWallets(gated);
 
+    // §3c computed combined OTC allowance: when the exact bound holds, the OTC card takes
+    // over as the qualifying-member allowance (base OTC + package aggregate, SSBCI-gated)
+    // and the package that fed it is absorbed — it must NOT also stand as its own
+    // vbidPackages card. Drop the matching standalone package from wp.partial here so it
+    // is excluded from both the vbidRemainder render list and the vbidPackages gate below.
+    const combinedOtc = combinedOtcAllowance(state.plan);
+    if (combinedOtc) {
+      const before = wp.partial.length;
+      wp.partial = wp.partial.filter(p => p.pkg !== combinedOtc.pkg);
+      if (wp.partial.length !== before)
+        report.wallet.push({ wallet: "(computed combined OTC allowance) " + combinedOtc.amount, renders_on: "otc", combined_from: ["otc_items", combinedOtc.pkg.name], vbid_packages_merged: [combinedOtc.pkg.name] });
+    }
+
     // 4. compile cards in taxonomy order
     const walletCards = [];
     wp.wallets.forEach(w => {
@@ -501,6 +647,40 @@
       }
     });
 
+    // §3c "qualifying takes over": rewrite the OTC card's Allowance to the computed combined
+    // amount (base OTC + absorbed package). The value is derived from two PBP slots, so it is
+    // stamped source:"computed" — the only way a $-bearing value legitimately passes the
+    // literal-dollar hard rule (scanHardRules / walletFunds DOLLAR checks skip computed rows).
+    // The plan is SSBCI by construction of the bound, so the card is SSBCI-gated.
+    if (combinedOtc && compiled.otc) {
+      const otcCard = compiled.otc;
+      const combinedValue = polishValue((combinedOtc.amount + " " + combinedOtc.period).trim());
+      const allowanceRow = otcCard.sections.flatMap(s => s.rows).find(r => r.pbpPath === "otc_items.max_plan_benefit");
+      if (allowanceRow) {
+        allowanceRow.value = combinedValue;
+        allowanceRow.source = "computed";
+        delete allowanceRow.pbpPath;
+      }
+      otcCard.requiresEligibility = "ssbci";
+      if (!otcCard.eligibilityBanner) otcCard.eligibilityBanner = ELIG_DEFAULT;
+      // Task 11 (content, §3c "qualifying takes over"): tell non-qualifiers what they
+      // still get. Authored in 03-content/base/otc.json as a {slot}-only template string
+      // (never a literal $, never a hardcoded benefit name) so it stays plan-accurate;
+      // only rendered here, on the combined/gated card — a plain OTC card (no combinedOtc)
+      // never shows this line. {ssbciBenefitName} is computed per plan (review fix: was
+      // hardcoded as the literal "Food & Produce", wrong for any plan whose SSBCI item
+      // pooled with OTC is named something else) — see deriveSsbciBenefitName().
+      const t = effectiveTemplate("otc") || {};
+      const nonQualifierNote = interp(t.nonQualifierNote, { ssbciBenefitName: deriveSsbciBenefitName(state.plan) });
+      if (nonQualifierNote) otcCard.sections[0].rows.push({ label: "", value: polishValue(nonQualifierNote), source: "computed" });
+      // Task 11 (§3f): surface the reclaimed delivery_mode / disbursement_note the pipeline
+      // already carries on the bound combined_benefits group (e.g. "Debit Card") — additive
+      // only, absent field → no line.
+      const grp = combinedOtc.group || {};
+      if (grp.delivery_mode) otcCard.sections[0].rows.push({ label: "", value: `Loaded on your ${grp.delivery_mode}`, source: "computed" });
+      if (grp.disbursement_note) otcCard.sections[0].rows.push({ label: "", value: grp.disbursement_note, source: "computed" });
+    }
+
     // absorption test (§4a step 3): member card with no substance → rows on wallet card
     walletCards.forEach(w => {
       w.memberCards.forEach(mk => {
@@ -514,6 +694,19 @@
         } else {
           w.crossRef.push(mk);
           if (w.eligibility) { card.requiresEligibility = "ssbci"; if (!card.eligibilityBanner) card.eligibilityBanner = ELIG_DEFAULT; }
+          // Disclosure line (§3a): a surviving wallet member discloses the shared
+          // allowance it draws from — but ONLY when the benefit the card renders is
+          // itself wallet-funded. The distinguishing signal is whether the card renders
+          // its OWN substantive independent dollar cost: a non-suppressed, non-$0 dollar
+          // value that isn't already a pooled "Included in your … allowance" line.
+          // Transportation renders only $0/trip → its real funding is the wallet → discloses.
+          // Hearing renders the $699–$999 prescription-aid copay (its own cost); the wallet
+          // funds a DIFFERENT variant (OTC aids the card doesn't render) → no disclosure.
+          if (walletFunds(card, w)) {
+            const wn = w.name;
+            const line = "Paid from your " + wn + (/allowances?$/i.test(wn) ? "" : " allowance") + " — see that card";
+            card.sections[0].rows.push({ label: "", value: line, source: "computed" });
+          }
         }
       });
     });
@@ -534,7 +727,26 @@
       w.absorbed.forEach(a => a.labels.forEach(l => covered.push(l)));
       (w.group.includes || []).forEach(i => { const n = typeof i === "string" ? i : (i.label || i.name); if (n && !covered.includes(n)) covered.push(n); });
       covered.forEach(l => rows.push({ label: l, value: "Included" }));
-      w.crossRef.forEach(mk => rows.push({ label: (compiled[mk] || { title: mk }).title, value: "See its card — allowance shared" }));
+      // cross-referenced member cards (real substance elsewhere) still name what THIS
+      // wallet covers, in the wallet's own category terms — not the card's title —
+      // so "OTC Hearing Aids (18c)" reads as "OTC Hearing Aids", not "Hearing".
+      const catIdx = catIndex();
+      w.crossRef.forEach(mk => {
+        const names = (w.group.categories || [])
+          .filter(c => codeToCard(parseCode(c), catIdx) === mk)
+          .map(c => c.replace(/\s*\([^()]*\)\s*$/, "").trim())
+          .filter(Boolean);
+        // Dedupe identical labels, then drop generic filing jargon (e.g. repeated
+        // "Other Defined Supplemental Benefits" from several 14c* categories that all
+        // map to one member card) — genericName() is the same jargon detector used
+        // for wallet/package names above. If clean specific labels survive (e.g. "OTC
+        // Hearing Aids" from 18c), use them; otherwise fall back to the card's own
+        // title so the row never reads as a wall of repeated jargon.
+        const cleanNames = [...new Set(names)]
+          .filter(n => !genericName(n) && !/other defined supplemental|supplemental benefits?$/i.test(n));
+        const label = cleanNames.length ? cleanNames.join(", ") : (compiled[mk] || { title: mk }).title;
+        rows.push({ label, value: "Covered by this allowance" });
+      });
       compiled.__wallet_ = compiled.__wallet_ || [];
       compiled.__wallet_.push({
         key: "flexAllowance", title: w.name,
@@ -901,7 +1113,10 @@
           ${card.requiresEligibility && card.eligibilityBanner ? `<div class="elig"><i class="ti ti-circle-check"></i> ${card.eligibilityBanner}</div>` : ""}
           ${card.sections.map(sec => `
             ${card.sections.length > 1 ? `<div class="seclabel">${sec.label}</div>` : ""}
-            ${sec.rows.map(r => `<div class="fr"><span>${r.label}</span><b style="${r.highlight ? "color:" + card.iconColor : ""}">${r.value}</b></div>`).join("")}
+            ${sec.rows.map(r => r.label
+              ? `<div class="fr"><span>${r.label}</span><b style="${r.highlight ? "color:" + card.iconColor : ""}">${r.value}</b></div>`
+              : `<div class="fr" style="display:block;"><b style="display:block;max-width:none;font-weight:500;${r.highlight ? "color:" + card.iconColor : ""}">${r.value}</b></div>`
+            ).join("")}
             ${sec.note ? `<div class="s">${sec.note}</div>` : ""}
             ${sec.chips.length ? `<div class="s" style="margin-top:4px;">${sec.chips.map(c => `<span class="pill">${c}</span>`).join("")}</div>` : ""}
             ${sec.howToUse ? `<div class="howto"><b><i class="ti ti-info-circle"></i> How to use this</b><br>${sec.howToUse}</div>` : ""}

@@ -1692,7 +1692,8 @@ window.WB_CONTENT = {
       {
        "label": "Hearing aids",
        "slot": "hearing_aids.copay",
-       "plusSlot": "hearing_aids.coinsurance"
+       "plusSlot": "hearing_aids.coinsurance",
+       "suffix": "copay per aid (varies by model)"
       },
       {
        "label": "Plan pays up to",
@@ -1882,8 +1883,9 @@ window.WB_CONTENT = {
    "iconBg": "#FEF3C7",
    "iconColor": "#D97706",
    "barColor": "#D97706",
-   "tagline": "{otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period} for health products",
-   "tileSubtitle": "{otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period}",
+   "tagline": "Your over-the-counter allowance for health products",
+   "tileSubtitle": "Over-the-counter allowance",
+   "nonQualifierNote": "If you don't qualify for {ssbciBenefitName}, your OTC allowance is {otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period}.",
    "sections": [
     {
      "icon": "shopping_bag",
