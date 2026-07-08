@@ -1,0 +1,12 @@
+pbp_a_hnumber	pbp_a_plan_identifier	segment_id	pbp_a_ben_cov	pbp_a_plan_type	orgtype	bid_id	version	pbp_d_opt_use_mand_17a_yn	pbp_d_opt_use_mand_17a1_yn	pbp_d_opt_use_mand_17a2_yn	pbp_b17a_bendesc_yn	pbp_b17a_bendesc_ehc	pbp_b17a_bendesc_amo_rex	pbp_b17a_bendesc_lim_rex	pbp_b17a_bendesc_num_rex	pbp_b17a_bendesc_per_rex	pbp_b17a_bendesc_per_rex_d	pbp_b17a_addl_service_other	pbp_b17a_bendesc_amo_other	pbp_b17a_bendesc_lim_other	pbp_b17a_bendesc_num_other	pbp_b17a_bendesc_per_other	pbp_b17a_bendesc_per_other_d	pbp_b17a_maxplan_yn	pbp_b17a_maxplan_in_oon	pbp_b17a_maxplan_amt	pbp_b17a_maxplan_per	pbp_b17a_maxplan_per_d	pbp_b17a_coins_yn	pbp_b17a_coins_ehc	pbp_b17a_coins_pct_rex_min	pbp_b17a_coins_pct_rex_max	pbp_b17a_coins_pct_other_min	pbp_b17a_coins_pct_other_max	pbp_b17a_copay_yn	pbp_b17a_copay_ehc	pbp_b17a_copay_amt_rex_min	pbp_b17a_copay_amt_rex_max	pbp_b17a_copay_amt_other_min	pbp_b17a_copay_amt_other_max	pbp_b17a_ded_nmc_yn	pbp_b17a_ded_nmc_amt	pbp_b17a_auth_yn	pbp_b17a_refer_yn	pbp_d_opt_identifier
+H3924	059	21	1	04	01	H3924_059_21	3				1	01	3	2	1	3								2					2						1	001	20.00	20.00			2		2	2	001
+H3924	059	22	1	04	01	H3924_059_22	3				1	01	3	2	1	3								2					2						1	001	20.00	20.00			2		2	2	001
+H3924	065	0	1	04	01	H3924_065_0	3				1	01	3	2	1	3								2					2						1	001	20.00	20.00			2		2	2	001
+H8764	001	0	1	01	01	H8764_001_0	5				1	01	3	2	1	3								2					2						1	001	10.00	10.00			2		2	2	001
+H8764	002	0	1	02	01	H8764_002_0	5				1	01	3	2	1	3								2					2						1	001	10.00	10.00			2		2	2	001
+H8764	002	0	1	02	01	H8764_002_0	5				1	01	3	2	1	3								2					2						1	001	10.00	10.00			2		2	2	002
+H8764	003	0	1	01	01	H8764_003_0	6				1	01	3	2	1	3								2					2						1	001	10.00	10.00			2		2	2	001
+H8764	003	0	1	01	01	H8764_003_0	6				1	01	3	2	1	3								2					2						1	001	10.00	10.00			2		2	2	002
+H8764	004	0	1	01	01	H8764_004_0	7				1	01	3	2	1	3								2					2						1	001	10.00	10.00			2		2	2	001
+H8764	004	0	1	01	01	H8764_004_0	7				1	01	3	2	1	3								2					2						1	001	10.00	10.00			2		2	2	002
+H8764	801	0	1	02	01	H8764_801_0	3				1	01	3	2	1	3								2					2						1	001	10.00	10.00			2		2	2	001

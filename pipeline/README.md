@@ -10,18 +10,6 @@ This is the **canonical home** of the pipeline as of 2026-07-08. The prior
 copy under `CMS-PBP-Translation-Package-2026/dashboard/` in the CMS Benefit
 Data folder is now an archive (see `MOVED.md` there) — do not edit it.
 
-## Raw CMS input
-
-The raw PBP filings (`pbp_*.txt`, tab-delimited, plus dictionary files) are
-**not committed** to this repo — the set is ~259MB. They live on disk at:
-
-```
-/Users/jennkerfoot/Documents/Claude Code/CMS Benefit Data/CMS-PBP-Translation-Package-2026/pbp-benefits-2026/
-```
-
-They're downloaded from CMS (Plan Benefit Package Landscape files). For the
-file layout / column reference, see `PACKAGE_README` at the old location
-(`CMS-PBP-Translation-Package-2026/`).
 
 ## Regenerating the data
 
@@ -65,3 +53,11 @@ Any time you regenerate `data/`, re-run the Corpus audit tab in the workbench
 UI (`workbench.html`) to confirm the full 8,081-plan build is still clean,
 then commit and push both the `data/` changes and the pipeline change
 together.
+
+## Raw CMS source (in-repo)
+
+The raw 2026 PBP files are committed at `pipeline/pbp-benefits-2026/` (154 files, ~118MB) —
+the repo is fully self-contained: raw source → `preprocess.py` → `data/`.
+One exception: `PlanArea.txt` (158MB raw) exceeds GitHub's 100MB single-file limit, so it
+ships as `PlanArea.txt.gz` (17MB); `preprocess.py` reads the `.gz` transparently.
+Override the raw location with `PBP_RAW_DIR` if you keep a copy elsewhere.

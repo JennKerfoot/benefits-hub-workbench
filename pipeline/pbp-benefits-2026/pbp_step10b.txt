@@ -1,0 +1,47 @@
+pbp_a_hnumber	pbp_a_plan_identifier	segment_id	pbp_a_ben_cov	pbp_a_plan_type	orgtype	bid_id	version	pbp_d_opt_use_mand_10b_yn	pbp_d_opt_use_mand_10b1_yn	pbp_d_opt_use_mand_10b2_yn	pbp_b10b_bendesc_yn	pbp_b10b_bendesc_trn	pbp_b10b_bendesc_amo_pal	pbp_b10b_bendesc_lim_pal	pbp_b10b_bendesc_amt_pal	pbp_b10b_bendesc_per_pal	pbp_b10b_bendesc_per_pal_d	pbp_b10b_bendesc_tt_pal	pbp_b10b_bendesc_tt_pal_d	pbp_b10b_bendesc_amt_pal_days	pbp_b10b_bendesc_mt_pal	pbp_b10b_bendesc_mt_pal_d	pbp_b10b_bendesc_amo_al	pbp_b10b_bendesc_lim_al	pbp_b10b_bendesc_amt_al	pbp_b10b_bendesc_per_al	pbp_b10b_bendesc_per_al_d	pbp_b10b_bendesc_tt_al	pbp_b10b_bendesc_tt_al_d	pbp_b10b_bendesc_amt_al_days	pbp_b10b_bendesc_mt_al	pbp_b10b_bendesc_mt_al_d	pbp_b10b_maxplan_yn	pbp_b10b_maxplan_amt	pbp_b10b_maxplan_per	pbp_b10b_maxplan_per_d	pbp_b10b_maxenr_yn	pbp_b10b_maxenr_amt	pbp_b10b_maxenr_per	pbp_b10b_maxenr_per_d	pbp_b10b_coins_yn	pbp_b10b_coins_pct_min	pbp_b10b_coins_pct_max	pbp_b10b_ded_yn	pbp_b10b_ded_amt	pbp_b10b_copay_yn	pbp_b10b_copay_amt_min	pbp_b10b_copay_amt_max	pbp_b10b_auth_yn	pbp_b10b_refer_yn	pbp_d_opt_identifier
+H0630	013	0	1	01	01	H0630_013_0	5	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	002
+H0630	015	0	1	02	01	H0630_015_0	5	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	002
+H0630	016	0	1	02	01	H0630_016_0	6	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	002
+H0630	017	0	1	01	01	H0630_017_0	5	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	002
+H0630	020	0	1	01	01	H0630_020_0	5	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	002
+H0630	021	0	1	02	01	H0630_021_0	5	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	002
+H0630	023	0	1	02	01	H0630_023_0	5	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	002
+H0630	025	0	1	02	01	H0630_025_0	5	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	002
+H3138	001	0	1	04	01	H3138_001_0	6	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	001
+H3138	002	0	1	04	01	H3138_002_0	6	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	001
+H3138	003	0	1	04	01	H3138_003_0	6	2	2		1	1	3	2	20	3		1			011011												2				2				2			2		1	0.00	0.00	2	2	001
+H3443	005	0	1	01	01	H3443_005_0	11				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H3815	013	0	1	01	01	H3815_013_0	7				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H3815	038	0	1	01	01	H3815_038_0	7				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H3815	040	0	1	01	01	H3815_040_0	7				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H3815	047	0	1	01	01	H3815_047_0	7				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H3815	055	0	1	01	01	H3815_055_0	7				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H3815	056	0	1	01	01	H3815_056_0	7				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H5050	001	0	1	01	01	H5050_001_0	3				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	004	0	1	01	01	H5050_004_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	009	0	1	01	01	H5050_009_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	017	0	1	01	01	H5050_017_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	019	0	1	01	01	H5050_019_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	021	0	1	01	01	H5050_021_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	022	0	1	01	01	H5050_022_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	023	0	1	01	01	H5050_023_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	024	0	1	01	01	H5050_024_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	025	0	1	01	01	H5050_025_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	026	0	1	01	01	H5050_026_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	027	0	1	01	01	H5050_027_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	028	0	1	01	01	H5050_028_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	029	0	1	01	01	H5050_029_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	030	0	1	01	01	H5050_030_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	031	0	1	01	01	H5050_031_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5050	032	0	1	01	01	H5050_032_0	4				1	1	3	2	20	3		2			100000	Means of transportation is determined by member’s physical needs. Vehicles include wheelchair vans, taxis, and other ground transportation as appropriate for the member’s physical needs.											2				2				2			2		1	0.00	0.00	2	2	002
+H5296	006	0	1	01	01	H5296_006_0	10				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H5296	008	0	1	01	01	H5296_008_0	8				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H5472	003	0	1	02	01	H5472_003_0	10				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H5472	010	0	1	02	01	H5472_010_0	7				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001
+H8764	001	0	1	01	01	H8764_001_0	5	2	2		1	1	3	2	10	3		1			011001												2				2				2			2		2			1	2	001
+H8764	002	0	1	02	01	H8764_002_0	5	2	2		1	1	3	2	10	3		1			011001												2				2				2			2		2			1	2	001
+H8764	003	0	1	01	01	H8764_003_0	6	2	2		1	1	3	2	10	3		1			011001												2				2				2			2		2			1	2	002
+H8764	004	0	1	01	01	H8764_004_0	7	2	2		1	1	3	2	10	3		1			011001												2				2				2			2		2			1	2	002
+H8764	801	0	1	02	01	H8764_801_0	3	2	2		1	1	3	2	10	3		1			011001												2				2				2			2		2			1	2	001
+H8832	001	0	1	04	01	H8832_001_0	7				1	1	3	2	12	3		1			000010												2				2				2			2		2			1	2	001
+H9686	008	0	1	01	01	H9686_008_0	10				1	1	3	2	24	3		1			000010												2				2				2			2		2			1	2	001

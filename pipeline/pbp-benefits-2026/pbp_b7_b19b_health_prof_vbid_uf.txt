@@ -1,0 +1,179 @@
+pbp_a_hnumber	pbp_a_plan_identifier	segment_id	pbp_a_ben_cov	pbp_a_plan_type	orgtype	bid_id	version	pbp_vbid_group_id	pbp_b7b_bendesc_yn	pbp_b7b_bendesc_ehc	pbp_b7b_bendesc_amo_rc	pbp_b7b_bendesc_lim_rc	pbp_b7b_bendesc_num_rc	pbp_b7b_bendesc_per_rc	pbp_b7b_bendesc_per_rc_d	pbp_b7b_addl_service_other	pbp_b7b_bendesc_amo_other	pbp_b7b_bendesc_lim_other	pbp_b7b_bendesc_num_other	pbp_b7b_bendesc_per_other	pbp_b7b_bendesc_per_other_d	pbp_b7b_maxplan_yn	pbp_b7b_maxplan_amt	pbp_b7b_maxplan_per	pbp_b7b_maxplan_per_d	pbp_b7b_coins_yn	pbp_b7b_coins_ehc	pbp_b7b_coins_pct_rc_min	pbp_b7b_coins_pct_rc_max	pbp_b7b_coins_pct_other_min	pbp_b7b_coins_pct_other_max	pbp_b7b_copay_yn	pbp_b7b_copay_ehc	pbp_b7b_copay_rc_amt_min	pbp_b7b_copay_rc_amt_max	pbp_b7b_copay_other_amt_min	pbp_b7b_copay_other_amt_max	pbp_b7b_auth_yn	pbp_b7b_refer_yn	pbp_b7f_bendesc_yn	pbp_b7f_bendesc_rf	pbp_b7f_bendesc_amo_rf	pbp_b7f_bendesc_lim_rf	pbp_b7f_bendesc_amt_rf	pbp_b7f_bendesc_per_rf	pbp_b7f_bendesc_per_rf_d	pbp_b7f_maxplan_yn	pbp_b7f_maxplan_amt	pbp_b7f_maxplan_per	pbp_b7f_maxplan_per_d	pbp_b7f_coins_yn	pbp_b7f_coins_ehc	pbp_b7f_coins_pct_rf_min	pbp_b7f_coins_pct_rf_max	pbp_b7f_copay_yn	pbp_b7f_copay_ehc	pbp_b7f_copay_rf_amt_min	pbp_b7f_copay_rf_amt_max	pbp_b7f_auth_yn	pbp_b7f_refer_yn
+H0523	801	0	1	01	01	H0523_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H0523	801	0	1	01	01	H0523_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H0523	805	0	1	01	01	H0523_805_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H0523	805	0	1	01	01	H0523_805_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H0628	801	0	1	01	01	H0628_801_0	2	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H0628	801	0	1	01	01	H0628_801_0	2	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1109	801	0	1	01	01	H1109_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1109	801	0	1	01	01	H1109_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1109	802	0	1	01	01	H1109_802_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1109	802	0	1	01	01	H1109_802_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1206	801	0	1	01	01	H1206_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1206	801	0	1	01	01	H1206_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1304	803	0	1	04	01	H1304_803_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H1304	804	0	1	04	01	H1304_804_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H1304	805	0	1	04	01	H1304_805_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H1304	806	0	1	04	01	H1304_806_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H1608	801	0	1	04	01	H1608_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1608	801	0	1	04	01	H1608_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H1609	801	0	1	01	01	H1609_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1609	801	0	1	01	01	H1609_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1609	807	0	1	01	01	H1609_807_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1609	807	0	1	01	01	H1609_807_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1692	801	0	1	01	01	H1692_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1692	801	0	1	01	01	H1692_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H1969	805	0	1	01	01	H1969_805_0	2	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H1997	013	0	1	01	01	H1997_013_0	5	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H2056	801	0	1	01	01	H2056_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H2056	801	0	1	01	01	H2056_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H2056	802	0	1	01	01	H2056_802_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H2056	802	0	1	01	01	H2056_802_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H2663	805	0	1	01	01	H2663_805_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H2663	805	0	1	01	01	H2663_805_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3146	801	0	1	01	01	H3146_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3146	801	0	1	01	01	H3146_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3152	801	0	1	01	01	H3152_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3152	801	0	1	01	01	H3152_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3152	804	0	1	01	01	H3152_804_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3152	804	0	1	01	01	H3152_804_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3192	801	0	1	01	01	H3192_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3192	801	0	1	01	01	H3192_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3219	801	0	1	04	01	H3219_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H3219	801	0	1	04	01	H3219_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3288	801	0	1	04	01	H3288_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3288	801	0	1	04	01	H3288_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H3312	801	0	1	01	01	H3312_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3312	801	0	1	01	01	H3312_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3312	804	0	1	01	01	H3312_804_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3312	804	0	1	01	01	H3312_804_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3597	801	0	1	01	01	H3597_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3597	801	0	1	01	01	H3597_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3597	802	0	1	01	01	H3597_802_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3597	802	0	1	01	01	H3597_802_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3748	801	0	1	01	01	H3748_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3748	801	0	1	01	01	H3748_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3817	008	1	1	04	01	H3817_008_1	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	008	2	1	04	01	H3817_008_2	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	008	4	1	04	01	H3817_008_4	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	009	1	1	04	01	H3817_009_1	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	009	2	1	04	01	H3817_009_2	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	010	0	1	04	01	H3817_010_0	5	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	011	1	1	04	01	H3817_011_1	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	011	2	1	04	01	H3817_011_2	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	011	3	1	04	01	H3817_011_3	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	801	0	1	04	01	H3817_801_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	802	0	1	04	01	H3817_802_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	803	0	1	04	01	H3817_803_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3817	804	0	1	04	01	H3817_804_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H3928	801	0	1	01	01	H3928_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3928	801	0	1	01	01	H3928_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3928	803	0	1	01	01	H3928_803_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3928	803	0	1	01	01	H3928_803_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3931	801	0	1	01	01	H3931_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3931	801	0	1	01	01	H3931_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3931	804	0	1	01	01	H3931_804_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3931	804	0	1	01	01	H3931_804_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3959	804	0	1	01	01	H3959_804_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H3959	804	0	1	01	01	H3959_804_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4523	801	0	1	01	01	H4523_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4523	801	0	1	01	01	H4523_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4523	802	0	1	01	01	H4523_802_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4523	802	0	1	01	01	H4523_802_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4605	001	0	1	04	01	H4605_001_0	5	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H4605	002	0	1	04	01	H4605_002_0	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H4605	004	0	1	04	01	H4605_004_0	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H4605	801	0	1	04	01	H4605_801_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H4605	802	0	1	04	01	H4605_802_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H4605	803	0	1	04	01	H4605_803_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H4605	804	0	1	04	01	H4605_804_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H4711	801	0	1	01	01	H4711_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4711	801	0	1	01	01	H4711_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4835	801	0	1	01	01	H4835_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4835	801	0	1	01	01	H4835_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4982	801	0	1	01	01	H4982_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H4982	801	0	1	01	01	H4982_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5009	002	0	1	04	01	H5009_002_0	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H5009	011	1	1	04	01	H5009_011_1	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H5009	011	2	1	04	01	H5009_011_2	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H5009	801	0	1	04	01	H5009_801_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H5009	802	0	1	04	01	H5009_802_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H5009	803	0	1	04	01	H5009_803_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H5009	804	0	1	04	01	H5009_804_0	3	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H5302	809	0	1	01	01	H5302_809_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5302	809	0	1	01	01	H5302_809_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5521	801	0	1	04	01	H5521_801_0	2	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5521	801	0	1	04	01	H5521_801_0	2	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5521	805	0	2	04	01	H5521_805_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5521	805	0	2	04	01	H5521_805_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	802	0	1	04	01	H5522_802_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	802	0	1	04	01	H5522_802_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	803	0	1	04	01	H5522_803_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	803	0	1	04	01	H5522_803_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	808	0	2	04	01	H5522_808_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	808	0	2	04	01	H5522_808_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	809	0	2	04	01	H5522_809_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	809	0	2	04	01	H5522_809_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	810	0	1	04	01	H5522_810_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	810	0	1	04	01	H5522_810_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	811	0	1	04	01	H5522_811_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	811	0	1	04	01	H5522_811_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	813	0	2	04	01	H5522_813_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	813	0	2	04	01	H5522_813_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	814	0	2	04	01	H5522_814_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	814	0	2	04	01	H5522_814_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	815	0	1	04	01	H5522_815_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	815	0	1	04	01	H5522_815_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	816	0	1	04	01	H5522_816_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	816	0	1	04	01	H5522_816_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	817	0	2	04	01	H5522_817_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	817	0	2	04	01	H5522_817_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	818	0	2	04	01	H5522_818_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	818	0	2	04	01	H5522_818_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	819	0	1	04	01	H5522_819_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	819	0	1	04	01	H5522_819_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	820	0	1	04	01	H5522_820_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	820	0	1	04	01	H5522_820_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	821	0	1	04	01	H5522_821_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	821	0	1	04	01	H5522_821_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	822	0	2	04	01	H5522_822_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	822	0	2	04	01	H5522_822_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	823	0	1	04	01	H5522_823_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	823	0	1	04	01	H5522_823_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	824	0	2	04	01	H5522_824_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	824	0	2	04	01	H5522_824_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	825	0	2	04	01	H5522_825_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	825	0	2	04	01	H5522_825_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	827	0	2	04	01	H5522_827_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	827	0	2	04	01	H5522_827_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	828	0	1	04	01	H5522_828_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	828	0	1	04	01	H5522_828_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	832	0	1	04	01	H5522_832_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	832	0	1	04	01	H5522_832_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	836	0	1	04	01	H5522_836_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	836	0	1	04	01	H5522_836_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	837	0	1	04	01	H5522_837_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	837	0	1	04	01	H5522_837_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5522	838	0	2	04	01	H5522_838_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H5522	838	0	2	04	01	H5522_838_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5593	801	0	1	01	01	H5593_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5593	801	0	1	01	01	H5593_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5793	801	0	1	01	01	H5793_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5793	801	0	1	01	01	H5793_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5793	802	0	1	01	01	H5793_802_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5793	802	0	1	01	01	H5793_802_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H5826	014	0	1	01	01	H5826_014_0	5	1																																1	1	2	2	8	3		2				2				2				2	2
+H5826	017	0	1	01	01	H5826_017_0	6	1																																1	1	2	2	8	3		2				2				2				2	2
+H6237	009	0	1	01	01	H6237_009_0	6	1																																1	1	2	2	6	3		2				2				1	10	0.00	0.00	2	2
+H7149	801	0	1	01	01	H7149_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H7149	801	0	1	01	01	H7149_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H7301	803	0	1	04	01	H7301_803_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H7301	803	0	1	04	01	H7301_803_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H8332	801	0	1	01	01	H8332_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H8332	801	0	1	01	01	H8332_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H8649	801	0	1	01	01	H8649_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H8649	801	0	1	01	01	H8649_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H8649	803	0	1	01	01	H8649_803_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H8649	803	0	1	01	01	H8649_803_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2
+H9431	801	0	1	04	01	H9431_801_0	1	2	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				1	101	0	20	0	20	2						2	2	1	1	2	1				2				1	10	0	20	2				2	2
+H9431	801	0	1	04	01	H9431_801_0	1	1	1	11	2	1				Non-Medicare (Other Chiropractic Services)	2	1				2				2						2						2	2	1	1	2	1				2				2				2				2	2

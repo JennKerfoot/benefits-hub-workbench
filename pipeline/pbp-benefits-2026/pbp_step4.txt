@@ -1,0 +1,14 @@
+pbp_a_hnumber	pbp_a_plan_identifier	segment_id	pbp_a_ben_cov	pbp_a_plan_type	orgtype	bid_id	version	pbp_d_opt_use_mand_4_yn	pbp_d_opt_use_mand_4c1_yn	pbp_d_opt_use_mand_4c2_yn	pbp_d_opt_use_mand_4c3_yn	pbp_b4c_bendesc_yn	pbp_b4c_bendesc_ehc	pbp_b4c_bendesc_amo_wec	pbp_b4c_bendesc_amo_wuc	pbp_b4c_bendesc_amo_wet	pbp_b4c_wwc_maxplan_yn	pbp_b4c_wwc_maxplan_svcs_yn	pbp_b4c_wwc_maxplan_amt	pbp_b4c_maxenr_yn	pbp_b4c_maxenr_amt	pbp_b4c_maxenr_per	pbp_b4c_maxenr_per_d	pbp_b4c_coins_yn	pbp_b4c_coins_ehc	pbp_b4c_coins_pct_wec_min	pbp_b4c_coins_pct_wec_max	pbp_b4c_coins_wav_wec_yn	pbp_b4c_coins_pct_wuc_min	pbp_b4c_coins_pct_wuc_max	pbp_b4c_coins_wav_wuc_yn	pbp_b4c_coins_pct_wet_min	pbp_b4c_coins_pct_wet_max	pbp_b4c_coins_wav_wet_yn	pbp_b4c_copay_yn	pbp_b4c_copay_ehc	pbp_b4c_copay_amt_wec_min	pbp_b4c_copay_amt_wec_max	pbp_b4c_copay_wav_wec_yn	pbp_b4c_copay_amt_wuc_min	pbp_b4c_copay_amt_wuc_max	pbp_b4c_copay_wav_wuc_yn	pbp_b4c_copay_amt_wet_min	pbp_b4c_copay_amt_wet_max	pbp_b4c_copay_wav_wet_yn	pbp_b4c_ded_yn	pbp_b4c_ded_amt	pbp_d_opt_identifier
+H3443	005	0	1	01	01	H3443_005_0	11	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H3815	013	0	1	01	01	H3815_013_0	7	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H3815	038	0	1	01	01	H3815_038_0	7	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H3815	040	0	1	01	01	H3815_040_0	7	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H3815	047	0	1	01	01	H3815_047_0	7	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H3815	055	0	1	01	01	H3815_055_0	7	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H3815	056	0	1	01	01	H3815_056_0	7	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H5296	006	0	1	01	01	H5296_006_0	10	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H5296	008	0	1	01	01	H5296_008_0	8	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H5472	003	0	1	02	01	H5472_003_0	10	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H5472	010	0	1	02	01	H5472_010_0	7	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001
+H8832	001	0	1	04	01	H8832_001_0	7	2	2	2		1	011	3	3		1	2	15000.00	2				2											2											2		001
+H9686	008	0	1	01	01	H9686_008_0	10	2	2	2		1	011	3	3		1	2	75000.00	2				2											2											2		001

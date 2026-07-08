@@ -33,14 +33,12 @@ import pandas as pd
 #   PBP_OUT_DIR - where generated data/ (plans/, plans_summary.json, etc.) goes
 #
 # Defaults:
-#   raw = the CMS package's raw-data folder on disk (not part of this repo)
+#   raw = this repo's own pipeline/pbp-benefits-2026/ (committed in-repo;
+#         PlanArea ships gzipped to stay under GitHub's 100MB file limit)
 #   out = this repo's own data/ dir, resolved relative to this script so it
 #         works regardless of the caller's current working directory
 # ---------------------------------------------------------------------------
-_DEFAULT_RAW_DIR = (
-    "/Users/jennkerfoot/Documents/Claude Code/CMS Benefit Data/"
-    "CMS-PBP-Translation-Package-2026/pbp-benefits-2026"
-)
+_DEFAULT_RAW_DIR = str(Path(__file__).resolve().parent / "pbp-benefits-2026")
 BASE_DIR = Path(os.environ.get("PBP_RAW_DIR", _DEFAULT_RAW_DIR)).resolve()
 OUT_DIR = Path(os.environ.get("PBP_OUT_DIR", str(Path(__file__).resolve().parent.parent / "data"))).resolve()
 PLANS_DIR = OUT_DIR / "plans"
@@ -1939,8 +1937,12 @@ def process_geography():
     geo_index = defaultdict(lambda: defaultdict(set))
     states_counties = defaultdict(set)
 
-    # Process PlanArea.txt in chunks (large file)
+    # Process PlanArea.txt in chunks (large file). The in-repo copy ships as
+    # PlanArea.txt.gz (the raw 158MB file exceeds GitHub's 100MB limit);
+    # pandas decompresses .gz transparently, so prefer .txt, fall back to .gz.
     path = BASE_DIR / "PlanArea.txt"
+    if not path.exists() and (BASE_DIR / "PlanArea.txt.gz").exists():
+        path = BASE_DIR / "PlanArea.txt.gz"
     if path.exists():
         chunk_count = 0
         for chunk in pd.read_csv(path, sep="\t", dtype=str, na_values=[""],

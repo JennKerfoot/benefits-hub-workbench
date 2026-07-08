@@ -1,0 +1,19 @@
+pbp_a_hnumber	pbp_a_plan_identifier	segment_id	pbp_a_ben_cov	pbp_a_plan_type	orgtype	bid_id	version	pbp_d_opt_use_mand_7b_yn	pbp_d_opt_use_mand_7b1_yn	pbp_d_opt_use_mand_7b2_yn	pbp_b7b_bendesc_yn	pbp_b7b_bendesc_ehc	pbp_b7b_bendesc_amo_rc	pbp_b7b_bendesc_lim_rc	pbp_b7b_bendesc_num_rc	pbp_b7b_bendesc_per_rc	pbp_b7b_bendesc_per_rc_d	pbp_b7b_addl_service_other	pbp_b7b_bendesc_amo_other	pbp_b7b_bendesc_lim_other	pbp_b7b_bendesc_num_other	pbp_b7b_bendesc_per_other	pbp_b7b_bendesc_per_other_d	pbp_b7b_maxplan_yn	pbp_b7b_maxplan_amt	pbp_b7b_maxplan_per	pbp_b7b_maxplan_per_d	pbp_b7b_coins_yn	pbp_b7b_coins_ehc	pbp_b7b_coins_pct_rc_min	pbp_b7b_coins_pct_rc_max	pbp_b7b_coins_pct_other_min	pbp_b7b_coins_pct_other_max	pbp_b7b_copay_yn	pbp_b7b_copay_ehc	pbp_b7b_copay_rc_amt_min	pbp_b7b_copay_rc_amt_max	pbp_b7b_copay_other_amt_min	pbp_b7b_copay_other_amt_max	pbp_b7b_auth_yn	pbp_b7b_refer_yn	pbp_d_opt_identifier
+H2462	028	0	1	18	06	H2462_028_0	8				1	01	3	1										2				2						2						2	2	001
+H5050	001	0	1	01	01	H5050_001_0	3	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	004	0	1	01	01	H5050_004_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	009	0	1	01	01	H5050_009_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	017	0	1	01	01	H5050_017_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	019	0	1	01	01	H5050_019_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	021	0	1	01	01	H5050_021_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	022	0	1	01	01	H5050_022_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	023	0	1	01	01	H5050_023_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	024	0	1	01	01	H5050_024_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	025	0	1	01	01	H5050_025_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	026	0	1	01	01	H5050_026_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	027	0	1	01	01	H5050_027_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	028	0	1	01	01	H5050_028_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	029	0	1	01	01	H5050_029_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	030	0	1	01	01	H5050_030_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	031	0	1	01	01	H5050_031_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
+H5050	032	0	1	01	01	H5050_032_0	4	2			1	01	3	2	15	3								2				2						1	001	15.00	15.00			2	2	002
