@@ -371,7 +371,15 @@
           w.codes.some(wc => wc.startsWith("19b")) ||
           codes.some(code => w.codes.some(wc => code.startsWith(wc) || wc.startsWith(code))));
         const genuineSsbci = planIsSsbci() && isGenuineSsbci(codes);
-        if (genuineSsbci) passWallets.forEach(w => { w.eligibility = true; });
+        // A passing genuine-SSBCI package may gate a wallet's card-level chip ONLY when
+        // the wallet's OWN pooled categories are exclusively SSBCI-family (13i, ignoring
+        // the 19b pass-through marker). If the wallet also pools a universal/non-SSBCI
+        // category (13b OTC, 18c OTC aids, dental codes, etc.), the wallet is a MIXED
+        // pool — chipping it would over-imply the universal portion is condition-gated
+        // too. Leave w.eligibility false so the mixedSsbci note path (below, in the
+        // wallet-card builder) fires instead. Fully-SSBCI wallets are unaffected.
+        const walletIsFullySsbci = w => (w.codes || []).every(wc => wc.startsWith("19b") || /^13i/.test(wc));
+        if (genuineSsbci) passWallets.forEach(w => { if (walletIsFullySsbci(w)) w.eligibility = true; });
         const nameTarget = passWallets.find(w => genericName(w.group.name));
         if (nameTarget && !genericName(pkg.name)) nameTarget.pkgNames.push(pkg.name);
         if (genuineSsbci) codes.forEach(code => { const card = codeToCard(code, idx); if (card) eligStamps.add(card); });

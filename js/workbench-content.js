@@ -1390,6 +1390,11 @@ window.WB_CONTENT = {
        "plusSlot": "chiropractic.coinsurance"
       },
       {
+       "label": "Visits included",
+       "slot": "chiropractic.visit_limit",
+       "suffix": " {chiropractic.visit_limit_period}"
+      },
+      {
        "label": "Referral required",
        "slot": "chiropractic.referral_required"
       },
@@ -1432,6 +1437,12 @@ window.WB_CONTENT = {
        "label": "{item.label}",
        "slot": "item.copay",
        "plusSlot": "item.coinsurance"
+      },
+      {
+       "forEach": "dental_preventive.sub_types",
+       "label": "{item.label} included",
+       "slot": "item.visit_limit",
+       "suffix": " {item.visit_limit_period}"
       },
       {
        "label": "Preventive dental maximum",
@@ -1701,6 +1712,11 @@ window.WB_CONTENT = {
        "plusSlot": "hearing_exams.coinsurance"
       },
       {
+       "label": "Hearing aid fittings included",
+       "slot": "hearing_exams.fitting_visit_limit",
+       "suffix": " {hearing_exams.fitting_visit_limit_period}"
+      },
+      {
        "label": "Hearing aids",
        "slot": "hearing_aids.copay",
        "plusSlot": "hearing_aids.coinsurance",
@@ -1713,9 +1729,19 @@ window.WB_CONTENT = {
        "highlight": true
       },
       {
+       "label": "Hearing aids included",
+       "slot": "hearing_aids.visit_limit",
+       "suffix": " {hearing_aids.visit_limit_period}"
+      },
+      {
        "label": "Over-the-counter hearing aids",
        "slot": "otc_hearing_aids.max_plan_benefit",
        "prefix": "Up to "
+      },
+      {
+       "label": "OTC hearing aids included",
+       "slot": "otc_hearing_aids.visit_limit",
+       "suffix": " {otc_hearing_aids.visit_limit_period}"
       }
      ]
     }
@@ -1907,6 +1933,10 @@ window.WB_CONTENT = {
        "slot": "otc_items.max_plan_benefit",
        "suffix": " {otc_items.max_plan_benefit_period}",
        "highlight": true
+      },
+      {
+       "label": "How to use it",
+       "slot": "otc_items.otc_delivery_mode"
       }
      ],
      "chips": [
@@ -2114,6 +2144,12 @@ window.WB_CONTENT = {
        "label": "{item.label}",
        "slot": "item.copay",
        "default": "Covered"
+      },
+      {
+       "forEach": "additional_preventive.sub_types",
+       "label": "{item.label} included",
+       "slot": "item.visit_limit",
+       "suffix": " {item.max_plan_benefit_period}"
       }
      ]
     }
@@ -2303,8 +2339,18 @@ window.WB_CONTENT = {
        "slot": "eyewear.glasses_copay"
       },
       {
+       "label": "Glasses included",
+       "slot": "eyewear.glasses_quantity_limit",
+       "suffix": " {eyewear.glasses_quantity_limit_period}"
+      },
+      {
        "label": "Contacts copay",
        "slot": "eyewear.contacts_copay"
+      },
+      {
+       "label": "Contacts included",
+       "slot": "eyewear.contacts_quantity_limit",
+       "suffix": " {eyewear.contacts_quantity_limit_period}"
       }
      ]
     }
