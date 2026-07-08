@@ -34,9 +34,20 @@
   .btn { background:var(--purple); color:#fff; border:none; border-radius:999px; padding:9px 20px; font:inherit; font-weight:600; cursor:pointer; font-size:0.83rem; }
   .btn.secondary { background:#fff; color:var(--purple); border:2px solid var(--purple); }
   .btnrow { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-  .result { display:block; width:100%; text-align:left; border:1px solid var(--line); background:#fff; border-radius:8px; padding:8px 10px; margin-top:6px; cursor:pointer; font:inherit; font-size:0.82rem; }
+  .result { display:block; width:100%; text-align:left; border:1px solid var(--line); background:#fff; border-radius:8px; padding:8px 10px; margin-top:6px; cursor:pointer; font:inherit; font-size:0.82rem; position:relative; }
   .result:hover { border-color:var(--purple); background:var(--magenta-l); }
   .result span { color:var(--muted); font-size:0.76rem; }
+  /* Phase-1 carrier-pack tile tint — a plain green class instead of an inline style so
+     the §C2 tri-state classes below (equal specificity, declared later) can win the
+     cascade on tiles that have BOTH a carrier pack and a needs-authoring/not-offered state. */
+  .result.has-pack { background:var(--green-l); border-color:var(--green); }
+  /* §C2 authoring-board tri-state tile flag — reuses the board's existing status-tile
+     idiom (colored border + tinted background, same as the Phase-1 "hasCarrierPack"
+     treatment above) rather than inventing a new visual language. Declared AFTER
+     .has-pack so these rules win when a carrier-pack tile also needs a state treatment. */
+  .result.tile-needs-authoring { border-color:var(--orange); background:var(--orange-l); }
+  .result.tile-nudge::after { content:""; position:absolute; top:6px; right:6px; width:7px; height:7px; border-radius:50%; background:var(--teal); }
+  .result.tile-not-offered { opacity:0.45; }
   #planinfo, #datasource { font-size:0.81rem; line-height:1.6; background:var(--magenta-l); border-radius:8px; padding:9px 12px; margin-top:8px; }
   .doc { font-size:0.81rem; margin-top:8px; line-height:1.5; }
   .ok { color:var(--green); font-weight:600; } .err { color:var(--orange); font-weight:600; }

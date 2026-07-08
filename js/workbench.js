@@ -7,6 +7,14 @@
   const C = window.WB_CONTENT;
   const DOLLAR = /\$\s?\d/;
   const COINS_PCT = /^\d+(\.\d+)?%(\s*-\s*\d+(\.\d+)?%)?$/; // a bare coinsurance percentage
+  // §4a wallet absorption (§B4 QA fix): when a member card has no substance of its own,
+  // its row LABELS stand in for the "benefits" it covers on the wallet card. But not every
+  // row is a benefit — prior-auth flags, plan-pays/scope facts, and cost-share facts are
+  // administrative, not pooled benefits, and must never leak onto the wallet as their own
+  // "Included" line. Matched primarily by the field's own slot/pbpPath key (robust across
+  // authoring); the label regex is a fallback for computed/no-pbpPath rows.
+  const NON_BENEFIT_SLOT = /prior_auth_required|max_plan_benefit_scope|copay|coinsurance|referral_required/i;
+  const NON_BENEFIT_LABEL = /^(prior authorization|plan pays up to|your cost|referral( required)?|specialist referral required|cost-sharing reduced on)\b/i;
   // Provenance / QA / citation language that must NEVER reach a member-facing field
   // (rule 5). It belongs only in the internal "verification" field (never rendered,
   // never scanned here). Generalizes the SCAN-fitness one-off so no author can leak it.
@@ -382,7 +390,7 @@
     gatedKeys.forEach(key => {
       const t = effectiveTemplate(key);
       if (!t) return;
-      const fields = [["title", t.title], ["tagline", t.tagline], ["tileSubtitle", t.tileSubtitle], ["note", t.note], ["nonQualifierNote", t.nonQualifierNote], ["cta.label", t.cta && t.cta.label], ["eligibilityBanner", t.eligibilityBanner]];
+      const fields = [["title", t.title], ["tagline", t.tagline], ["tileSubtitle", t.tileSubtitle], ["note", t.note], ["combinedConditionalNote", t.combinedConditionalNote], ["cta.label", t.cta && t.cta.label], ["eligibilityBanner", t.eligibilityBanner]];
       // per-SSBCI-item member-facing content (itemContent renders as section how-to/CTA)
       Object.entries(t.itemContent || {}).forEach(([ik, ic]) => {
         fields.push([`itemContent.${ik}.howToUse`, ic.howToUse], [`itemContent.${ik}.note`, ic.note], [`itemContent.${ik}.cta.label`, ic.cta && ic.cta.label]);
@@ -465,6 +473,33 @@
     // SSBCI items claimed by a wallet's includes[] (the pipeline's period-matched
     // linkage) render on THAT wallet card, not here — item-level absorption
     if (cardKey === "socialSupports" && ctx && ctx.label && opts.claimed && opts.claimed.has(ctx.label)) return [];
+    // §B5: vbidPackages package cards. Two CMS filing artifacts leak raw to members
+    // if not caught here — both are per-package (ctx), not per-plan, so they must be
+    // gated at the row level, not by dropping the whole card:
+    //  (a) aggregate_allowance is sometimes filed as a literal "$0 (Every month)" —
+    //      a $0 aggregate is a filing artifact, not a real benefit (H8298 "Package 1"
+    //      files $0/month while the real SSBCI money sits in the 13b+19b3 combined
+    //      group elsewhere — see hasStandaloneSsbciHome() above). Reuse the same
+    //      numeric-parse guard (parseDollar), never a "$0" string match, so a real
+    //      "$0.50 (Every month)" is never wrongly caught.
+    //  (b) eligibility is sometimes filed as a bare CMS condition code ("011", "001")
+    //      instead of free text (compare H0351's readable COPD description). No
+    //      condition-code decode map exists anywhere in the compiler, content, or
+    //      CMS source data (searched) — so per COMPILER_SPEC, a bare numeric code is
+    //      suppressed rather than shown raw or guessed at.
+    if (cardKey === "vbidPackages" && f.slot === "package.aggregate_allowance") {
+      if (!(parseDollar(value) > 0)) { drops.push({ label, reason: "vbidPackages $0/absent aggregate_allowance suppressed (§B5)" }); return []; }
+    }
+    if (cardKey === "vbidPackages" && f.slot === "package.eligibility") {
+      if (value != null && /^\s*\d{2,}\s*$/.test(String(value))) { drops.push({ label, reason: `vbidPackages raw condition code "${value}" suppressed — no decode map (§B5)` }); return []; }
+    }
+    //  (c) reduced_benefits is likewise filed as a bare CMS reduction-type code ("01",
+    //      "11") instead of free text (H0351_038_0 "Package 1" files "01" for "Cost-
+    //      sharing reduced on"). Same reasoning as (b): no decode map exists, so the
+    //      raw code is suppressed rather than shown raw or guessed at.
+    if (cardKey === "vbidPackages" && f.slot === "package.reduced_benefits") {
+      if (value != null && /^\s*\d{2,}\s*$/.test(String(value))) { drops.push({ label, reason: `vbidPackages raw reduced-benefits code "${value}" suppressed — no decode map (§B5)` }); return []; }
+    }
     // pooled / wallet suppression (§4a step 3 + spec §4b SSBCI note) — a member card is
     // suppressed against its OWNING wallet, whichever of the plan's wallets that is
     const owning = (opts.wallets || []).find(w => w.memberCards.has(cardKey));
@@ -606,6 +641,16 @@
       wp.partial = wp.partial.filter(p => p.pkg !== combinedOtc.pkg);
       if (wp.partial.length !== before)
         report.wallet.push({ wallet: "(computed combined OTC allowance) " + combinedOtc.amount, renders_on: "otc", combined_from: ["otc_items", combinedOtc.pkg.name], vbid_packages_merged: [combinedOtc.pkg.name] });
+      // §B2/§B3 (product QA fix): the OTC card must NOT carry the card-level SSBCI chip —
+      // the base allowance is universal, so a non-qualifying member must never read a
+      // chipped card and conclude they get nothing. The package that feeds combinedOtc IS
+      // genuinely SSBCI (isGenuineSsbci gated it into eligStamps during wallet/package
+      // planning above, via codeToCard("13b") === "otc"), but here that fact is rendered as
+      // an inline conditional note + a named Food & Produce line item instead — so the
+      // earlier eligStamps.add("otc") stamp is withdrawn for this card ONLY. This never
+      // touches other cards' stamps (e.g. socialSupports keeps its own genuine SSBCI chip)
+      // or the universal model_test.ssbci gate used elsewhere.
+      eligStamps.delete("otc");
     }
 
     // 4. compile cards in taxonomy order
@@ -651,28 +696,35 @@
     // amount (base OTC + absorbed package). The value is derived from two PBP slots, so it is
     // stamped source:"computed" — the only way a $-bearing value legitimately passes the
     // literal-dollar hard rule (scanHardRules / walletFunds DOLLAR checks skip computed rows).
-    // The plan is SSBCI by construction of the bound, so the card is SSBCI-gated.
+    // §B2/§B3 (product QA fix, supersedes the prior "qualifying takes over" presentation):
+    // the base OTC allowance is UNIVERSAL — every member gets it, qualifying or not — so
+    // the card must headline the base amount, never stamp a card-level SSBCI chip (a chip
+    // wrongly implies a non-qualifying member gets nothing), and instead (a) leave the base
+    // allowance row showing the base PBP value untouched, (b) add a computed Food & Produce
+    // line item naming the SSBCI benefit that combines in, and (c) describe the combined
+    // up-to-amount as an inline conditional note. The §3c bound computation above (whether
+    // combinedOtc fires at all) is unchanged — only this card's presentation of it is.
     if (combinedOtc && compiled.otc) {
       const otcCard = compiled.otc;
-      const combinedValue = polishValue((combinedOtc.amount + " " + combinedOtc.period).trim());
-      const allowanceRow = otcCard.sections.flatMap(s => s.rows).find(r => r.pbpPath === "otc_items.max_plan_benefit");
-      if (allowanceRow) {
-        allowanceRow.value = combinedValue;
-        allowanceRow.source = "computed";
-        delete allowanceRow.pbpPath;
-      }
-      otcCard.requiresEligibility = "ssbci";
-      if (!otcCard.eligibilityBanner) otcCard.eligibilityBanner = ELIG_DEFAULT;
-      // Task 11 (content, §3c "qualifying takes over"): tell non-qualifiers what they
-      // still get. Authored in 03-content/base/otc.json as a {slot}-only template string
-      // (never a literal $, never a hardcoded benefit name) so it stays plan-accurate;
-      // only rendered here, on the combined/gated card — a plain OTC card (no combinedOtc)
-      // never shows this line. {ssbciBenefitName} is computed per plan (review fix: was
-      // hardcoded as the literal "Food & Produce", wrong for any plan whose SSBCI item
-      // pooled with OTC is named something else) — see deriveSsbciBenefitName().
+      const ssbciBenefitName = deriveSsbciBenefitName(state.plan);
+      // (a) base allowance row stays as-is — its slot value ($55, from
+      // otc_items.max_plan_benefit) is the universal amount every member gets, so it is
+      // NEVER overwritten with the combined ($80) figure.
+      // (b) Food & Produce (or whatever the plan's SSBCI item is named) as its own line
+      // item — value phrased like the codebase's existing pooled-value convention
+      // ("Included in your ... allowance" / bare "Included").
+      otcCard.sections[0].rows.push({ label: ssbciBenefitName, value: "Included", source: "computed" });
+      // (c) inline conditional: template-driven from 03-content/base/otc.json, slot tokens
+      // only — {ssbciBenefitName} names the qualifying benefit, {combinedAmount}/
+      // {combinedPeriod} are the computed combine-to figures ($80 every 3 months), never a
+      // literal dollar amount authored in content.
       const t = effectiveTemplate("otc") || {};
-      const nonQualifierNote = interp(t.nonQualifierNote, { ssbciBenefitName: deriveSsbciBenefitName(state.plan) });
-      if (nonQualifierNote) otcCard.sections[0].rows.push({ label: "", value: polishValue(nonQualifierNote), source: "computed" });
+      const combinedConditionalNote = interp(t.combinedConditionalNote, {
+        ssbciBenefitName,
+        combinedAmount: combinedOtc.amount,
+        combinedPeriod: combinedOtc.period,
+      });
+      if (combinedConditionalNote) otcCard.sections[0].rows.push({ label: "", value: polishValue(combinedConditionalNote), source: "computed" });
       // Task 11 (§3f): surface the reclaimed delivery_mode / disbursement_note the pipeline
       // already carries on the bound combined_benefits group (e.g. "Debit Card") — additive
       // only, absent field → no line.
@@ -688,7 +740,13 @@
         if (!card) return;
         const substance = card.sections.some(s => s.rows.some(r => !r.suppressed && (/\d/.test(r.value) || (r.value.length > 2 && !/^(Included|Covered)/i.test(r.value)))));
         if (!substance) {
-          const labels = card.sections.flatMap(s => s.rows.map(r => r.label)).filter(Boolean);
+          // §B4: only genuine pooled-benefit rows may stand in as wallet line items —
+          // drop already-suppressed rows (e.g. a pooled dollar row rewritten to "Included
+          // in your ... allowance") and non-benefit administrative fields (prior-auth,
+          // plan-pays/scope, cost-share flags), matched by slot key first, label as fallback.
+          const labels = card.sections.flatMap(s => s.rows
+            .filter(r => !r.suppressed && !NON_BENEFIT_SLOT.test(r.pbpPath || "") && !NON_BENEFIT_LABEL.test(r.label || ""))
+            .map(r => r.label)).filter(Boolean);
           w.absorbed.push({ key: mk, title: card.title, labels: labels.length > 1 ? labels : [card.title] });
           delete compiled[mk];
         } else {
@@ -705,6 +763,30 @@
           if (walletFunds(card, w)) {
             const wn = w.name;
             const line = "Paid from your " + wn + (/allowances?$/i.test(wn) ? "" : " allowance") + " — see that card";
+            card.sections[0].rows.push({ label: "", value: line, source: "computed" });
+          } else if (mk === "hearing" && (w.codes || []).some(c => c.startsWith("18c"))) {
+            // §B1/R27: hearing keeps its own prescription-aid copay (walletFunds()
+            // correctly excludes the generic disclosure — that copay IS the card's own
+            // substantive cost), but when this wallet ALSO pools OTC hearing aids (18c),
+            // every wallet member must reference its wallet on its own card. Scope the
+            // label to the OTC aids specifically so it never reads as if the $699–$999
+            // prescription copay itself were wallet-funded.
+            const wn = w.name;
+            const line = "Paid from your " + wn + (/allowances?$/i.test(wn) ? "" : " allowance") + " — see that card";
+            card.sections[0].rows.push({ label: "OTC hearing aids", value: line, source: "computed" });
+          } else {
+            // §B1/R27 corpus-gate fix: a cross-referenced member that carries its OWN
+            // substantive cost (walletFunds() correctly declined the "Paid from" line —
+            // that wording would misstate a member that pays its own copays) still sits
+            // inside a shared CAP/pool its services draw against (e.g. dental copays that
+            // count against a combined "Dental Maximum Amount"). Every wallet member must
+            // reference its wallet on its own card (§B1/R27), so give it a distinct,
+            // accurate wording: the member's costs count toward a shared maximum, they are
+            // not paid BY the wallet. Same wallet-name-derivation idiom as the two
+            // disclosure lines above (w.name + allowance-suffix), so the phrasing is
+            // consistent across all three variants.
+            const wn = w.name;
+            const line = "Counts toward your " + wn + (/allowances?$/i.test(wn) ? "" : " allowance") + " — see that card";
             card.sections[0].rows.push({ label: "", value: line, source: "computed" });
           }
         }
@@ -897,6 +979,55 @@
     return out;
   }
 
+  // §C2: authoring-board tile state. Amber only for genuine detail-less drops —
+  // NOT for cards dropped because absorbed/gated/merged (they render elsewhere).
+  const DETAILLESS_DROP = /no sections survived|detail-?less|stub/i;
+  const ABSORBED_DROP = /merged into|absorbed|gated off|cross-?referenced|packages merged/i;
+  function tileState(benefitKey, { offered, dropReason, onEocList }) {
+    if (!offered) return "not-offered";
+    if (dropReason && DETAILLESS_DROP.test(dropReason) && !ABSORBED_DROP.test(dropReason)) return "needs-authoring";
+    if (onEocList) return "nudge";
+    return "ok";
+  }
+
+  // §C2 review fix: the compiler's gate (cards_gated_off) only tells us whether a benefit
+  // key was ELIGIBLE to compile — it says nothing about whether compilation actually
+  // produced output anywhere. A benefit can be gated ON (e.g. flexAllowance whenever
+  // benefits.combined_benefits exists) yet the wallet consolidator builds NO wallet card
+  // for it (a link-only group with no pooled dollar) — that key then shows up in NONE of
+  // cards_rendered / cards_gated_off / cards_dropped, and the naive
+  // "offered = !gated_off.includes(key)" derivation wrongly calls it "ok". Likewise a
+  // member card absorbed into a wallet (its rows become wallet line items) is silently
+  // deleted from the compiled set with no cards_dropped entry — it must NOT read as
+  // not-offered, because it renders on the wallet card.
+  //
+  // This function is the single source of truth for renderBoard()'s per-tile inputs so
+  // both cases are handled precisely and can be pinned by headless tests against real
+  // compiled reports (no DOM required).
+  function deriveTileInputs(key, report, eocSet) {
+    const gatedOff = (report.cards_gated_off || []).includes(key);
+    const dropped = (report.cards_dropped || []).find(d => d.card === key);
+    const rendered = (report.cards_rendered || []).some(c => c === key || c.indexOf(key + " (") === 0);
+    // "has a home elsewhere": a card absorbed into a wallet, cross-referenced as a wallet
+    // member, or eligibility-stamped by a link-only group — its content lives on another
+    // surface (the wallet card, or nowhere pooled at all for link-only), so it must not be
+    // dimmed even though it produced no card of its own.
+    const wallets = report.wallet_consolidations || report.wallet || [];
+    const hasHomeElsewhere = wallets.some(w =>
+      (w.cards_absorbed || []).includes(key) ||
+      (w.cards_cross_referenced || []).includes(key) ||
+      (w.eligibility_stamped_on || []).includes(key)
+    );
+    let offered = !gatedOff;
+    if (offered && !rendered && !dropped && !hasHomeElsewhere) {
+      // gated on, but produced no output anywhere and has no home elsewhere — e.g.
+      // flexAllowance for an all-dollarless (link-only) combined_benefits group, where the
+      // consolidator never builds a wallet card at all.
+      offered = false;
+    }
+    return { offered, dropReason: dropped ? dropped.reason : null, onEocList: eocSet.has(key) };
+  }
+
   /* ---------- §4b admin-tool helpers ---------- */
   function adminToPipeline(id) {
     const m = /^([HRES]\d{4})(\d{3})(\d{3})$/.exec(String(id || "").trim());
@@ -1035,10 +1166,34 @@
     if (!el) return;
     if (!state.carrier) { el.innerHTML = '<p class="hint">Pick a plan to see its carrier.</p>'; return; }
     const rows = window.WBAuthor.boardStatus(C, state.carrier);
-    el.innerHTML = rows.map(r => `
-      <button class="result" data-key="${esc(r.key)}" style="text-align:center;${r.hasCarrierPack ? 'background:var(--green-l);border-color:var(--green);' : ''}">
+    // §C2: the currently-compiled plan's report tells us, per card key, whether the
+    // compiler's own gating+build pipeline ever produced output for it (offered) and —
+    // if offered but dropped — why. deriveTileInputs() is the single source of truth for
+    // this derivation (see its doc comment for why a naive gated-off check isn't enough).
+    const report = (state.lastCompile && state.lastCompile.report) || null;
+    const eocCommon = new Set((C.eocCommon && C.eocCommon.benefits) || []);
+    el.innerHTML = rows.map(r => {
+      let stateClass = "", titleAttr = "";
+      if (report) {
+        const { offered, dropReason, onEocList } = deriveTileInputs(r.key, report, eocCommon);
+        const ts = tileState(r.key, { offered, dropReason, onEocList });
+        stateClass = " tile-" + ts;
+        const tip = ts === "needs-authoring" ? "Needs authoring — " + (dropReason || "no detail survived for this plan")
+          : ts === "nudge" ? "Commonly needs EOC facts — check the EOC/SB for this benefit"
+          : ts === "not-offered" ? "Not offered on this plan"
+          : "";
+        if (tip) titleAttr = ` title="${esc(tip)}"`;
+      }
+      // Phase-1 carrier-pack tint is a class (.has-pack), not an inline style, so the §C2
+      // state classes above — declared later in workbench.html with equal specificity —
+      // still win the cascade on a tile that has both a pack and a needs-authoring/
+      // not-offered state.
+      const packClass = r.hasCarrierPack ? " has-pack" : "";
+      return `
+      <button class="result${packClass}${stateClass}" data-key="${esc(r.key)}"${titleAttr} style="text-align:center;">
         <b>${esc(r.key)}</b><br><span>${r.hasCarrierPack ? 'pack ✓' : 'base only'}${r.overrides ? ' · ' + r.overrides + ' override' + (r.overrides > 1 ? 's' : '') : ''}</span>
-      </button>`).join("");
+      </button>`;
+    }).join("");
     el.querySelectorAll(".result").forEach(b => b.addEventListener("click", () => WB.openCardForm(b.dataset.key)));
   }
   function currentPackFor(key) {
@@ -1057,6 +1212,9 @@
     const key = state.authKey, A = window.WBAuthor;
     const inherited = A.effectiveForm(C, state.authScope, key);
     const form = A.packToForm(currentPackFor(key));
+    // state.authFacts holds the in-progress EOC-fact rows for the open form (survives
+    // across re-renders triggered by add/remove, distinct from the saved pack).
+    if (!state.authFacts || state.authFactsKey !== key) { state.authFacts = form.eocFacts.slice(); state.authFactsKey = key; }
     const field = f => {
       const val = form[f.key] || "", ph = inherited[f.key] ? `inherited: ${inherited[f.key]}` : "";
       const hint = f.hint ? `<span class="hint" style="font-size:0.72rem">${f.hint}</span>` : "";
@@ -1064,6 +1222,13 @@
       if (f.type === "select") return `<label class="doc"><b>${f.label}</b><br><select data-f="${f.key}"><option value=""></option>${f.options.map(o => `<option${o === val ? " selected" : ""}>${o}</option>`).join("")}</select></label>`;
       return `<label class="doc"><b>${f.label}</b> ${hint}<br><input type="text" data-f="${f.key}" value="${esc(val)}" placeholder="${esc(ph)}"></label>`;
     };
+    const factRow = (f, i) => `
+      <div class="doc" data-fact-row="${i}" style="border:1px solid var(--border);border-radius:6px;padding:8px;margin-bottom:6px;">
+        <label class="doc"><b>Label</b><br><input type="text" data-ff="label" data-fi="${i}" value="${esc(f.label || "")}" placeholder="e.g. Meals"></label>
+        <label class="doc"><b>Value</b><br><input type="text" data-ff="value" data-fi="${i}" value="${esc(f.value || "")}" placeholder="e.g. 14 meals after a hospital stay, up to 4×/year"></label>
+        <label class="doc"><b>Citation</b> <span class="hint" style="font-size:0.72rem">required — e.g. SB p.12</span><br><input type="text" data-ff="citation" data-fi="${i}" value="${esc(f.citation || "")}" placeholder="SB/EOC page or section"></label>
+        <div class="btnrow" style="margin-top:4px;"><button type="button" class="btn secondary" style="padding:3px 10px" data-remove-fact="${i}"><i class="ti ti-trash"></i> Remove</button></div>
+      </div>`;
     $("authorform").innerHTML = `
       <div class="card" style="margin-top:10px;">
         <h2><i class="ti ti-edit"></i> ${esc(key)}</h2>
@@ -1073,13 +1238,30 @@
           `<button class="btn ${state.authScope.level === l ? "" : "secondary"}" style="padding:5px 12px" onclick="WB.setScope('${l}')">${l === "carrier" ? "All " + esc(state.carrier) : l === "contract" ? "Contract " + esc((state.planId || "").split("_")[0]) : "This plan " + esc(state.planId || "")}</button>`
         ).join("") + `</div>` +
         `${window.WBAuthor.FORM_FIELDS.map(field).join("")}
+        <h3 style="margin-top:14px;">Good to know (EOC facts)</h3>
+        <div id="factrows">${state.authFacts.map(factRow).join("") || '<p class="hint" style="font-size:0.8rem">No EOC facts yet — add one below.</p>'}</div>
+        <div class="btnrow" style="margin-bottom:8px;"><button type="button" class="btn secondary" id="addfact"><i class="ti ti-plus"></i> Add EOC fact</button></div>
         <div class="btnrow"><button class="btn secondary" onclick="WB.closeForm()">Done</button><button class="btn" onclick="WB.savePack()"><i class="ti ti-download"></i> Save file</button><span id="saveerr" style="font-size:0.78rem"></span></div>
       </div>`;
     $("authorform").querySelectorAll("[data-f]").forEach(i => i.addEventListener("input", applyForm));
+    $("authorform").querySelectorAll("[data-ff]").forEach(i => i.addEventListener("input", () => {
+      state.authFacts[Number(i.dataset.fi)][i.dataset.ff] = i.value;
+      applyForm(); // live preview only — does not re-render rows, so focus/caret is preserved
+    }));
+    $("authorform").querySelectorAll("[data-remove-fact]").forEach(b => b.addEventListener("click", () => {
+      state.authFacts.splice(Number(b.dataset.removeFact), 1);
+      renderForm(); applyForm();
+    }));
+    const addBtn = $("authorform").querySelector("#addfact");
+    if (addBtn) addBtn.addEventListener("click", () => {
+      state.authFacts.push({ label: "", value: "", citation: "", approved: false });
+      renderForm(); applyForm();
+    });
   }
   function readForm() {
     const form = window.WBAuthor.packToForm({});
     $("authorform").querySelectorAll("[data-f]").forEach(i => { form[i.dataset.f] = i.value; });
+    form.eocFacts = (state.authFacts || []).slice();
     return form;
   }
   function applyForm() {
@@ -1087,7 +1269,7 @@
     state.userPack[key] = window.WBAuthor.formToPack(readForm(), key); // live preview via existing pipeline
     recompile();
   }
-  function closeForm() { $("authorform").innerHTML = ""; state.authKey = null; }
+  function closeForm() { $("authorform").innerHTML = ""; state.authKey = null; state.authFacts = null; state.authFactsKey = null; }
   function savePack() {
     const key = state.authKey, A = window.WBAuthor, sc = state.authScope;
     const pack = A.buildSavePack(sc, currentPackFor(key), readForm(), A.effectiveForm(C, sc, key), key);
@@ -1102,6 +1284,7 @@
   function setScope(level) {
     const h = (state.planId || "").split("_")[0];
     state.authScope = { level, carrier: state.carrier, contract: h, planId: state.planId };
+    state.authFacts = null; state.authFactsKey = null; // re-seed rows from the new scope's own pack
     renderForm();
   }
 
@@ -1116,6 +1299,9 @@
   function recompile() {
     if (!state.plan) return;
     const res = compile();
+    // §C2: cache the report so renderBoard() can derive each tile's authoring-coverage
+    // state (needs-authoring / nudge / not-offered) without recompiling the plan again.
+    state.lastCompile = res;
     // banner
     $("buildbanner").innerHTML = res.errors.length
       ? `<div class="banner fail"><i class="ti ti-alert-triangle"></i> BUILD FAILED — ${res.errors.length} hard-rule violation(s):<ul>${res.errors.map(e => `<li>${e}</li>`).join("")}</ul></div>`
@@ -1176,6 +1362,18 @@
   }
   function summaryIds() { return state.summary ? Object.keys(state.summary) : []; }
 
-  window.WB = { renderSearch, attachDoc, tab, recompile, runAudit, stopAudit, compileFor, summaryIds, renderBoard, openCardForm, renderForm, closeForm, savePack, setScope };
+  window.WB = {
+    renderSearch, attachDoc, tab, recompile, runAudit, stopAudit, compileFor, summaryIds,
+    renderBoard, openCardForm, renderForm, closeForm, savePack, setScope,
+    // re-export the pure data-layer round-trip (window.WBAuthor) on WB so callers that
+    // only reach the UI namespace (e.g. headless test harnesses) can still exercise
+    // formToPack/packToForm without reaching into WBAuthor directly.
+    formToPack: window.WBAuthor.formToPack, packToForm: window.WBAuthor.packToForm,
+    // §C2: pure tri-state tile-flag helper, re-exported the same way for headless tests.
+    tileState,
+    // §C2 review fix: pure call-site derivation (offered/dropReason/onEocList) extracted
+    // out of renderBoard()'s closure so it can be tested against real compiled reports.
+    deriveTileInputs,
+  };
   init();
 })();

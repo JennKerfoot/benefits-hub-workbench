@@ -1317,6 +1317,16 @@ window.WB_CONTENT = {
    }
   }
  },
+ "eocCommon": {
+  "$schema": "duos-eoc-common/v1",
+  "description": "Benefit card keys whose key member facts routinely live only in the EOC/SB (not the PBP filing). Drives the soft 'check for EOC facts' nudge on the authoring board. Extend as patterns emerge.",
+  "benefits": [
+   "meals",
+   "transportation",
+   "socialSupports",
+   "pers"
+  ]
+ },
  "base": {
   "acupuncture": {
    "$schema": "duos-benefit-content/v1",
@@ -1886,7 +1896,7 @@ window.WB_CONTENT = {
    "barColor": "#D97706",
    "tagline": "Your over-the-counter allowance for health products",
    "tileSubtitle": "Over-the-counter allowance",
-   "nonQualifierNote": "If you don't qualify for {ssbciBenefitName}, your OTC allowance is {otc_items.max_plan_benefit} {otc_items.max_plan_benefit_period}.",
+   "combinedConditionalNote": "If you qualify for {ssbciBenefitName}, your OTC allowance combines with it — up to {combinedAmount} {combinedPeriod}.",
    "sections": [
     {
      "icon": "shopping_bag",
