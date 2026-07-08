@@ -14,7 +14,26 @@
   // "Included" line. Matched primarily by the field's own slot/pbpPath key (robust across
   // authoring); the label regex is a fallback for computed/no-pbpPath rows.
   const NON_BENEFIT_SLOT = /prior_auth_required|max_plan_benefit_scope|copay|coinsurance|referral_required/i;
-  const NON_BENEFIT_LABEL = /^(prior authorization|plan pays up to|your cost|referral( required)?|specialist referral required|cost-sharing reduced on)\b/i;
+  // Exact-match (trim + case-insensitive) fallback, not a prefix/substring regex — a
+  // genuine benefit NAME can start with the same words as an admin row (e.g. a real
+  // SSBCI offering titled "Prior Authorization Support Services"); the old prefix regex
+  // wrongly caught those. This set is the literal, closed list of admin row labels the
+  // content templates actually emit (03-content/base/*.json) — extend it there first if
+  // a new admin-only fact label is ever authored.
+  const NON_BENEFIT_LABELS = new Set([
+    "prior authorization",
+    "referral required",
+    "referral",
+    "specialist referral required",
+    "plan pays up to",
+    "your cost",
+    "your cost per visit",
+    "your cost per trip",
+    "cost-sharing reduced on",
+  ]);
+  function isNonBenefitLabel(label) {
+    return NON_BENEFIT_LABELS.has(String(label || "").trim().toLowerCase());
+  }
   // Provenance / QA / citation language that must NEVER reach a member-facing field
   // (rule 5). It belongs only in the internal "verification" field (never rendered,
   // never scanned here). Generalizes the SCAN-fitness one-off so no author can leak it.
@@ -499,14 +518,14 @@
       if (!(parseDollar(value) > 0)) { drops.push({ label, reason: "vbidPackages $0/absent aggregate_allowance suppressed (§B5)" }); return []; }
     }
     if (cardKey === "vbidPackages" && f.slot === "package.eligibility") {
-      if (value != null && /^\s*\d{2,}\s*$/.test(String(value))) { drops.push({ label, reason: `vbidPackages raw condition code "${value}" suppressed — no decode map (§B5)` }); return []; }
+      if (value != null && /^\s*\d{2,}[a-z]?\s*$/i.test(String(value))) { drops.push({ label, reason: `vbidPackages raw condition code "${value}" suppressed — no decode map (§B5)` }); return []; }
     }
     //  (c) reduced_benefits is likewise filed as a bare CMS reduction-type code ("01",
     //      "11") instead of free text (H0351_038_0 "Package 1" files "01" for "Cost-
     //      sharing reduced on"). Same reasoning as (b): no decode map exists, so the
     //      raw code is suppressed rather than shown raw or guessed at.
     if (cardKey === "vbidPackages" && f.slot === "package.reduced_benefits") {
-      if (value != null && /^\s*\d{2,}\s*$/.test(String(value))) { drops.push({ label, reason: `vbidPackages raw reduced-benefits code "${value}" suppressed — no decode map (§B5)` }); return []; }
+      if (value != null && /^\s*\d{2,}[a-z]?\s*$/i.test(String(value))) { drops.push({ label, reason: `vbidPackages raw reduced-benefits code "${value}" suppressed — no decode map (§B5)` }); return []; }
     }
     // pooled / wallet suppression (§4a step 3 + spec §4b SSBCI note) — a member card is
     // suppressed against its OWNING wallet, whichever of the plan's wallets that is
@@ -531,7 +550,11 @@
     // alone reads as meaningless (or worse, mistakable for a discount). Frame every
     // standalone coinsurance value the same way, for every card.
     if (!suppressed && COINS_PCT.test(text.trim())) text = text.trim() + " of the cost";
-    const pfx = f.prefix ? interp(f.prefix, ctx) : null, sfx = f.suffix ? interp(f.suffix, ctx) : null;
+    const pfx = f.prefix ? interp(f.prefix, ctx) : null;
+    let sfx = f.suffix ? interp(f.suffix, ctx) : null;
+    // CMS files periodicity "Other" (enum code 6) as a literal filed label, not real
+    // member-facing text — e.g. dental x-rays render "3 Other" with no meaning. Drop it.
+    if (sfx && sfx.trim() === "Other") sfx = null;
     if (pfx) text = pfx + " " + text;
     if (sfx && !suppressed) text = text + " " + sfx;
     const row = { label, value: polishValue(text.trim()), highlight: !!f.highlight, suppressed };
@@ -753,7 +776,7 @@
           // in your ... allowance") and non-benefit administrative fields (prior-auth,
           // plan-pays/scope, cost-share flags), matched by slot key first, label as fallback.
           const labels = card.sections.flatMap(s => s.rows
-            .filter(r => !r.suppressed && !NON_BENEFIT_SLOT.test(r.pbpPath || "") && !NON_BENEFIT_LABEL.test(r.label || ""))
+            .filter(r => !r.suppressed && !NON_BENEFIT_SLOT.test(r.pbpPath || "") && !isNonBenefitLabel(r.label))
             .map(r => r.label)).filter(Boolean);
           w.absorbed.push({ key: mk, title: card.title, labels: labels.length > 1 ? labels : [card.title] });
           delete compiled[mk];
@@ -1178,7 +1201,14 @@
     // compiler's own gating+build pipeline ever produced output for it (offered) and —
     // if offered but dropped — why. deriveTileInputs() is the single source of truth for
     // this derivation (see its doc comment for why a naive gated-off check isn't enough).
-    const report = (state.lastCompile && state.lastCompile.report) || null;
+    // Staleness guard (follow-up #4): state.lastCompile is whatever plan was compiled
+    // most recently — if the board is (re)rendered after the selected plan changed but
+    // before a fresh compile ran for it, the cached report describes the WRONG plan.
+    // Only trust it when its own plan_id matches the currently selected plan; otherwise
+    // fall through to the no-report path below (tiles render classless).
+    const report = (state.lastCompile && state.lastCompile.report && state.lastCompile.report.plan_id === state.planId)
+      ? state.lastCompile.report
+      : null;
     const eocCommon = new Set((C.eocCommon && C.eocCommon.benefits) || []);
     el.innerHTML = rows.map(r => {
       let stateClass = "", titleAttr = "";

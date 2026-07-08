@@ -118,6 +118,15 @@ window.WB_CONTENT = {
     ]
    },
    {
+    "key": "podiatry",
+    "pbpSources": [
+     "podiatry"
+    ],
+    "pbpCategories": [
+     "7f"
+    ]
+   },
+   {
     "key": "mentalHealth",
     "pbpSources": [
      "mental_health_outpatient",
@@ -155,7 +164,8 @@ window.WB_CONTENT = {
     "pbpSources": [
      "outpatient_rehabilitation",
      "physical_speech_therapy",
-     "occupational_therapy"
+     "occupational_therapy",
+     "cardiac_rehab"
     ],
     "pbpCategories": [
      "7d",
@@ -1994,12 +2004,42 @@ window.WB_CONTENT = {
        "slot": "physical_speech_therapy.prior_auth_required"
       }
      ]
+    },
+    {
+     "icon": "ecg_heart",
+     "label": "Cardiac Rehabilitation",
+     "facts": [
+      {
+       "label": "Your cost per visit",
+       "slot": "cardiac_rehab.copay",
+       "highlight": true,
+       "plusSlot": "cardiac_rehab.coinsurance"
+      },
+      {
+       "label": "Referral required",
+       "slot": "cardiac_rehab.referral_required"
+      },
+      {
+       "label": "Prior authorization",
+       "slot": "cardiac_rehab.prior_auth_required"
+      },
+      {
+       "forEach": "cardiac_rehab.sub_type_limits",
+       "label": "{item.label}",
+       "slot": "item.visit_limit",
+       "suffix": " {item.visit_limit_period}"
+      }
+     ]
     }
    ],
    "connections": [
     {
      "icon": "lightbulb",
      "text": "Therapy after surgery, a fall, or a stroke is one of the strongest predictors of getting back to normal life — don't skip sessions."
+    },
+    {
+     "icon": "ecg_heart",
+     "text": "Cardiac rehab combines supervised exercise, education, and support to help your heart recover and lower the risk of another cardiac event."
     }
    ]
   },
@@ -2037,6 +2077,50 @@ window.WB_CONTENT = {
     }
    ],
    "note": "Call us and we'll explain how to use this benefit."
+  },
+  "podiatry": {
+   "$schema": "duos-benefit-content/v1",
+   "key": "podiatry",
+   "title": "Podiatry (Foot Care)",
+   "icon": "foot_bones",
+   "iconBg": "#EFF6FF",
+   "iconColor": "#1D4ED8",
+   "barColor": "#1D4ED8",
+   "tagline": "Foot and ankle care covered by your plan",
+   "tileSubtitle": "Foot care covered",
+   "sections": [
+    {
+     "icon": "foot_bones",
+     "label": "Podiatry Care",
+     "facts": [
+      {
+       "label": "Your cost per visit",
+       "slot": "podiatry.copay",
+       "highlight": true,
+       "plusSlot": "podiatry.coinsurance"
+      },
+      {
+       "label": "Routine visits included",
+       "slot": "podiatry.visit_limit",
+       "suffix": " {podiatry.visit_limit_period}"
+      },
+      {
+       "label": "Referral required",
+       "slot": "podiatry.referral_required"
+      },
+      {
+       "label": "Prior authorization",
+       "slot": "podiatry.prior_auth_required"
+      }
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "icon": "lightbulb",
+     "text": "Healthy feet matter for staying mobile and independent — regular foot checks are especially important if you live with diabetes or circulation problems, since small issues can go unnoticed."
+    }
+   ]
   },
   "prescriptions": {
    "$schema": "duos-benefit-content/v1",
@@ -2149,7 +2233,7 @@ window.WB_CONTENT = {
        "forEach": "additional_preventive.sub_types",
        "label": "{item.label} included",
        "slot": "item.visit_limit",
-       "suffix": " {item.max_plan_benefit_period}"
+       "suffix": " {item.visit_limit_period}"
       }
      ]
     }
