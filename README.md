@@ -3,8 +3,9 @@
 A **self-contained, browser-only reference implementation** of the Benefits Hub
 card compiler ([docs/COMPILER_SPEC.md](docs/COMPILER_SPEC.md)). Everything is in
 this repo: the app, the compiler, all 8,081 generated 2026 plan JSONs, the
-content layer, and the docs. No backend, no build step, no dependencies beyond
-Node (or any static file server).
+content layer, the data-generating pipeline, and the docs. No backend, no
+build step, no dependencies beyond Node (or any static file server) for the
+app — the pipeline needs Python + pandas.
 
 ## Quickstart
 
@@ -31,10 +32,10 @@ production version.
 ## The three inputs
 
 ### 1. Plan data (`data/plans/*.json`)
-Generated from the raw CMS PBP filings by the pipeline in the CMS package
-(`CMS-PBP-Translation-Package-2026/dashboard/preprocess.py`). Read-only input —
-the source of truth for coverage and every dollar amount. Regenerate there
-after a CMS data refresh, then copy `data/` here.
+Generated from the raw CMS PBP filings by the pipeline now co-located in this
+repo (`pipeline/preprocess.py` — see [pipeline/README.md](pipeline/README.md)).
+Read-only input to the compiler — the source of truth for coverage and every
+dollar amount. Regenerate in place after a CMS data refresh.
 
 ### 2. The content layer (`content/`)
 Human-authored wording. Structure:
@@ -70,6 +71,14 @@ instructions. Panel 4 ingests those rows (JSON array of
 benefit" box on the mapped card; phones/URLs become CTAs; free-text dollars and
 misplaced SSBCI language are flagged; an unmapped benefit name fails the build;
 and the PBP gate still rules — a row can never make an uncovered benefit appear.
+
+## The pipeline (`pipeline/`)
+
+The raw-CMS → plan-JSON translation engine now lives in this repo, co-versioned
+with the `data/` it generates (moved 2026-07-08 from the standalone CMS
+package). See [pipeline/README.md](pipeline/README.md) for how to regenerate,
+the raw-input location (259MB, external, never committed), and the test suite
+(42 tests, `python3 -m pytest pipeline/tests/ -v`).
 
 ## Compiler rules implemented
 
@@ -112,13 +121,15 @@ data/                 plans_summary.json + 8,081 plan JSONs (pipeline output)
 content/              the content layer (source of the generated snapshot)
 docs/                 COMPILER_SPEC, architecture, plan-JSON reference,
                       content schema, card types, pipeline audit, plan QA
+pipeline/             raw-CMS → plan-JSON translation engine + tests (see
+                      pipeline/README.md)
 tools/                content-bundle generator
 ```
 
 ## Provenance
 
-- Plan data: CMS PBP Benefits 2026 landscape files → `preprocess.py` (see
-  [docs/PIPELINE_AUDIT_2026.md](docs/PIPELINE_AUDIT_2026.md) for the
+- Plan data: CMS PBP Benefits 2026 landscape files → `pipeline/preprocess.py`
+  (see [docs/PIPELINE_AUDIT_2026.md](docs/PIPELINE_AUDIT_2026.md) for the
   column-mapping audit, including Round 2).
 - Faithfulness rule: the data is never hand-edited to match the EOC. EOC/SB
   content enters only through carrier packs and approved `eoc_facts`
